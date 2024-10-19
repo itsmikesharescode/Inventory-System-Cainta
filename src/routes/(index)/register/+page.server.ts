@@ -24,6 +24,7 @@ export const actions: Actions = {
       password: form.data.pwd,
       options: {
         data: {
+          role: 'teacher',
           teacherId: form.data.teacherId,
           email: form.data.email,
           firstname: form.data.fName,

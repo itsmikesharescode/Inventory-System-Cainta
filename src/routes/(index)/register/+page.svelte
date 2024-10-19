@@ -47,7 +47,7 @@
   <div class="flex flex-col items-center gap-2.5 overflow-auto md:h-screen md:border-l-2 md:py-20">
     <h1 class="scroll-m-20 text-2xl font-semibold tracking-tight">Register</h1>
 
-    <form method="POST" use:enhance class="flex flex-col gap-2.5">
+    <form method="POST" action="?/registerEvent" use:enhance class="flex flex-col gap-2.5">
       <Form.Field {form} name="teacherId">
         <Form.Control let:attrs>
           <Form.Label>Teacher ID</Form.Label>
