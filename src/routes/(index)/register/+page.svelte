@@ -5,11 +5,24 @@
   import { registerSchema } from './schema';
   import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
   import { zodClient } from 'sveltekit-superforms/adapters';
+  import { toast } from 'svelte-sonner';
 
   const { data } = $props();
 
   const form = superForm(data.registerForm, {
-    validators: zodClient(registerSchema)
+    validators: zodClient(registerSchema),
+    async onUpdate({ result }) {
+      const { status, data } = result;
+      switch (status) {
+        case 200:
+          toast.success('', { description: data.msg });
+          break;
+
+        case 401:
+          toast.error('', { description: data.msg });
+          break;
+      }
+    }
   });
 
   const { form: formData, enhance, submitting } = form;
