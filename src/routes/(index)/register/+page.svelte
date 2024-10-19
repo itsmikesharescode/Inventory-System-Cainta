@@ -119,7 +119,7 @@
 
       <Form.Field {form} name="confirmPwd">
         <Form.Control let:attrs>
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Confirm Password</Form.Label>
           <Input
             type="password"
             {...attrs}
