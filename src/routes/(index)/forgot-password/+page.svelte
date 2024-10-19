@@ -3,13 +3,26 @@
   import { Input } from '$lib/components/ui/input';
   import { LoaderCircle } from 'lucide-svelte';
   import { forgotPwdSchema } from './schema';
-  import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
+  import { superForm } from 'sveltekit-superforms';
   import { zodClient } from 'sveltekit-superforms/adapters';
+  import { toast } from 'svelte-sonner';
 
   const { data } = $props();
 
   const form = superForm(data.forgotPwdForm, {
-    validators: zodClient(forgotPwdSchema)
+    validators: zodClient(forgotPwdSchema),
+    async onUpdate({ result }) {
+      const { status, data } = result;
+      switch (status) {
+        case 200:
+          toast.success('', { description: data.msg });
+          break;
+
+        case 401:
+          toast.error('', { description: data.msg });
+          break;
+      }
+    }
   });
 
   const { form: formData, enhance, submitting } = form;
@@ -33,7 +46,7 @@
   <div class="flex flex-col items-center justify-center gap-2.5 md:border-l-2">
     <h1 class="scroll-m-20 text-2xl font-semibold tracking-tight">Forgot Password</h1>
 
-    <form method="POST" use:enhance class="flex flex-col gap-2.5">
+    <form method="POST" action="?/forgotPwdEvent" use:enhance class="flex flex-col gap-2.5">
       <Form.Field {form} name="email">
         <Form.Control let:attrs>
           <Form.Label>Email</Form.Label>
