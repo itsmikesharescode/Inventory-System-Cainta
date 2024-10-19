@@ -17,6 +17,6 @@
     </h1>
   </div>
   <div class="flex items-center justify-center border-l-2">
-    <h1 class="scroll-m-20 text-2xl font-semibold tracking-tight">Log in</h1>
+    <h1 class="scroll-m-20 text-2xl font-semibold tracking-tight">Register</h1>
   </div>
 </div>
