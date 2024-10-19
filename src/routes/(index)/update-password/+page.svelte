@@ -31,7 +31,7 @@
 <div class="flex h-screen flex-col items-center justify-center gap-2.5 md:border-l-2">
   <h1 class="scroll-m-20 text-2xl font-semibold tracking-tight">Update Password Page</h1>
 
-  <form method="POST" action="?/loginEvent" use:enhance class="flex flex-col gap-2.5">
+  <form method="POST" action="?/updatePwdEvent" use:enhance class="flex flex-col gap-2.5">
     <Form.Field {form} name="newPwd">
       <Form.Control let:attrs>
         <Form.Label>New Password</Form.Label>
