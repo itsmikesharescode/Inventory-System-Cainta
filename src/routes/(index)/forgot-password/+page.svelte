@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as Form from '$lib/components/ui/form';
   import { Input } from '$lib/components/ui/input';
+  import { LoaderCircle } from 'lucide-svelte';
   import { forgotPwdSchema } from './schema';
   import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
   import { zodClient } from 'sveltekit-superforms/adapters';
@@ -11,7 +12,7 @@
     validators: zodClient(forgotPwdSchema)
   });
 
-  const { form: formData, enhance } = form;
+  const { form: formData, enhance, submitting } = form;
 </script>
 
 <div class="grid min-h-screen gap-10 py-20 md:grid-cols-[2fr,1fr] md:gap-0 md:p-0">
@@ -41,7 +42,18 @@
         <Form.FieldErrors />
       </Form.Field>
 
-      <Form.Button>Send Password Reset</Form.Button>
+      <Form.Button disabled={$submitting} class="relative">
+        {#if $submitting}
+          <div
+            class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-1.5 rounded-lg bg-primary"
+          >
+            <span>Sending</span>
+            <LoaderCircle class="h-[20px] w-[20px] animate-spin" />
+          </div>
+        {/if}
+
+        Send Reset Link
+      </Form.Button>
     </form>
 
     <p class="leading-7 [&:not(:first-child)]:mt-6">Already recovered your account?</p>

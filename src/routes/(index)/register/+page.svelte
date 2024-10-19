@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as Form from '$lib/components/ui/form';
   import { Input } from '$lib/components/ui/input';
+  import { LoaderCircle } from 'lucide-svelte';
   import { registerSchema } from './schema';
   import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
   import { zodClient } from 'sveltekit-superforms/adapters';
@@ -11,7 +12,7 @@
     validators: zodClient(registerSchema)
   });
 
-  const { form: formData, enhance } = form;
+  const { form: formData, enhance, submitting } = form;
 </script>
 
 <div class="grid min-h-screen gap-10 py-20 md:grid-cols-[2fr,1fr] md:gap-0 md:p-0">
@@ -115,7 +116,19 @@
         </Form.Control>
         <Form.FieldErrors />
       </Form.Field>
-      <Form.Button>Create Account</Form.Button>
+
+      <Form.Button disabled={$submitting} class="relative">
+        {#if $submitting}
+          <div
+            class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-1.5 rounded-lg bg-primary"
+          >
+            <span>Creating</span>
+            <LoaderCircle class="h-[20px] w-[20px] animate-spin" />
+          </div>
+        {/if}
+
+        Create Account
+      </Form.Button>
     </form>
 
     <p class="leading-7 [&:not(:first-child)]:mt-6">Already have an account?</p>
