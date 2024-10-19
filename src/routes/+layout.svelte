@@ -1,6 +1,8 @@
 <script>
   import '../app.css';
   import { onNavigate } from '$app/navigation';
+  import { Toaster } from '$lib/components/ui/sonner';
+
   const { data, children } = $props();
 
   onNavigate((navigation) => {
@@ -15,6 +17,7 @@
   });
 </script>
 
+<Toaster richColors={true} position="bottom-left" />
 {@render children()}
 
 <style>

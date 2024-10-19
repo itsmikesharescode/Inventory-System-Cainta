@@ -16,7 +16,7 @@
     "@sveltejs/adapter-auto": "^3.2.5",
     "@sveltejs/adapter-vercel": "^5.4.5",
     "@sveltejs/kit": "^2.7.1",
-    "@sveltejs/vite-plugin-svelte": "^4.0.0-next.8",
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@tailwindcss/typography": "^0.5.15",
     "@types/eslint": "^9.6.1",
     "autoprefixer": "^10.4.20",
@@ -35,7 +35,7 @@
     "prettier": "^3.3.3",
     "prettier-plugin-svelte": "^3.2.7",
     "prettier-plugin-tailwindcss": "^0.6.8",
-    "svelte": "^5.0.0-next.272",
+    "svelte": "^5.0.0",
     "svelte-check": "^4.0.5",
     "svelte-sonner": "^0.3.28",
     "sveltekit-superforms": "^2.20.0",
@@ -52,6 +52,6 @@
   "dependencies": {
     "@fontsource/poppins": "^5.1.0",
     "@supabase/ssr": "^0.5.1",
-    "@supabase/supabase-js": "^2.45.5"
+    "@supabase/supabase-js": "^2.45.6"
   }
 }
