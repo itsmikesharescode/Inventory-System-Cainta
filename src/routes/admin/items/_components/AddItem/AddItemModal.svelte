@@ -28,6 +28,7 @@
       switch (status) {
         case 200:
           toast.success('', { description: data.msg });
+          open = false;
           break;
 
         case 401:
@@ -58,7 +59,7 @@
         <span class="sr-only">Close</span>
       </button>
 
-      <AlertDialog.Header class="sticky top-0 rounded-t-lg p-5 backdrop-blur-lg">
+      <AlertDialog.Header class="sticky top-0 z-20 rounded-t-lg p-5 backdrop-blur-lg">
         <AlertDialog.Title>Add Item</AlertDialog.Title>
         <AlertDialog.Description>
           Kindly fill all the following fields to add an item.
