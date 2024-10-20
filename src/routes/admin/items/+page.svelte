@@ -4,6 +4,8 @@
   import * as Table from '$lib/components/ui/table';
   import AddItemModal from './_components/AddItem/AddItemModal.svelte';
   import ItemMenu from './_components/ItemMenu.svelte';
+
+  const { data } = $props();
 </script>
 
 <div class="flex flex-col gap-5">
@@ -13,7 +15,7 @@
       words="Items"
     />
 
-    <AddItemModal />
+    <AddItemModal addItemForm={data.addItemForm} />
   </div>
 
   <Table.Root>
