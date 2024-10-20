@@ -35,6 +35,10 @@
   });
 
   const { form: formData, enhance, submitting } = form;
+
+  $effect(() => {
+    //repopulate data here
+  });
 </script>
 
 <AlertDialog.Root preventScroll={true} bind:open={showUpdateTeacher}>
@@ -42,6 +46,7 @@
     <ScrollArea class="max-h-screen md:max-h-[80dvh]">
       <button
         onclick={() => {
+          showUpdateTeacher = false;
           form.reset();
         }}
         class="absolute right-4 top-4 z-30 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
@@ -51,9 +56,9 @@
       </button>
 
       <AlertDialog.Header class="sticky top-0 z-20 rounded-t-lg p-5 backdrop-blur-lg">
-        <AlertDialog.Title>Add Teacher</AlertDialog.Title>
+        <AlertDialog.Title>Update Teacher</AlertDialog.Title>
         <AlertDialog.Description>
-          Kindly fill all the following fields to add a teacher.
+          Kindly fill all the following fields to update a teacher.
         </AlertDialog.Description>
       </AlertDialog.Header>
 
