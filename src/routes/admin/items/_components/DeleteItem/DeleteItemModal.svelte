@@ -36,7 +36,7 @@
 <AlertDialog.Root bind:open={showDeleteItem}>
   <AlertDialog.Content>
     <AlertDialog.Header>
-      <AlertDialog.Title>Are you absolutely sure?</AlertDialog.Title>
+      <AlertDialog.Title>Delete this item?</AlertDialog.Title>
       <AlertDialog.Description>
         This action cannot be undone. This will permanently delete the item in our database.
       </AlertDialog.Description>
