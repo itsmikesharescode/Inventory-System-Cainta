@@ -54,4 +54,4 @@
 
 <ViewTeacherModal {teacher} bind:showViewTeacher />
 <UpdateTeacherModal {teacher} {updateTeacherForm} bind:showUpdateTeacher />
-<DeleteTeacherModal bind:showDeleteTeacher />
+<DeleteTeacherModal {teacher} bind:showDeleteTeacher />
