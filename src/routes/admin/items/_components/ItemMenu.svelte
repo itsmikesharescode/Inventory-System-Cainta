@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Button from '$lib/components/ui/button/button.svelte';
   import { FolderCog } from 'lucide-svelte';
   import * as Menubar from '$lib/components/ui/menubar';
   import UpdateItemModal from './UpdateItem/UpdateItemModal.svelte';
@@ -7,6 +6,7 @@
   import type { UpdateItemSchema } from './UpdateItem/schema';
   import DeleteItemModal from './DeleteItem/DeleteItemModal.svelte';
   import ViewItemModal from './ViewItem/ViewItemModal.svelte';
+  import { goto, preloadData, pushState } from '$app/navigation';
 
   interface Props {
     updateItemForm: SuperValidated<Infer<UpdateItemSchema>>;
@@ -26,10 +26,32 @@
     </Menubar.Trigger>
 
     <Menubar.Content>
-      <Menubar.Item onclick={() => (showViewItem = true)}>
-        View
-        <Menubar.Shortcut>⌘V</Menubar.Shortcut>
-      </Menubar.Item>
+      <!-- svelte-ignore event_directive_deprecated -->
+      <a
+        href="/admin/items/123123"
+        on:click={async (e) => {
+          e.preventDefault();
+          showViewItem = true;
+          const { href } = e.currentTarget;
+          pushState(href, { selected: 'sample' });
+
+          /* const { href } = e.currentTarget;
+
+          const result = await preloadData(href);
+
+          if (result.type === 'loaded' && result.status === 200) {
+            pushState(href, { selected: result.data });
+          } else {
+            // something bad happened! try navigating
+            goto(href);
+          } */
+        }}
+      >
+        <Menubar.Item>
+          View
+          <Menubar.Shortcut>⌘V</Menubar.Shortcut>
+        </Menubar.Item>
+      </a>
       <Menubar.Separator />
       <Menubar.Item onclick={() => (showUpdateItem = true)}>
         Update
