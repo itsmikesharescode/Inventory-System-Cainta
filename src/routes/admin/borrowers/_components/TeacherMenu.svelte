@@ -6,6 +6,7 @@
   import ViewTeacherModal from './ViewTeacher/ViewTeacherModal.svelte';
   import UpdateTeacherModal from './UpdateTeacher/UpdateTeacherModal.svelte';
   import type { UpdateTeacherSchema } from './UpdateTeacher/schema';
+  import DeleteTeacherModal from './DeleteTeacher/DeleteTeacherModal.svelte';
 
   interface Props {
     updateTeacherForm: SuperValidated<Infer<UpdateTeacherSchema>>;
@@ -51,3 +52,4 @@
 
 <ViewTeacherModal bind:showViewTeacher />
 <UpdateTeacherModal {updateTeacherForm} bind:showUpdateTeacher />
+<DeleteTeacherModal bind:showDeleteTeacher />
