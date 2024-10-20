@@ -32,17 +32,17 @@
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      {#each Array(20) as _}
+      {#each data.adminLayout.data?.items ?? [] as item}
         <Table.Row>
           <Table.Cell>
             <ItemMenu updateItemForm={data.updateItemForm} />
           </Table.Cell>
-          <Table.Cell>Paid</Table.Cell>
-          <Table.Cell>Credit Card</Table.Cell>
-          <Table.Cell>$250.00</Table.Cell>
-          <Table.Cell>$250.00</Table.Cell>
-          <Table.Cell>$250.00</Table.Cell>
-          <Table.Cell>$250.00</Table.Cell>
+          <Table.Cell>{item.model}</Table.Cell>
+          <Table.Cell>{item.category}</Table.Cell>
+          <Table.Cell>{item.brand}</Table.Cell>
+          <Table.Cell>{item.quantity}</Table.Cell>
+          <Table.Cell>{item.quantity}</Table.Cell>
+          <Table.Cell>{item.status}</Table.Cell>
         </Table.Row>
       {/each}
     </Table.Body>
