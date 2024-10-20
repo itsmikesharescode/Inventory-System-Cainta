@@ -35,7 +35,7 @@
       {#each Array(20) as _}
         <Table.Row>
           <Table.Cell>
-            <ItemMenu />
+            <ItemMenu updateItemForm={data.updateItemForm} />
           </Table.Cell>
           <Table.Cell>Paid</Table.Cell>
           <Table.Cell>Credit Card</Table.Cell>

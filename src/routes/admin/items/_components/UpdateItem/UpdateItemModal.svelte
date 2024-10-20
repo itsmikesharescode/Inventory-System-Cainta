@@ -1,28 +1,26 @@
 <script lang="ts">
   import * as AlertDialog from '$lib/components/ui/alert-dialog';
-  import Button from '$lib/components/ui/button/button.svelte';
   import { LoaderCircle, Plus, X } from 'lucide-svelte';
   import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
   import { zodClient } from 'sveltekit-superforms/adapters';
-  import { addItemSchema, type AddItemSchema } from './schema';
+  import { updateItemSchema, type UpdateItemSchema } from './schema';
   import { toast } from 'svelte-sonner';
   import * as Form from '$lib/components/ui/form';
   import { Input } from '$lib/components/ui/input';
   import { Textarea } from '$lib/components/ui/textarea/index';
-  import AddItemSelect from './AddItemSelect.svelte';
+  import UpdateItemSelect from './UpdateItemSelect.svelte';
   import { categoriesMeta, statusMeta, typeMeta } from '../../metadata';
   import { ScrollArea } from '$lib/components/ui/scroll-area/index';
 
   interface Props {
-    addItemForm: SuperValidated<Infer<AddItemSchema>>;
+    updateItemForm: SuperValidated<Infer<UpdateItemSchema>>;
+    showUpdateItem: boolean;
   }
 
-  const { addItemForm }: Props = $props();
+  let { updateItemForm, showUpdateItem = $bindable() }: Props = $props();
 
-  let open = $state(false);
-
-  const form = superForm(addItemForm, {
-    validators: zodClient(addItemSchema),
+  const form = superForm(updateItemForm, {
+    validators: zodClient(updateItemSchema),
     async onUpdate({ result }) {
       const { status, data } = result;
       switch (status) {
@@ -38,18 +36,18 @@
   });
 
   const { form: formData, enhance, submitting } = form;
+
+  $effect(() => {
+    //remount data here
+  });
 </script>
 
-<Button onclick={() => (open = true)} class="gap-1.5">
-  <Plus class="h-[20px] w-[20px]" />
-  Add Item
-</Button>
-<AlertDialog.Root preventScroll={true} bind:open>
+<AlertDialog.Root bind:open={showUpdateItem}>
   <AlertDialog.Content class="p-0">
     <ScrollArea class="max-h-screen md:max-h-[80dvh]">
       <button
         onclick={() => {
-          open = false;
+          showUpdateItem = false;
           form.reset();
         }}
         class="absolute right-4 top-4 z-30 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
@@ -59,7 +57,7 @@
       </button>
 
       <AlertDialog.Header class="sticky top-0 rounded-t-lg p-5 backdrop-blur-lg">
-        <AlertDialog.Title>Add Item</AlertDialog.Title>
+        <AlertDialog.Title>Update Item</AlertDialog.Title>
         <AlertDialog.Description>
           Kindly fill all the following fields to add an item.
         </AlertDialog.Description>
@@ -90,7 +88,7 @@
         <Form.Field {form} name="category">
           <Form.Control let:attrs>
             <Form.Label>Category</Form.Label>
-            <AddItemSelect
+            <UpdateItemSelect
               style="h-[30dvh] pr-4"
               placeholder="Select Category"
               {attrs}
@@ -105,7 +103,7 @@
         <Form.Field {form} name="type">
           <Form.Control let:attrs>
             <Form.Label>Type</Form.Label>
-            <AddItemSelect
+            <UpdateItemSelect
               style=""
               placeholder="Select Type"
               {attrs}
@@ -120,7 +118,7 @@
         <Form.Field {form} name="status">
           <Form.Control let:attrs>
             <Form.Label>Status</Form.Label>
-            <AddItemSelect
+            <UpdateItemSelect
               style=""
               placeholder="Select Status"
               {attrs}
@@ -192,12 +190,12 @@
               <div
                 class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-1.5 rounded-lg bg-primary"
               >
-                <span>Adding</span>
+                <span>Upadating</span>
                 <LoaderCircle class="h-[20px] w-[20px] animate-spin" />
               </div>
             {/if}
 
-            Add Item
+            Upate Iem
           </Form.Button>
         </div>
       </form>
