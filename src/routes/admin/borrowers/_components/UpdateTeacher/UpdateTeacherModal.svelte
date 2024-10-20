@@ -9,13 +9,15 @@
   import { Input } from '$lib/components/ui/input';
   import { ScrollArea } from '$lib/components/ui/scroll-area/index';
   import { updateTeacherSchema, type UpdateTeacherSchema } from './schema';
+  import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
 
   interface Props {
     updateTeacherForm: SuperValidated<Infer<UpdateTeacherSchema>>;
     showUpdateTeacher: boolean;
+    teacher: AdminLayout['teachers'][number];
   }
 
-  let { updateTeacherForm, showUpdateTeacher = $bindable() }: Props = $props();
+  let { updateTeacherForm, teacher, showUpdateTeacher = $bindable() }: Props = $props();
 
   const form = superForm(updateTeacherForm, {
     validators: zodClient(updateTeacherSchema),
@@ -38,7 +40,15 @@
   const { form: formData, enhance, submitting } = form;
 
   $effect(() => {
-    //repopulate data here
+    if (showUpdateTeacher) {
+      $formData.fName = teacher.user_meta_data.firstname;
+      $formData.mName = teacher.user_meta_data.middlename;
+      $formData.lName = teacher.user_meta_data.lastname;
+      $formData.email = teacher.user_meta_data.email;
+      $formData.teacherId = teacher.user_meta_data.teacherId;
+      $formData.phone = teacher.user_meta_data.phonenumber;
+      $formData.department = teacher.user_meta_data.department;
+    }
   });
 </script>
 
@@ -69,6 +79,13 @@
         use:enhance
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
+        <Form.Field {form} name="userId" class="hidden">
+          <Form.Control let:attrs>
+            <Input {...attrs} bind:value={teacher.teacher_id} />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
         <Form.Field {form} name="teacherId">
           <Form.Control let:attrs>
             <Form.Label>Teacher ID</Form.Label>
@@ -77,7 +94,7 @@
           <Form.FieldErrors />
         </Form.Field>
 
-        <Form.Field {form} name="lName">
+        <Form.Field {form} name="fName">
           <Form.Control let:attrs>
             <Form.Label>First Name</Form.Label>
             <Input {...attrs} bind:value={$formData.fName} placeholder="Enter first name" />

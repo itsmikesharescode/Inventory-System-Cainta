@@ -53,5 +53,5 @@
 </Menubar.Root>
 
 <ViewTeacherModal {teacher} bind:showViewTeacher />
-<UpdateTeacherModal {updateTeacherForm} bind:showUpdateTeacher />
+<UpdateTeacherModal {teacher} {updateTeacherForm} bind:showUpdateTeacher />
 <DeleteTeacherModal bind:showDeleteTeacher />

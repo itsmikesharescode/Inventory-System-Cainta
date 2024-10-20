@@ -46,6 +46,8 @@ export const actions: Actions = {
     const form = await superValidate(request, zod(updateTeacherSchema));
 
     if (!form.valid) return fail(400, { form });
+
+    console.log(form.data);
   },
 
   deleteTeacherEvent: async ({ locals: { supabaseAdmin }, request }) => {
