@@ -4,5 +4,5 @@
   const { data, children } = $props();
 </script>
 
-<AdminNav />
+<AdminNav supabase={data.supabase} />
 {@render children()}

@@ -4,6 +4,13 @@
   import { LogOut } from 'lucide-svelte';
   import AdminLogout from './AdminLogout.svelte';
   import Button from '$lib/components/ui/button/button.svelte';
+  import type { SupabaseClient } from '@supabase/supabase-js';
+
+  interface Props {
+    supabase: SupabaseClient;
+  }
+
+  const { supabase }: Props = $props();
 
   let samplePhoto =
     'https://scontent.fmnl9-7.fna.fbcdn.net/v/t39.30808-6/450246018_3400397896927161_4289112955186495137_n.jpg?stp=dst-webp_e15_q70_s750x750_tt1_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_eui2=AeFTtpfq_uIs0wYs34GwfwA3m7y80r5zFQGbvLzSvnMVAQ8EmNMs3sy8ZetFZ_gknX-OenjK5-FFBvOFtYzOo8Jf&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent.fmnl9-7.fna&_nc_cat=104&_nc_ohc=rFitjbs7xTMQ7kNvgERMV7P&_nc_gid=AT9vJE_Xx6D6vSRfeCdAqfk&ccb=1-7&_nc_sid=6ee11a&oh=00_AYBhqawSzcsdEttWOlWoPMtf35thXalx4cjKihimLBoXug&oe=671A487E';
@@ -49,4 +56,4 @@
   </Popover.Content>
 </Popover.Root>
 
-<AdminLogout bind:showLogout />
+<AdminLogout bind:showLogout {supabase} />

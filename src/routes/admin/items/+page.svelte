@@ -19,30 +19,30 @@
   </div>
 
   <Table.Root>
-    <Table.Caption>No data available in the table</Table.Caption>
+    {#if !data.adminLayout.data?.items.length}
+      <Table.Caption>No data available in the table</Table.Caption>
+    {/if}
     <Table.Header>
       <Table.Row>
         <Table.Head class="w-[100px]"></Table.Head>
         <Table.Head>Model</Table.Head>
         <Table.Head>Category</Table.Head>
         <Table.Head>Brand</Table.Head>
-        <Table.Head>Initial Quantity</Table.Head>
-        <Table.Head>Final Quantity</Table.Head>
+        <Table.Head>Quantity</Table.Head>
         <Table.Head>Status</Table.Head>
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      {#each Array(20) as _}
+      {#each data.adminLayout.data?.items ?? [] as item}
         <Table.Row>
           <Table.Cell>
-            <ItemMenu updateItemForm={data.updateItemForm} />
+            <ItemMenu {item} updateItemForm={data.updateItemForm} />
           </Table.Cell>
-          <Table.Cell>Paid</Table.Cell>
-          <Table.Cell>Credit Card</Table.Cell>
-          <Table.Cell>$250.00</Table.Cell>
-          <Table.Cell>$250.00</Table.Cell>
-          <Table.Cell>$250.00</Table.Cell>
-          <Table.Cell>$250.00</Table.Cell>
+          <Table.Cell>{item.model}</Table.Cell>
+          <Table.Cell>{item.category}</Table.Cell>
+          <Table.Cell>{item.brand}</Table.Cell>
+          <Table.Cell>{item.quantity}</Table.Cell>
+          <Table.Cell>{item.status}</Table.Cell>
         </Table.Row>
       {/each}
     </Table.Body>
