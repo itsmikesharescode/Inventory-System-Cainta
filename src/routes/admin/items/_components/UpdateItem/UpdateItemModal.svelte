@@ -74,7 +74,7 @@
       <AlertDialog.Header class="sticky top-0 z-20 rounded-t-lg p-5 backdrop-blur-lg">
         <AlertDialog.Title>Update Item</AlertDialog.Title>
         <AlertDialog.Description>
-          Kindly fill all the following fields to add an item.
+          Kindly fill all the following fields to update an item.
         </AlertDialog.Description>
       </AlertDialog.Header>
 
