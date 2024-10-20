@@ -6,7 +6,7 @@
   <div class="flex">
     <GradualSpacing
       class="font-display text-left text-4xl font-bold tracking-[-0.1em]  text-black   md:leading-[5rem]"
-      words="Borrower"
+      words="Borrowers"
     />
   </div>
 </div>

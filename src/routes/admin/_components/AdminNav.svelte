@@ -31,13 +31,13 @@
       ]
     },
     {
-      name: 'Item',
-      url: '/admin/item',
+      name: 'Items',
+      url: '/admin/items',
       subRoutes: []
     },
     {
-      name: 'Borrower',
-      url: '/admin/borrower',
+      name: 'Borrowers',
+      url: '/admin/borrowers',
       subRoutes: []
     }
   ];
