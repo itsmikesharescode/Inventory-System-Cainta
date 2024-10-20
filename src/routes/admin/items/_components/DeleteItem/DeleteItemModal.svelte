@@ -2,16 +2,18 @@
   import { enhance } from '$app/forms';
   import * as AlertDialog from '$lib/components/ui/alert-dialog';
   import Button from '$lib/components/ui/button/button.svelte';
+  import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
   import type { Result } from '$lib/types/types';
   import type { SubmitFunction } from '@sveltejs/kit';
   import { LoaderCircle } from 'lucide-svelte';
   import { toast } from 'svelte-sonner';
 
   interface Props {
+    item: AdminLayout['items'][number];
     showDeleteItem: boolean;
   }
 
-  let { showDeleteItem = $bindable() }: Props = $props();
+  let { showDeleteItem = $bindable(), item }: Props = $props();
 
   let deleteLoader = $state(false);
   const deleteItemEvent: SubmitFunction = () => {
@@ -46,8 +48,8 @@
     <AlertDialog.Footer>
       <AlertDialog.Cancel disabled={deleteLoader}>Cancel</AlertDialog.Cancel>
       <form method="post" action="?/deleteItemEvent" use:enhance={deleteItemEvent}>
-        <input name="itemId" type="hidden" value="" />
-        <Button disabled={deleteLoader} class="relative w-full" variant="destructive">
+        <input name="itemId" type="hidden" value={item.id} />
+        <Button type="submit" disabled={deleteLoader} class="relative w-full" variant="destructive">
           {#if deleteLoader}
             <div
               class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-1.5 rounded-lg bg-destructive"

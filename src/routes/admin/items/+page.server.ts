@@ -68,5 +68,10 @@ export const actions: Actions = {
   deleteItemEvent: async ({ request, locals: { supabase } }) => {
     const formData = await request.formData();
     const itemId = formData.get('itemId') as string;
+
+    const { error } = await supabase.from('items_tb').delete().eq('id', Number(itemId));
+
+    if (error) return fail(401, { msg: error.message });
+    return { msg: 'Item deleted.' };
   }
 };

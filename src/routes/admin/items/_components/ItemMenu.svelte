@@ -54,4 +54,4 @@
 
 <ViewItemModal {item} bind:showViewItem />
 <UpdateItemModal {item} {updateItemForm} bind:showUpdateItem />
-<DeleteItemModal bind:showDeleteItem />
+<DeleteItemModal {item} bind:showDeleteItem />
