@@ -7,12 +7,14 @@
   import UpdateTeacherModal from './UpdateTeacher/UpdateTeacherModal.svelte';
   import type { UpdateTeacherSchema } from './UpdateTeacher/schema';
   import DeleteTeacherModal from './DeleteTeacher/DeleteTeacherModal.svelte';
+  import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
 
   interface Props {
+    teacher: AdminLayout['teachers'][number];
     updateTeacherForm: SuperValidated<Infer<UpdateTeacherSchema>>;
   }
 
-  const { updateTeacherForm }: Props = $props();
+  const { updateTeacherForm, teacher }: Props = $props();
 
   let showUpdateTeacher = $state(false);
   let showDeleteTeacher = $state(false);
@@ -29,7 +31,7 @@
       <Menubar.Item
         onclick={() => {
           showViewTeacher = true;
-          pushState(`/admin/borrowers/123123`, {});
+          pushState(`/admin/borrowers/${teacher.teacher_id}`, {});
         }}
       >
         View
@@ -50,6 +52,6 @@
   </Menubar.Menu>
 </Menubar.Root>
 
-<ViewTeacherModal bind:showViewTeacher />
+<ViewTeacherModal {teacher} bind:showViewTeacher />
 <UpdateTeacherModal {updateTeacherForm} bind:showUpdateTeacher />
 <DeleteTeacherModal bind:showDeleteTeacher />
