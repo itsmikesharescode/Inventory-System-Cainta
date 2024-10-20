@@ -83,7 +83,7 @@
           <Form.Control let:attrs>
             <Form.Label>Category</Form.Label>
             <AddItemSelect
-              style="h-[40dvh] pr-4"
+              style="h-[30dvh] pr-4"
               placeholder="Select Category"
               {attrs}
               selections={categoriesMeta}
