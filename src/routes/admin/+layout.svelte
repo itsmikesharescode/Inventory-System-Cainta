@@ -4,5 +4,4 @@
   const { data, children } = $props();
 </script>
 
-<AdminNav />
-{@render children()}
+<AdminNav {children} />
