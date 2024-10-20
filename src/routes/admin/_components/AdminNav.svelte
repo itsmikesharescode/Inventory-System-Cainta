@@ -43,9 +43,7 @@
   ];
 </script>
 
-<nav
-  class="container flex items-center justify-between border-b-[1px] p-1.5 px-2.5 backdrop-blur-lg"
->
+<nav class="flex items-center justify-between border-b-[1px] p-1.5 px-2.5 backdrop-blur-lg">
   <div class="flex items-center gap-5">
     {#each adminSiteMaps as site}
       {#if site.subRoutes.length}

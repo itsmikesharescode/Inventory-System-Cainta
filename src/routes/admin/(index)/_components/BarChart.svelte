@@ -29,7 +29,7 @@
         datasets: [
           {
             label: 'Income this week',
-            backgroundColor: '#0D0DE6',
+            backgroundColor: '#000000',
             data: chartValues
           }
         ]

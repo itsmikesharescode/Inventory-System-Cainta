@@ -18,7 +18,9 @@
 </script>
 
 <Toaster richColors={true} position="bottom-left" />
-{@render children()}
+<div class="container">
+  {@render children()}
+</div>
 
 <style>
   :global(html) {

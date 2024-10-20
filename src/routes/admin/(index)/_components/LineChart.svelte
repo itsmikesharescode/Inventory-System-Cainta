@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Chart from 'chart.js/auto';
+  import Button from '$lib/components/ui/button/button.svelte';
 
   let chartCanvas: HTMLCanvasElement | undefined = $state(undefined);
   let chartInstance: Chart | null = $state(null);
@@ -27,10 +28,9 @@
         datasets: [
           {
             label: 'Approved this week',
-            backgroundColor: '#0D0DE6',
-            borderColor: '#0D0DE6',
+            backgroundColor: '#000000',
+            borderColor: '#000000',
             data: chartValues,
-            fill: false, // Optional: prevents the area under the line from being filled bla bla bla
             tension: 0.4
           }
         ]
