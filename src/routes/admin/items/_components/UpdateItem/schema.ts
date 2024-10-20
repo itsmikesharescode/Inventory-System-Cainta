@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { categoriesMeta, statusMeta, typeMeta } from '../../metadata';
 
 export const updateItemSchema = z.object({
+  itemId: z.string(),
   deviceId: z.string().min(1, { message: 'Must enter a device id.' }),
   model: z.string().min(1, { message: 'Must enter a model.' }),
   category: z
