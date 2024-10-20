@@ -18,9 +18,16 @@
   }
 
   let { selections, attrs, placeholder, selected = $bindable(), style }: Props = $props();
+
+  const selectedValue = $derived(selected ? { label: selected, value: selected } : undefined);
 </script>
 
-<Select.Root>
+<Select.Root
+  selected={selectedValue}
+  onSelectedChange={(v) => {
+    v && (selected = v.value);
+  }}
+>
   <Select.Trigger {...attrs}>
     <Select.Value {placeholder} />
   </Select.Trigger>

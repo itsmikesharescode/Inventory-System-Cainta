@@ -53,5 +53,5 @@
 </Menubar.Root>
 
 <ViewItemModal {item} bind:showViewItem />
-<UpdateItemModal {updateItemForm} bind:showUpdateItem />
+<UpdateItemModal {item} {updateItemForm} bind:showUpdateItem />
 <DeleteItemModal bind:showDeleteItem />

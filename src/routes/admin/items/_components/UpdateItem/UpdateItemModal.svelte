@@ -11,13 +11,16 @@
   import UpdateItemSelect from './UpdateItemSelect.svelte';
   import { categoriesMeta, statusMeta, typeMeta } from '../../metadata';
   import { ScrollArea } from '$lib/components/ui/scroll-area/index';
+  import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
+  import { Item } from '$lib/components/ui/accordion';
 
   interface Props {
+    item: AdminLayout['items'][number];
     updateItemForm: SuperValidated<Infer<UpdateItemSchema>>;
     showUpdateItem: boolean;
   }
 
-  let { updateItemForm, showUpdateItem = $bindable() }: Props = $props();
+  let { updateItemForm, item, showUpdateItem = $bindable() }: Props = $props();
 
   const form = superForm(updateItemForm, {
     validators: zodClient(updateItemSchema),
@@ -38,7 +41,18 @@
   const { form: formData, enhance, submitting } = form;
 
   $effect(() => {
-    //remount data here
+    if (showUpdateItem) {
+      $formData.brand = item.brand;
+      $formData.category = item.category;
+      $formData.description = item.description;
+      $formData.deviceId = item.device_id;
+      $formData.model = item.model;
+      $formData.mr = item.mr;
+      $formData.price = item.price;
+      $formData.quantity = item.quantity;
+      $formData.status = item.status;
+      $formData.type = item.type;
+    }
   });
 </script>
 
@@ -69,6 +83,13 @@
         use:enhance
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
+        <Form.Field {form} name="itemId" class="hidden">
+          <Form.Control let:attrs>
+            <Input {...attrs} bind:value={item.id} />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
         <Form.Field {form} name="deviceId">
           <Form.Control let:attrs>
             <Form.Label>Device ID</Form.Label>
