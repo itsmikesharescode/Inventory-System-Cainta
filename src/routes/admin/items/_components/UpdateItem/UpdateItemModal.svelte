@@ -29,6 +29,7 @@
       switch (status) {
         case 200:
           toast.success('', { description: data.msg });
+          showUpdateItem = false;
           break;
 
         case 401:
@@ -79,7 +80,7 @@
 
       <form
         method="POST"
-        action="?/addItemEvent"
+        action="?/updateItemEvent"
         use:enhance
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
@@ -211,12 +212,12 @@
               <div
                 class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-1.5 rounded-lg bg-primary"
               >
-                <span>Upadating</span>
+                <span>Wait</span>
                 <LoaderCircle class="h-[20px] w-[20px] animate-spin" />
               </div>
             {/if}
 
-            Upate Item
+            Update Item
           </Form.Button>
         </div>
       </form>

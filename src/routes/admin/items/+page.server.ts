@@ -43,6 +43,26 @@ export const actions: Actions = {
     const form = await superValidate(request, zod(updateItemSchema));
 
     if (!form.valid) return fail(400, { form });
+
+    const { error } = await supabase
+      .from('items_tb')
+      .update([
+        {
+          device_id: form.data.deviceId,
+          model: form.data.model,
+          category: form.data.category,
+          type: form.data.type,
+          status: form.data.status,
+          mr: form.data.mr,
+          brand: form.data.brand,
+          quantity: form.data.quantity,
+          price: form.data.price,
+          description: form.data.description
+        }
+      ])
+      .eq('id', form.data.itemId);
+    if (error) return fail(401, { form, msg: error.message });
+    return { form, msg: 'Item updated.' };
   },
 
   deleteItemEvent: async ({ request, locals: { supabase } }) => {
