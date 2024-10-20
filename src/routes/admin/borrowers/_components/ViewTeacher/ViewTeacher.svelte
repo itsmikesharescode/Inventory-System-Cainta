@@ -24,7 +24,7 @@
         <span class="sr-only">Close</span>
       </button>
       <AlertDialog.Header class="sticky top-0 rounded-t-lg p-5 backdrop-blur-lg">
-        <AlertDialog.Title>View Item</AlertDialog.Title>
+        <AlertDialog.Title>View Teacher</AlertDialog.Title>
       </AlertDialog.Header>
 
       <div class="flex flex-col gap-2.5 p-5 pt-0">
