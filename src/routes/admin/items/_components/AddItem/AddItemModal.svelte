@@ -23,6 +23,7 @@
 
   const form = superForm(addItemForm, {
     validators: zodClient(addItemSchema),
+    id: crypto.randomUUID(),
     async onUpdate({ result }) {
       const { status, data } = result;
       switch (status) {
