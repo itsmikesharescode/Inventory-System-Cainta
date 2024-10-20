@@ -35,7 +35,7 @@
       {#each data.adminLayout.data?.items ?? [] as item}
         <Table.Row>
           <Table.Cell>
-            <ItemMenu updateItemForm={data.updateItemForm} />
+            <ItemMenu {item} updateItemForm={data.updateItemForm} />
           </Table.Cell>
           <Table.Cell>{item.model}</Table.Cell>
           <Table.Cell>{item.category}</Table.Cell>

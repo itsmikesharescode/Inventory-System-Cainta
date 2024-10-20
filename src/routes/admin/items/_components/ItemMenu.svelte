@@ -7,12 +7,14 @@
   import DeleteItemModal from './DeleteItem/DeleteItemModal.svelte';
   import ViewItemModal from './ViewItem/ViewItemModal.svelte';
   import { goto, preloadData, pushState } from '$app/navigation';
+  import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
 
   interface Props {
     updateItemForm: SuperValidated<Infer<UpdateItemSchema>>;
+    item: AdminLayout['items'][number];
   }
 
-  const { updateItemForm }: Props = $props();
+  const { updateItemForm, item }: Props = $props();
 
   let showUpdateItem = $state(false);
   let showDeleteItem = $state(false);
@@ -26,32 +28,16 @@
     </Menubar.Trigger>
 
     <Menubar.Content>
-      <!-- svelte-ignore event_directive_deprecated -->
-      <a
-        href="/admin/items/123123"
-        on:click={async (e) => {
-          e.preventDefault();
+      <Menubar.Item
+        onclick={() => {
           showViewItem = true;
-          const { href } = e.currentTarget;
-          pushState(href, { selected: 'sample' });
-
-          /* const { href } = e.currentTarget;
-
-          const result = await preloadData(href);
-
-          if (result.type === 'loaded' && result.status === 200) {
-            pushState(href, { selected: result.data });
-          } else {
-            // something bad happened! try navigating
-            goto(href);
-          } */
+          pushState(`/admin/items/${item.id}`, {});
         }}
       >
-        <Menubar.Item>
-          View
-          <Menubar.Shortcut>⌘V</Menubar.Shortcut>
-        </Menubar.Item>
-      </a>
+        View
+        <Menubar.Shortcut>⌘V</Menubar.Shortcut>
+      </Menubar.Item>
+
       <Menubar.Separator />
       <Menubar.Item onclick={() => (showUpdateItem = true)}>
         Update
@@ -66,6 +52,6 @@
   </Menubar.Menu>
 </Menubar.Root>
 
-<ViewItemModal bind:showViewItem />
+<ViewItemModal {item} bind:showViewItem />
 <UpdateItemModal {updateItemForm} bind:showUpdateItem />
 <DeleteItemModal bind:showDeleteItem />
