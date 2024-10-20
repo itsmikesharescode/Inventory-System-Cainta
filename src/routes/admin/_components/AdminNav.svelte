@@ -2,6 +2,14 @@
   import AdminProfile from './AdminProfile/AdminProfile.svelte';
   import * as Menubar from '$lib/components/ui/menubar';
   import { ChevronDown } from 'lucide-svelte';
+  import type { SupabaseClient } from '@supabase/supabase-js';
+
+  interface Props {
+    supabase: SupabaseClient;
+  }
+
+  const { supabase }: Props = $props();
+
   const adminSiteMaps = [
     {
       name: 'Dashboard',
@@ -67,5 +75,5 @@
       {/if}
     {/each}
   </div>
-  <AdminProfile />
+  <AdminProfile {supabase} />
 </nav>
