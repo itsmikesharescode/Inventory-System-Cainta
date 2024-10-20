@@ -5,6 +5,7 @@
   import UpdateItemModal from './UpdateItem/UpdateItemModal.svelte';
   import type { Infer, SuperValidated } from 'sveltekit-superforms';
   import type { UpdateItemSchema } from './UpdateItem/schema';
+  import DeleteItemModal from './DeleteItem/DeleteItemModal.svelte';
 
   interface Props {
     updateItemForm: SuperValidated<Infer<UpdateItemSchema>>;
@@ -13,6 +14,7 @@
   const { updateItemForm }: Props = $props();
 
   let showUpdateItem = $state(false);
+  let showDeleteItem = $state(false);
 </script>
 
 <Menubar.Root preventScroll={true} class="max-w-fit border-0">
@@ -26,12 +28,13 @@
         View
         <Menubar.Shortcut>⌘V</Menubar.Shortcut>
       </Menubar.Item>
+      <Menubar.Separator />
       <Menubar.Item onclick={() => (showUpdateItem = true)}>
         Update
         <Menubar.Shortcut>⌘U</Menubar.Shortcut>
       </Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item
+      <Menubar.Item onclick={() => (showDeleteItem = true)}
         >Delete
         <Menubar.Shortcut>⌘D</Menubar.Shortcut>
       </Menubar.Item>
@@ -40,3 +43,4 @@
 </Menubar.Root>
 
 <UpdateItemModal {updateItemForm} bind:showUpdateItem />
+<DeleteItemModal bind:showDeleteItem />

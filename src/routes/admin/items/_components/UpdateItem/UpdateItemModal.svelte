@@ -195,7 +195,7 @@
               </div>
             {/if}
 
-            Upate Iem
+            Upate Item
           </Form.Button>
         </div>
       </form>
