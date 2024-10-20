@@ -26,8 +26,7 @@
         <Table.Head>Model</Table.Head>
         <Table.Head>Category</Table.Head>
         <Table.Head>Brand</Table.Head>
-        <Table.Head>Initial Quantity</Table.Head>
-        <Table.Head>Final Quantity</Table.Head>
+        <Table.Head>Quantity</Table.Head>
         <Table.Head>Status</Table.Head>
       </Table.Row>
     </Table.Header>
@@ -40,7 +39,6 @@
           <Table.Cell>{item.model}</Table.Cell>
           <Table.Cell>{item.category}</Table.Cell>
           <Table.Cell>{item.brand}</Table.Cell>
-          <Table.Cell>{item.quantity}</Table.Cell>
           <Table.Cell>{item.quantity}</Table.Cell>
           <Table.Cell>{item.status}</Table.Cell>
         </Table.Row>
