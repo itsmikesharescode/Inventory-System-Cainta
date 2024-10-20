@@ -3,8 +3,13 @@
   import { invalidate, onNavigate } from '$app/navigation';
   import { Toaster } from '$lib/components/ui/sonner';
   import { onMount } from 'svelte';
+  import { fromUserState, initUserState } from '$lib/runes/userState.svelte';
 
   const { data: clientSb, children } = $props();
+
+  initUserState();
+
+  const user = fromUserState();
 
   onMount(() => {
     const { data } = clientSb.supabase.auth.onAuthStateChange((_, newSession) => {
@@ -25,6 +30,10 @@
         await navigation.complete;
       });
     });
+  });
+
+  $effect(() => {
+    user.set(clientSb.user);
   });
 </script>
 
