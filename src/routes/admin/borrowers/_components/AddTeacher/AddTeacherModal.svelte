@@ -40,7 +40,7 @@
 
 <Button onclick={() => (open = true)} class="gap-1.5">
   <Plus class="h-[20px] w-[20px]" />
-  Add Item
+  Add Teacher
 </Button>
 <AlertDialog.Root preventScroll={true} bind:open>
   <AlertDialog.Content class="p-0">
@@ -162,7 +162,7 @@
               </div>
             {/if}
 
-            Add Item
+            Add Teacher
           </Form.Button>
         </div>
       </form>
