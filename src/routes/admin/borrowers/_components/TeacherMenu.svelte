@@ -3,6 +3,7 @@
   import * as Menubar from '$lib/components/ui/menubar';
   import type { Infer, SuperValidated } from 'sveltekit-superforms';
   import { pushState } from '$app/navigation';
+  import ViewTeacher from './ViewTeacher/ViewTeacher.svelte';
 
   /*  interface Props {
     updateTeacherForm: SuperValidated<Infer<UpdateItemSchema>>;
@@ -12,7 +13,7 @@
 
   let showUpdateTeacher = $state(false);
   let showDeleteTeacher = $state(false);
-  let showViewTeacber = $state(false);
+  let showViewTeacher = $state(false);
 </script>
 
 <Menubar.Root preventScroll={true} class="max-w-fit border-0">
@@ -24,7 +25,7 @@
     <Menubar.Content>
       <Menubar.Item
         onclick={() => {
-          showViewTeacber = true;
+          showViewTeacher = true;
           /* pushState(`/admin/items/${item.id}`, {}); */
         }}
       >
@@ -45,3 +46,5 @@
     </Menubar.Content>
   </Menubar.Menu>
 </Menubar.Root>
+
+<ViewTeacher bind:showViewTeacher />

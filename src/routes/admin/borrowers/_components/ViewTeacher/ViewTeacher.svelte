@@ -4,18 +4,18 @@
   import { ScrollArea } from '$lib/components/ui/scroll-area/index';
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
   interface Props {
-    showViewItem: boolean;
+    showViewTeacher: boolean;
   }
 
-  let { showViewItem = $bindable() }: Props = $props();
+  let { showViewTeacher = $bindable() }: Props = $props();
 </script>
 
-<AlertDialog.Root bind:open={showViewItem}>
+<AlertDialog.Root bind:open={showViewTeacher}>
   <AlertDialog.Content class="p-0">
     <ScrollArea class="max-h-screen md:max-h-[80dvh]">
       <button
         onclick={() => {
-          showViewItem = false;
+          showViewTeacher = false;
           history.back();
         }}
         class="absolute right-4 top-4 z-30 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
