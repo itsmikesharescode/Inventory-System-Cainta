@@ -25,5 +25,10 @@ export const actions: Actions = {
     const form = await superValidate(request, zod(updateItemSchema));
 
     if (!form.valid) return fail(400, { form });
+  },
+
+  deleteItemEvent: async ({ request, locals: { supabase } }) => {
+    const formData = await request.formData();
+    const itemId = formData.get('itemId') as string;
   }
 };
