@@ -11,8 +11,8 @@ export const addItemSchema = z.object({
   status: z.string().refine((v) => statusMeta.includes(v), { message: 'Must select status.' }),
   brand: z.string().min(1, { message: 'Must enter a brand.' }),
   mr: z.string().min(1, { message: 'Must enter mr.' }),
-  price: z.number(),
-  quantity: z.number(),
+  price: z.number().gt(1, { message: 'Price must be greater than 1.' }),
+  quantity: z.number().gt(1, { message: 'Quantity must be greater than 1.' }),
   description: z.string().min(1, { message: 'Must enter description.' })
 });
 

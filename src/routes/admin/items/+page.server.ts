@@ -15,5 +15,7 @@ export const actions: Actions = {
     const form = await superValidate(request, zod(addItemSchema));
 
     if (!form.valid) return fail(400, { form });
+
+    console.log(form.data);
   }
 };

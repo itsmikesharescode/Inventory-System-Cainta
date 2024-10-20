@@ -62,7 +62,12 @@
         </AlertDialog.Description>
       </AlertDialog.Header>
 
-      <form method="POST" action="?/loginEvent" use:enhance class="flex flex-col gap-2.5 p-5 pt-0">
+      <form
+        method="POST"
+        action="?/addItemEvent"
+        use:enhance
+        class="flex flex-col gap-2.5 p-5 pt-0"
+      >
         <Form.Field {form} name="deviceId">
           <Form.Control let:attrs>
             <Form.Label>Device ID</Form.Label>
@@ -124,6 +129,14 @@
           <Form.FieldErrors />
         </Form.Field>
 
+        <Form.Field {form} name="mr">
+          <Form.Control let:attrs>
+            <Form.Label>MR</Form.Label>
+            <Input {...attrs} bind:value={$formData.mr} placeholder="Enter mr" />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
         <Form.Field {form} name="brand">
           <Form.Control let:attrs>
             <Form.Label>Brand</Form.Label>
@@ -140,6 +153,19 @@
               {...attrs}
               bind:value={$formData.quantity}
               placeholder="Enter quantity"
+            />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field {form} name="price">
+          <Form.Control let:attrs>
+            <Form.Label>Price</Form.Label>
+            <Input
+              type="number"
+              {...attrs}
+              bind:value={$formData.price}
+              placeholder="Enter price"
             />
           </Form.Control>
           <Form.FieldErrors />
