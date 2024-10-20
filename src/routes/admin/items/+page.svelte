@@ -1,5 +1,6 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
+  import * as Table from '$lib/components/ui/table';
 </script>
 
 <div class="flex flex-col gap-5">
@@ -9,4 +10,30 @@
       words="Items"
     />
   </div>
+
+  <Table.Root>
+    <Table.Caption>No data available in the table</Table.Caption>
+    <Table.Header>
+      <Table.Row>
+        <Table.Head class="w-[100px]"></Table.Head>
+        <Table.Head>Model</Table.Head>
+        <Table.Head>Category</Table.Head>
+        <Table.Head>Brand</Table.Head>
+        <Table.Head>Initial Quantity</Table.Head>
+        <Table.Head>Final Quantity</Table.Head>
+        <Table.Head>Status</Table.Head>
+      </Table.Row>
+    </Table.Header>
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>INV001</Table.Cell>
+        <Table.Cell>Paid</Table.Cell>
+        <Table.Cell>Credit Card</Table.Cell>
+        <Table.Cell>$250.00</Table.Cell>
+        <Table.Cell>$250.00</Table.Cell>
+        <Table.Cell>$250.00</Table.Cell>
+        <Table.Cell>$250.00</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  </Table.Root>
 </div>
