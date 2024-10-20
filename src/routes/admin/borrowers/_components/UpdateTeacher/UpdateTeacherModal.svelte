@@ -8,24 +8,23 @@
   import * as Form from '$lib/components/ui/form';
   import { Input } from '$lib/components/ui/input';
   import { ScrollArea } from '$lib/components/ui/scroll-area/index';
-  import { addTeacherSchema, type AddTeacherSchema } from './schema';
+  import { updateTeacherSchema, type UpdateTeacherSchema } from './schema';
 
   interface Props {
-    addTeacherForm: SuperValidated<Infer<AddTeacherSchema>>;
+    updateTeacherForm: SuperValidated<Infer<UpdateTeacherSchema>>;
+    showUpdateTeacher: boolean;
   }
 
-  const { addTeacherForm }: Props = $props();
+  let { updateTeacherForm, showUpdateTeacher = $bindable() }: Props = $props();
 
-  let open = $state(false);
-
-  const form = superForm(addTeacherForm, {
-    validators: zodClient(addTeacherSchema),
+  const form = superForm(updateTeacherForm, {
+    validators: zodClient(updateTeacherSchema),
     async onUpdate({ result }) {
       const { status, data } = result;
       switch (status) {
         case 200:
           toast.success('', { description: data.msg });
-          open = false;
+
           break;
 
         case 401:
@@ -38,16 +37,11 @@
   const { form: formData, enhance, submitting } = form;
 </script>
 
-<Button onclick={() => (open = true)} class="gap-1.5">
-  <Plus class="h-[20px] w-[20px]" />
-  Add Teacher
-</Button>
-<AlertDialog.Root preventScroll={true} bind:open>
+<AlertDialog.Root preventScroll={true} bind:open={showUpdateTeacher}>
   <AlertDialog.Content class="p-0">
     <ScrollArea class="max-h-screen md:max-h-[80dvh]">
       <button
         onclick={() => {
-          open = false;
           form.reset();
         }}
         class="absolute right-4 top-4 z-30 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
@@ -65,7 +59,7 @@
 
       <form
         method="POST"
-        action="?/addTeacherEvent"
+        action="?/updateTeacherEvent"
         use:enhance
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
@@ -157,12 +151,12 @@
               <div
                 class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-1.5 rounded-lg bg-primary"
               >
-                <span>Adding</span>
+                <span>Updating</span>
                 <LoaderCircle class="h-[20px] w-[20px] animate-spin" />
               </div>
             {/if}
 
-            Add Teacher
+            Update Teacher
           </Form.Button>
         </div>
       </form>

@@ -3,7 +3,8 @@
   import * as Menubar from '$lib/components/ui/menubar';
   import type { Infer, SuperValidated } from 'sveltekit-superforms';
   import { pushState } from '$app/navigation';
-  import ViewTeacher from './ViewTeacher/ViewTeacher.svelte';
+  import ViewTeacherModal from './ViewTeacher/ViewTeacherModal.svelte';
+  import UpdateTeacherModal from './UpdateTeacher/UpdateTeacherModal.svelte';
 
   /*  interface Props {
     updateTeacherForm: SuperValidated<Infer<UpdateItemSchema>>;
@@ -47,4 +48,5 @@
   </Menubar.Menu>
 </Menubar.Root>
 
-<ViewTeacher bind:showViewTeacher />
+<ViewTeacherModal bind:showViewTeacher />
+<UpdateTeacherModal bind:showUpdateTeacher />
