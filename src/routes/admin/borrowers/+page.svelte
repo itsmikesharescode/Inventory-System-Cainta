@@ -18,7 +18,7 @@
   </div>
 
   <Table.Root>
-    {#if false}
+    {#if !data.adminLayout.data?.teachers.length}
       <Table.Caption>No data available in the table</Table.Caption>
     {/if}
     <Table.Header>
@@ -32,16 +32,19 @@
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      {#each Array(20) as _}
+      {#each data.adminLayout.data?.teachers ?? [] as teacher}
         <Table.Row>
           <Table.Cell>
-            <TeacherMenu updateTeacherForm={data.updateTeacherForm} />
+            <TeacherMenu {teacher} updateTeacherForm={data.updateTeacherForm} />
           </Table.Cell>
-          <Table.Cell>asdasd</Table.Cell>
-          <Table.Cell>asdasd</Table.Cell>
-          <Table.Cell>rrrr</Table.Cell>
-          <Table.Cell>qwe</Table.Cell>
-          <Table.Cell>123123</Table.Cell>
+          <Table.Cell>{teacher.user_meta_data.teacherId}</Table.Cell>
+          <Table.Cell
+            >{teacher.user_meta_data.lastname}, {teacher.user_meta_data.firstname}
+            {teacher.user_meta_data.middlename}</Table.Cell
+          >
+          <Table.Cell>{teacher.user_meta_data.department}</Table.Cell>
+          <Table.Cell>{teacher.user_meta_data.email}</Table.Cell>
+          <Table.Cell>{teacher.user_meta_data.phonenumber}</Table.Cell>
         </Table.Row>
       {/each}
     </Table.Body>
