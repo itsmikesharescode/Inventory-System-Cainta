@@ -19,7 +19,9 @@
   </div>
 
   <Table.Root>
-    <Table.Caption>No data available in the table</Table.Caption>
+    {#if !data.adminLayout.data?.items.length}
+      <Table.Caption>No data available in the table</Table.Caption>
+    {/if}
     <Table.Header>
       <Table.Row>
         <Table.Head class="w-[100px]"></Table.Head>
