@@ -27,7 +27,7 @@
       switch (status) {
         case 200:
           toast.success('', { description: data.msg });
-
+          showUpdateTeacher = false;
           break;
 
         case 401:
