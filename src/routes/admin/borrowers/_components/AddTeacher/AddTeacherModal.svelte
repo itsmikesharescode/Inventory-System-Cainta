@@ -78,7 +78,7 @@
           <Form.FieldErrors />
         </Form.Field>
 
-        <Form.Field {form} name="lName">
+        <Form.Field {form} name="fName">
           <Form.Control let:attrs>
             <Form.Label>First Name</Form.Label>
             <Input {...attrs} bind:value={$formData.fName} placeholder="Enter first name" />
