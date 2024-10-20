@@ -47,7 +47,22 @@ export const actions: Actions = {
 
     if (!form.valid) return fail(400, { form });
 
-    console.log(form.data);
+    const { error } = await supabaseAdmin.auth.admin.updateUserById(form.data.userId, {
+      email: form.data.email,
+      password: form.data.pwd,
+      user_metadata: {
+        teacherId: form.data.teacherId,
+        email: form.data.email,
+        firstname: form.data.fName,
+        middlename: form.data.mName,
+        lastname: form.data.lName,
+        phonenumber: form.data.phone,
+        department: form.data.department
+      }
+    });
+
+    if (error) return fail(401, { form, msg: error.message });
+    return { form, msg: 'Success updated.' };
   },
 
   deleteTeacherEvent: async ({ locals: { supabaseAdmin }, request }) => {
