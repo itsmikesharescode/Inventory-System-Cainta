@@ -1,16 +1,16 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
   import AdminProfile from './AdminProfile/AdminProfile.svelte';
-
+  import * as Menubar from '$lib/components/ui/menubar';
+  import { ChevronDown } from 'lucide-svelte';
   const adminSiteMaps = [
     {
       name: 'Dashboard',
       url: '/admin',
-      subRoutes: false
+      subRoutes: []
     },
     {
       name: 'Transactions',
-      url: false,
+      url: '',
       subRoutes: [
         {
           name: 'Reservations',
@@ -33,16 +33,39 @@
     {
       name: 'Item',
       url: '/admin/item',
-      subRoutes: false
+      subRoutes: []
     },
     {
       name: 'Borrower',
       url: '/admin/borrower',
-      subRoutes: false
+      subRoutes: []
     }
   ];
 </script>
 
-<nav class="flex items-center justify-end p-1.5">
+<nav
+  class="container flex items-center justify-between border-b-[1px] p-1.5 px-2.5 backdrop-blur-lg"
+>
+  <div class="flex items-center gap-5">
+    {#each adminSiteMaps as site}
+      {#if site.subRoutes.length}
+        <Menubar.Root>
+          <Menubar.Menu>
+            <Menubar.Trigger>{site.name} <ChevronDown class="h-[20px] w-[20px]" /></Menubar.Trigger>
+            <Menubar.Content>
+              {#each site.subRoutes as subRoute}
+                <Menubar.Item href={subRoute.url}>
+                  {subRoute.name}
+                </Menubar.Item>
+                <Menubar.Separator />
+              {/each}
+            </Menubar.Content>
+          </Menubar.Menu>
+        </Menubar.Root>
+      {:else if site.url.length}
+        <a href={site.url} class="text-sm font-medium">{site.name}</a>
+      {/if}
+    {/each}
+  </div>
   <AdminProfile />
 </nav>
