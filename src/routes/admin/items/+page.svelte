@@ -1,6 +1,7 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import * as Table from '$lib/components/ui/table';
+  import ItemMenu from './_components/ItemMenu.svelte';
 </script>
 
 <div class="flex flex-col gap-5">
@@ -25,15 +26,19 @@
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      <Table.Row>
-        <Table.Cell>INV001</Table.Cell>
-        <Table.Cell>Paid</Table.Cell>
-        <Table.Cell>Credit Card</Table.Cell>
-        <Table.Cell>$250.00</Table.Cell>
-        <Table.Cell>$250.00</Table.Cell>
-        <Table.Cell>$250.00</Table.Cell>
-        <Table.Cell>$250.00</Table.Cell>
-      </Table.Row>
+      {#each Array(20) as _}
+        <Table.Row>
+          <Table.Cell>
+            <ItemMenu />
+          </Table.Cell>
+          <Table.Cell>Paid</Table.Cell>
+          <Table.Cell>Credit Card</Table.Cell>
+          <Table.Cell>$250.00</Table.Cell>
+          <Table.Cell>$250.00</Table.Cell>
+          <Table.Cell>$250.00</Table.Cell>
+          <Table.Cell>$250.00</Table.Cell>
+        </Table.Row>
+      {/each}
     </Table.Body>
   </Table.Root>
 </div>

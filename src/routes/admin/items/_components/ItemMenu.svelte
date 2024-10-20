@@ -4,21 +4,22 @@
   import * as Menubar from '$lib/components/ui/menubar';
 </script>
 
-<Menubar.Root>
+<Menubar.Root preventScroll={true} class="max-w-fit border-0">
   <Menubar.Menu>
-    <Menubar.Trigger>
-      <FolderCog />
+    <Menubar.Trigger class="max-w-fit cursor-pointer data-[state=open]:bg-inherit">
+      <FolderCog class="h-[20px] w-[20px]" />
     </Menubar.Trigger>
+
     <Menubar.Content>
       <Menubar.Item>
-        New Tab
-        <Menubar.Shortcut>⌘T</Menubar.Shortcut>
+        Update
+        <Menubar.Shortcut>⌘U</Menubar.Shortcut>
       </Menubar.Item>
-      <Menubar.Item>New Window</Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item>Share</Menubar.Item>
-      <Menubar.Separator />
-      <Menubar.Item>Print</Menubar.Item>
+      <Menubar.Item
+        >Delete
+        <Menubar.Shortcut>⌘D</Menubar.Shortcut>
+      </Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
 </Menubar.Root>
