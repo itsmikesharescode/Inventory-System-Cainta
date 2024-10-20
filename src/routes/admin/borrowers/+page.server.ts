@@ -13,15 +13,25 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions: Actions = {
-  addTeacherEvent: async ({ locals: { supabase }, request }) => {
+  addTeacherEvent: async ({ locals: { supabaseAdmin }, request }) => {
     const form = await superValidate(request, zod(addTeacherSchema));
 
     if (!form.valid) return fail(400, { form });
   },
 
-  updateTeacherEvent: async ({ locals: { supabase }, request }) => {
+  updateTeacherEvent: async ({ locals: { supabaseAdmin }, request }) => {
     const form = await superValidate(request, zod(updateTeacherSchema));
 
     if (!form.valid) return fail(400, { form });
+  },
+
+  deleteTeacherEvent: async ({ locals: { supabaseAdmin }, request }) => {
+    const formData = await request.formData();
+    const teacherId = formData.get('teacherId') as string;
+
+    const { error } = await supabaseAdmin.auth.admin.deleteUser(teacherId);
+
+    if (error) return fail(401, { msg: error.message });
+    return { msg: 'You have deleted the teacher.' };
   }
 };
