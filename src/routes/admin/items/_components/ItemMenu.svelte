@@ -12,6 +12,10 @@
 
     <Menubar.Content>
       <Menubar.Item>
+        View
+        <Menubar.Shortcut>⌘V</Menubar.Shortcut>
+      </Menubar.Item>
+      <Menubar.Item>
         Update
         <Menubar.Shortcut>⌘U</Menubar.Shortcut>
       </Menubar.Item>

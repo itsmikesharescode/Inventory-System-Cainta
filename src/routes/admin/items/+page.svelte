@@ -1,15 +1,19 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
+  import Button from '$lib/components/ui/button/button.svelte';
   import * as Table from '$lib/components/ui/table';
+  import AddItemModal from './_components/AddItemModal.svelte';
   import ItemMenu from './_components/ItemMenu.svelte';
 </script>
 
 <div class="flex flex-col gap-5">
-  <div class="flex">
+  <div class="flex items-center justify-between gap-2.5">
     <GradualSpacing
       class="font-display text-left text-4xl font-bold tracking-[-0.1em]  text-black   md:leading-[5rem]"
       words="Items"
     />
+
+    <AddItemModal />
   </div>
 
   <Table.Root>
