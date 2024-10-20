@@ -2,6 +2,7 @@
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import * as Table from '$lib/components/ui/table';
   import AddTeacherModal from './_components/AddTeacher/AddTeacherModal.svelte';
+  import TeacherMenu from './_components/TeacherMenu.svelte';
 
   const { data } = $props();
 </script>
@@ -33,7 +34,9 @@
     <Table.Body>
       {#each Array(20) as _}
         <Table.Row>
-          <Table.Cell>Menu here</Table.Cell>
+          <Table.Cell>
+            <TeacherMenu />
+          </Table.Cell>
           <Table.Cell>asdasd</Table.Cell>
           <Table.Cell>asdasd</Table.Cell>
           <Table.Cell>rrrr</Table.Cell>

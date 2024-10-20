@@ -4,11 +4,11 @@
   import type { Infer, SuperValidated } from 'sveltekit-superforms';
   import { pushState } from '$app/navigation';
 
-  interface Props {
+  /*  interface Props {
     updateTeacherForm: SuperValidated<Infer<UpdateItemSchema>>;
   }
 
-  const { updateTeacherForm }: Props = $props();
+  const { updateTeacherForm }: Props = $props(); */
 
   let showUpdateTeacher = $state(false);
   let showDeleteTeacher = $state(false);
