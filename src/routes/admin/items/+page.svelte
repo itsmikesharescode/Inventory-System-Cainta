@@ -1,6 +1,5 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
-  import Button from '$lib/components/ui/button/button.svelte';
   import * as Table from '$lib/components/ui/table';
   import AddItemModal from './_components/AddItem/AddItemModal.svelte';
   import ItemMenu from './_components/ItemMenu.svelte';
