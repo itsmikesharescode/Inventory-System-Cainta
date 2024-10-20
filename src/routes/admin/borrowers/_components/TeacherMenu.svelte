@@ -5,12 +5,13 @@
   import { pushState } from '$app/navigation';
   import ViewTeacherModal from './ViewTeacher/ViewTeacherModal.svelte';
   import UpdateTeacherModal from './UpdateTeacher/UpdateTeacherModal.svelte';
+  import type { UpdateTeacherSchema } from './UpdateTeacher/schema';
 
-  /*  interface Props {
-    updateTeacherForm: SuperValidated<Infer<UpdateItemSchema>>;
+  interface Props {
+    updateTeacherForm: SuperValidated<Infer<UpdateTeacherSchema>>;
   }
 
-  const { updateTeacherForm }: Props = $props(); */
+  const { updateTeacherForm }: Props = $props();
 
   let showUpdateTeacher = $state(false);
   let showDeleteTeacher = $state(false);
@@ -49,4 +50,4 @@
 </Menubar.Root>
 
 <ViewTeacherModal bind:showViewTeacher />
-<UpdateTeacherModal bind:showUpdateTeacher />
+<UpdateTeacherModal {updateTeacherForm} bind:showUpdateTeacher />
