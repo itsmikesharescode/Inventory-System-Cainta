@@ -18,7 +18,7 @@
   </div>
 
   <Table.Root>
-    {#if false}
+    {#if !data.adminLayout.data?.teachers.length}
       <Table.Caption>No data available in the table</Table.Caption>
     {/if}
     <Table.Header>
