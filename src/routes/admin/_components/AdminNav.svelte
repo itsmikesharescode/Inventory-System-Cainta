@@ -2,12 +2,6 @@
   import type { Snippet } from 'svelte';
   import AdminProfile from './AdminProfile/AdminProfile.svelte';
 
-  interface Props {
-    children: Snippet;
-  }
-
-  const { children }: Props = $props();
-
   const adminSiteMaps = [
     {
       name: 'Dashboard',
