@@ -24,7 +24,6 @@
     <Table.Header>
       <Table.Row>
         <Table.Head class="w-[100px]"></Table.Head>
-        <Table.Head></Table.Head>
         <Table.Head>Name</Table.Head>
         <Table.Head>Items</Table.Head>
         <Table.Head>Reservation Date</Table.Head>
@@ -37,7 +36,6 @@
           <Table.Cell>
             <ReservationMenu />
           </Table.Cell>
-          <Table.Cell>2</Table.Cell>
           <Table.Cell>Eviota, Mike John B</Table.Cell>
           <Table.Cell>asdasd</Table.Cell>
           <Table.Cell>123123sd</Table.Cell>
