@@ -2,6 +2,7 @@
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import * as Table from '$lib/components/ui/table';
   import FilterSelect from './_components/FilterSelect/FilterSelect.svelte';
+  import ReservationMenu from './_components/ReservationMenu.svelte';
 </script>
 
 <div class="flex flex-col gap-5">
@@ -34,7 +35,7 @@
       {#each Array(20) as _}
         <Table.Row>
           <Table.Cell>
-            <!-- <TeacherMenu {teacher} updateTeacherForm={data.updateTeacherForm} /> -->
+            <ReservationMenu />
           </Table.Cell>
           <Table.Cell>2</Table.Cell>
           <Table.Cell>Eviota, Mike John B</Table.Cell>
