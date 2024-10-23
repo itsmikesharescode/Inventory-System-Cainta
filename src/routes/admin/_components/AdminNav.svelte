@@ -26,7 +26,7 @@
         },
         {
           name: 'New',
-          url: '/admin/new'
+          url: '/admin/reservations?new=true'
         },
         {
           name: 'Borrowed Items',
@@ -65,6 +65,7 @@
                 <Menubar.Item href={subRoute.url}>
                   {subRoute.name}
                 </Menubar.Item>
+
                 <Menubar.Separator />
               {/each}
             </Menubar.Content>

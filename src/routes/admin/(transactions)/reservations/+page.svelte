@@ -1,6 +1,7 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import * as Table from '$lib/components/ui/table';
+  import CreateReservation from './_components/CreateReservation/CreateReservation.svelte';
   import FilterSelect from './_components/FilterSelect/FilterSelect.svelte';
   import ReservationMenu from './_components/ReservationMenu.svelte';
 </script>
@@ -45,3 +46,5 @@
     </Table.Body>
   </Table.Root>
 </div>
+
+<CreateReservation />
