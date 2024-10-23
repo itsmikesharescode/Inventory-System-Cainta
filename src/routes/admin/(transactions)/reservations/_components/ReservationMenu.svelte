@@ -1,24 +1,20 @@
 <script lang="ts">
   import { AlignJustify } from 'lucide-svelte';
   import * as Menubar from '$lib/components/ui/menubar';
-  import UpdateItemModal from './UpdateItem/UpdateItemModal.svelte';
   import type { Infer, SuperValidated } from 'sveltekit-superforms';
-  import type { UpdateItemSchema } from './UpdateItem/schema';
-  import DeleteItemModal from './DeleteItem/DeleteItemModal.svelte';
-  import ViewItemModal from './ViewItem/ViewItemModal.svelte';
-  import { goto, preloadData, pushState } from '$app/navigation';
+  import { pushState } from '$app/navigation';
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
 
-  interface Props {
-    updateItemForm: SuperValidated<Infer<UpdateItemSchema>>;
-    item: AdminLayout['items'][number];
+  /* interface Props {
+    teacher: AdminLayout['teachers'][number];
+    updateTeacherForm: SuperValidated<Infer<UpdateTeacherSchema>>;
   }
 
-  const { updateItemForm, item }: Props = $props();
+  const { updateTeacherForm, teacher }: Props = $props(); */
 
-  let showUpdateItem = $state(false);
-  let showDeleteItem = $state(false);
-  let showViewItem = $state(false);
+  let showUpReservation = $state(false);
+  let showDelReservation = $state(false);
+  let showViewReservation = $state(false);
 </script>
 
 <Menubar.Root preventScroll={true} class="max-w-fit border-0">
@@ -30,8 +26,8 @@
     <Menubar.Content>
       <Menubar.Item
         onclick={() => {
-          showViewItem = true;
-          pushState(`/admin/items/${item.id}`, {});
+          showViewReservation = true;
+          /*  pushState(`/admin/borrowers/${teacher.teacher_id}`, {}); */
         }}
       >
         View
@@ -39,19 +35,15 @@
       </Menubar.Item>
 
       <Menubar.Separator />
-      <Menubar.Item onclick={() => (showUpdateItem = true)}>
+      <Menubar.Item onclick={() => (showUpReservation = true)}>
         Update
         <Menubar.Shortcut>⌘U</Menubar.Shortcut>
       </Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item onclick={() => (showDeleteItem = true)}
+      <Menubar.Item onclick={() => (showDelReservation = true)}
         >Delete
         <Menubar.Shortcut>⌘D</Menubar.Shortcut>
       </Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
 </Menubar.Root>
-
-<ViewItemModal {item} bind:showViewItem />
-<UpdateItemModal {item} {updateItemForm} bind:showUpdateItem />
-<DeleteItemModal {item} bind:showDeleteItem />

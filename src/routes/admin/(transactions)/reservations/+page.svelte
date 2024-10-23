@@ -1,5 +1,8 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
+  import * as Table from '$lib/components/ui/table';
+  import FilterSelect from './_components/FilterSelect/FilterSelect.svelte';
+  import ReservationMenu from './_components/ReservationMenu.svelte';
 </script>
 
 <div class="flex flex-col gap-5">
@@ -9,4 +12,36 @@
       words="Reservations"
     />
   </div>
+
+  <div class="flex items-center gap-2.5">
+    <FilterSelect />
+  </div>
+
+  <Table.Root>
+    {#if false}
+      <Table.Caption>No data available in the table</Table.Caption>
+    {/if}
+    <Table.Header>
+      <Table.Row>
+        <Table.Head class="w-[100px]"></Table.Head>
+        <Table.Head>Name</Table.Head>
+        <Table.Head>Items</Table.Head>
+        <Table.Head>Reservation Date</Table.Head>
+        <Table.Head>Rooms</Table.Head>
+      </Table.Row>
+    </Table.Header>
+    <Table.Body>
+      {#each Array(20) as _}
+        <Table.Row>
+          <Table.Cell>
+            <ReservationMenu />
+          </Table.Cell>
+          <Table.Cell>Eviota, Mike John B</Table.Cell>
+          <Table.Cell>asdasd</Table.Cell>
+          <Table.Cell>123123sd</Table.Cell>
+          <Table.Cell>asdasd</Table.Cell>
+        </Table.Row>
+      {/each}
+    </Table.Body>
+  </Table.Root>
 </div>
