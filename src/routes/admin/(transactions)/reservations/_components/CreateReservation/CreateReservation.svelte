@@ -1,24 +1,130 @@
 <script lang="ts">
   import * as AlertDialog from '$lib/components/ui/alert-dialog';
-  import { page } from '$app/stores';
-  import { goto, pushState } from '$app/navigation';
   import Button from '$lib/components/ui/button/button.svelte';
+  import { LoaderCircle, Plus, X } from 'lucide-svelte';
+  import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
+  import { zodClient } from 'sveltekit-superforms/adapters';
+  import { toast } from 'svelte-sonner';
+  import * as Form from '$lib/components/ui/form';
+  import { Input } from '$lib/components/ui/input';
+  import { ScrollArea } from '$lib/components/ui/scroll-area/index';
+  import { createReservationSchema, type CreateReservationSchema } from './schema';
+  import { page } from '$app/stores';
+  import SelectRoom from './SelectRoom.svelte';
+  import { goto } from '$app/navigation';
+
+  interface Props {
+    createReservationForm: SuperValidated<Infer<CreateReservationSchema>>;
+  }
+
+  const { createReservationForm }: Props = $props();
 
   const isOpen = $derived($page.url.searchParams.get('new') === 'true');
+
+  const form = superForm(createReservationForm, {
+    validators: zodClient(createReservationSchema),
+    id: crypto.randomUUID(),
+    async onUpdate({ result }) {
+      const { status, data } = result;
+      switch (status) {
+        case 200:
+          toast.success('', { description: data.msg });
+          break;
+
+        case 401:
+          toast.error('', { description: data.msg });
+          break;
+      }
+    }
+  });
+
+  const { form: formData, enhance, submitting } = form;
 </script>
 
-<AlertDialog.Root open={isOpen}>
-  <AlertDialog.Content>
-    <AlertDialog.Header>
-      <AlertDialog.Title>Are you absolutely sure?</AlertDialog.Title>
-      <AlertDialog.Description>
-        This action cannot be undone. This will permanently delete your account and remove your data
-        from our servers.
-      </AlertDialog.Description>
-    </AlertDialog.Header>
-    <AlertDialog.Footer>
-      <Button href="/admin/reservations" variant="secondary">Cancel</Button>
-      <AlertDialog.Action>Continue</AlertDialog.Action>
-    </AlertDialog.Footer>
+<AlertDialog.Root preventScroll={true} open={isOpen}>
+  <AlertDialog.Content class="p-0">
+    <ScrollArea class="max-h-screen md:max-h-[80dvh]">
+      <button
+        onclick={() => {
+          goto('/admin/reservations', { invalidateAll: false });
+          form.reset();
+        }}
+        class="absolute right-4 top-4 z-30 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+      >
+        <X class="h-4 w-4" />
+        <span class="sr-only">Close</span>
+      </button>
+
+      <AlertDialog.Header class="sticky top-0 z-20 rounded-t-lg p-5 backdrop-blur-lg">
+        <AlertDialog.Title>Create Reservation</AlertDialog.Title>
+        <AlertDialog.Description>
+          Kindly fill all the following fields to add a reservation.
+        </AlertDialog.Description>
+      </AlertDialog.Header>
+
+      <form
+        method="POST"
+        action="?/createResEvent"
+        use:enhance
+        class="flex flex-col gap-2.5 p-5 pt-0"
+      >
+        <Form.Field {form} name="teacherId">
+          <Form.Control let:attrs>
+            <Form.Label>Teacher ID</Form.Label>
+            <Input {...attrs} bind:value={$formData.teacherId} placeholder="Enter first name" />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field {form} name="maxItems">
+          <Form.Control let:attrs>
+            <Form.Label>Max Items</Form.Label>
+            <Input
+              type="number"
+              {...attrs}
+              bind:value={$formData.maxItems}
+              placeholder="Enter max items"
+            />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field {form} name="room">
+          <Form.Control let:attrs>
+            <Form.Label>Select Room</Form.Label>
+            <SelectRoom
+              selections={['Room 1', 'Room 2', 'Room 3']}
+              bind:selected={$formData.room}
+              placeholder="Select Room"
+            />
+            <input hidden bind:value={$formData.room} name={attrs.name} />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field {form} name="timeLimit">
+          <Form.Control let:attrs>
+            <Form.Label>Phone Number</Form.Label>
+            <Input {...attrs} bind:value={$formData.timeLimit} placeholder="Enter time limit" />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
+        <div class="sticky bottom-[1rem] left-0 right-0 flex justify-end">
+          <Form.Button disabled={$submitting} class="relative  max-w-fit">
+            {#if $submitting}
+              <div
+                class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-1.5 rounded-lg bg-primary"
+              >
+                <span>Adding</span>
+                <LoaderCircle class="h-[20px] w-[20px] animate-spin" />
+              </div>
+            {/if}
+
+            Add
+          </Form.Button>
+        </div>
+      </form>
+    </ScrollArea>
   </AlertDialog.Content>
 </AlertDialog.Root>

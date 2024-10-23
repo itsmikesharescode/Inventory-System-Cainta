@@ -4,6 +4,8 @@
   import CreateReservation from './_components/CreateReservation/CreateReservation.svelte';
   import FilterSelect from './_components/FilterSelect/FilterSelect.svelte';
   import ReservationMenu from './_components/ReservationMenu.svelte';
+
+  const { data } = $props();
 </script>
 
 <div class="flex flex-col gap-5">
@@ -47,4 +49,4 @@
   </Table.Root>
 </div>
 
-<CreateReservation />
+<CreateReservation createReservationForm={data.createReservationForm} />
