@@ -18,7 +18,7 @@ begin
   return jsonb_build_object(
     'items', coalesce(item_data, '[]'::jsonb),
     'teachers', coalesce(teacher_data, '[]'::jsonb),
-    'reservations', coalesce(teacher_data, '[]'::jsonb)
+    'reservations', coalesce(reservation_data, '[]'::jsonb)
   );
 end;
 $$ language plpgsql set search_path = '';
