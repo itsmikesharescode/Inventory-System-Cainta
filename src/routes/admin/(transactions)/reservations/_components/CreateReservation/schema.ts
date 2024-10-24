@@ -6,9 +6,7 @@ const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:MM AM/PM';
 export const createReservationSchema = z.object({
   teacherId: z.string().min(1, { message: 'Must enter teacher id.' }),
   maxItems: z.number().nonnegative(),
-  room: z
-    .string()
-    .refine((v) => ['room1', 'room2'].includes(v), { message: 'Must select a valid room.' }),
+  room: z.string().min(1, { message: 'Must enter a room.' }),
   date: z.string().min(1, { message: 'Must select date.' }),
   time: z.string().refine((v) => DATE_TIME_PATTERN.test(v), {
     message: `Time must be in format "${DATE_TIME_FORMAT}"`

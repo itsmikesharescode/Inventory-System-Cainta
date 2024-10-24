@@ -18,5 +18,18 @@ export const actions: Actions = {
     const form = await superValidate(request, zod(createReservationSchema));
 
     if (!form.valid) return fail(400, { form });
+
+    const { error } = await supabase.from('reservations_tb').insert([
+      {
+        teacher_id: form.data.teacherId,
+        max_items: form.data.maxItems,
+        room: form.data.room,
+        time_limit: `${form.data.date} ${form.data.time}`,
+        accepted: false
+      }
+    ]);
+
+    if (error) return fail(401, { form, msg: error.message });
+    return { form, msg: 'Reservation created.' };
   }
 };

@@ -29,6 +29,8 @@
       switch (status) {
         case 200:
           toast.success('', { description: data.msg });
+          form.reset();
+          open = false;
           break;
 
         case 401:
@@ -81,7 +83,12 @@
         <Form.Field {form} name="maxItems">
           <Form.Control let:attrs>
             <Form.Label>Max Items</Form.Label>
-            <Input {...attrs} bind:value={$formData.maxItems} placeholder="Enter max items" />
+            <Input
+              type="number"
+              {...attrs}
+              bind:value={$formData.maxItems}
+              placeholder="Enter max items"
+            />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
@@ -89,7 +96,7 @@
         <Form.Field {form} name="room">
           <Form.Control let:attrs>
             <Form.Label>Room</Form.Label>
-            <Input type="number" {...attrs} bind:value={$formData.room} placeholder="Enter room" />
+            <Input {...attrs} bind:value={$formData.room} placeholder="Enter room" />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
@@ -98,7 +105,7 @@
           <Form.Control let:attrs>
             <Form.Label>Select Date</Form.Label>
             <DatePicker name="Select date" bind:dateValue={$formData.date} />
-            <input type="hidden" {...attrs} value={$formData.date} />
+            <input type="hidden" {...attrs} bind:value={$formData.date} />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
@@ -117,7 +124,6 @@
               <div
                 class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-1.5 rounded-lg bg-primary"
               >
-                <span>Adding</span>
                 <LoaderCircle class="h-[20px] w-[20px] animate-spin" />
               </div>
             {/if}
