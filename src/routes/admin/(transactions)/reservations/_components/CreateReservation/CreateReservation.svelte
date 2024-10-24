@@ -94,10 +94,11 @@
           <Form.FieldErrors />
         </Form.Field>
 
-        <Form.Field {form} name="timeLimit">
+        <Form.Field {form} name="date">
           <Form.Control let:attrs>
             <Form.Label>Select Date</Form.Label>
-            <DatePicker name="Select date" />
+            <DatePicker name="Select date" bind:dateValue={$formData.date} />
+            <input type="hidden" {...attrs} value={$formData.date} />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>

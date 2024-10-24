@@ -9,14 +9,8 @@ export const createReservationSchema = z.object({
   room: z
     .string()
     .refine((v) => ['room1', 'room2'].includes(v), { message: 'Must select a valid room.' }),
-  timeLimit: z
-    .string()
-    .refine((v) => DATE_TIME_PATTERN.test(v), {
-      message: `Time limit must be in format "${DATE_TIME_FORMAT}"`
-    })
-    .refine((v) => !isNaN(Date.parse(v.replace(/(AM|PM)$/, ''))), {
-      message: 'Must be a valid date and time'
-    })
+  date: z.string().min(1, { message: 'Must select date.' }),
+  time: z.string().min(1, { message: 'Must select time.' })
 });
 
 export type CreateReservationSchema = typeof createReservationSchema;

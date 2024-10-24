@@ -9,9 +9,10 @@
 
   interface Props {
     name: string;
+    dateValue: string;
   }
 
-  let { ...props }: Props = $props();
+  let { dateValue = $bindable(), ...props }: Props = $props();
 
   type $$Props = CalendarPrimitive.Props;
   type $$Events = CalendarPrimitive.Events;
@@ -54,18 +55,18 @@
       : undefined
   );
 
-  const displaySelections = () => {
-    if (value) return value;
-
-    return props.name;
-  };
+  $effect(() => {
+    if (value) {
+      dateValue = String(value);
+    }
+  });
 </script>
 
 <Popover.Root>
   <Popover.Trigger
     class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 aria-[invalid]:border-destructive [&>span]:line-clamp-1 data-[placeholder]:[&>span]:text-muted-foreground"
   >
-    <span class={value ? 'text-black' : 'text-gray-600'}>{displaySelections()}</span>
+    <span class={value ? 'text-black' : 'text-gray-600'}>{value ? value : props.name}</span>
   </Popover.Trigger>
   <Popover.Content class="">
     <CalendarPrimitive.Root
