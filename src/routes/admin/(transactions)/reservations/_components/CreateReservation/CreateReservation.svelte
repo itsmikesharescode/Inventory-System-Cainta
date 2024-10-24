@@ -103,6 +103,14 @@
           <Form.FieldErrors />
         </Form.Field>
 
+        <Form.Field {form} name="time">
+          <Form.Control let:attrs>
+            <Form.Label>Time</Form.Label>
+            <Input type="text" {...attrs} bind:value={$formData.time} placeholder="Enter time" />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
         <div class="sticky bottom-[1rem] left-0 right-0 flex justify-end">
           <Form.Button disabled={$submitting} class="relative  max-w-fit">
             {#if $submitting}
