@@ -36,7 +36,7 @@
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      {#each Array(20) as _}
+      {#each data.adminLayout.data?.reservations ?? [] as reservation}
         <Table.Row>
           <Table.Cell>
             <ReservationMenu />

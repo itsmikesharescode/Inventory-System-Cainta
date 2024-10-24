@@ -80,6 +80,14 @@
           <Form.FieldErrors />
         </Form.Field>
 
+        <Form.Field {form} name="teacherId">
+          <Form.Control let:attrs>
+            <Form.Label>Teacher Name</Form.Label>
+            <Input {...attrs} bind:value={$formData.teacherName} placeholder="Enter name" />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
         <Form.Field {form} name="maxItems">
           <Form.Control let:attrs>
             <Form.Label>Max Items</Form.Label>
