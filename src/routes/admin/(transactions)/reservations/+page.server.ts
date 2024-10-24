@@ -22,6 +22,7 @@ export const actions: Actions = {
     const { error } = await supabase.from('reservations_tb').insert([
       {
         teacher_id: form.data.teacherId,
+        teacher_name: form.data.teacherName,
         max_items: form.data.maxItems,
         room: form.data.room,
         time_limit: `${form.data.date} ${form.data.time}`,

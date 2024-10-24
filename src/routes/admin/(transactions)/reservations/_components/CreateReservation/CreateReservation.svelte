@@ -80,7 +80,7 @@
           <Form.FieldErrors />
         </Form.Field>
 
-        <Form.Field {form} name="teacherId">
+        <Form.Field {form} name="teacherName">
           <Form.Control let:attrs>
             <Form.Label>Teacher Name</Form.Label>
             <Input {...attrs} bind:value={$formData.teacherName} placeholder="Enter name" />
