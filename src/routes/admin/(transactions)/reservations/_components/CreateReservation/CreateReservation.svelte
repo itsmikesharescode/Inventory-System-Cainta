@@ -1,7 +1,6 @@
 <script lang="ts">
   import * as AlertDialog from '$lib/components/ui/alert-dialog';
-  import Button from '$lib/components/ui/button/button.svelte';
-  import { LoaderCircle, Plus, X } from 'lucide-svelte';
+  import { LoaderCircle, X } from 'lucide-svelte';
   import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
   import { zodClient } from 'sveltekit-superforms/adapters';
   import { toast } from 'svelte-sonner';
@@ -10,7 +9,6 @@
   import { ScrollArea } from '$lib/components/ui/scroll-area/index';
   import { createReservationSchema, type CreateReservationSchema } from './schema';
   import { page } from '$app/stores';
-  import SelectRoom from './SelectRoom.svelte';
   import { goto } from '$app/navigation';
 
   interface Props {
@@ -79,32 +77,22 @@
         <Form.Field {form} name="maxItems">
           <Form.Control let:attrs>
             <Form.Label>Max Items</Form.Label>
-            <Input
-              type="number"
-              {...attrs}
-              bind:value={$formData.maxItems}
-              placeholder="Enter max items"
-            />
+            <Input {...attrs} bind:value={$formData.maxItems} placeholder="Enter max items" />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="room">
           <Form.Control let:attrs>
-            <Form.Label>Select Room</Form.Label>
-            <SelectRoom
-              selections={['Room 1', 'Room 2', 'Room 3']}
-              bind:selected={$formData.room}
-              placeholder="Select Room"
-            />
-            <input hidden bind:value={$formData.room} name={attrs.name} />
+            <Form.Label>Room</Form.Label>
+            <Input type="number" {...attrs} bind:value={$formData.room} placeholder="Enter room" />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="timeLimit">
           <Form.Control let:attrs>
-            <Form.Label>Phone Number</Form.Label>
+            <Form.Label>Time Limit</Form.Label>
             <Input {...attrs} bind:value={$formData.timeLimit} placeholder="Enter time limit" />
           </Form.Control>
           <Form.FieldErrors />
