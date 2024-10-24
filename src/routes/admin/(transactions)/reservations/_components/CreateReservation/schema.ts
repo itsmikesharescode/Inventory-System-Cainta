@@ -11,7 +11,7 @@ export const createReservationSchema = z.object({
     .refine((v) => ['room1', 'room2'].includes(v), { message: 'Must select a valid room.' }),
   date: z.string().min(1, { message: 'Must select date.' }),
   time: z.string().refine((v) => DATE_TIME_PATTERN.test(v), {
-    message: `Time limit must be in format "${DATE_TIME_FORMAT}"`
+    message: `Time must be in format "${DATE_TIME_FORMAT}"`
   })
 });
 
