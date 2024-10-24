@@ -11,6 +11,7 @@
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
   import Button from '$lib/components/ui/button/button.svelte';
+  import DatePicker from '$lib/components/gen/DatePicker.svelte';
 
   interface Props {
     createReservationForm: SuperValidated<Infer<CreateReservationSchema>>;
@@ -95,8 +96,8 @@
 
         <Form.Field {form} name="timeLimit">
           <Form.Control let:attrs>
-            <Form.Label>Time Limit</Form.Label>
-            <Input {...attrs} bind:value={$formData.timeLimit} placeholder="Enter time limit" />
+            <Form.Label>Select Date</Form.Label>
+            <DatePicker name="Select date" />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
