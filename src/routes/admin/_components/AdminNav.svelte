@@ -25,10 +25,6 @@
           url: '/admin/reservations'
         },
         {
-          name: 'New',
-          url: '/admin/reservations?new=true'
-        },
-        {
           name: 'Borrowed Items',
           url: '/admin/borrowed-items'
         },

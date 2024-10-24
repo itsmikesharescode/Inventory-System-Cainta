@@ -10,6 +10,7 @@
   import { createReservationSchema, type CreateReservationSchema } from './schema';
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
+  import Button from '$lib/components/ui/button/button.svelte';
 
   interface Props {
     createReservationForm: SuperValidated<Infer<CreateReservationSchema>>;
@@ -17,7 +18,7 @@
 
   const { createReservationForm }: Props = $props();
 
-  const isOpen = $derived($page.url.searchParams.get('new') === 'true');
+  let open = $state(false);
 
   const form = superForm(createReservationForm, {
     validators: zodClient(createReservationSchema),
@@ -39,12 +40,14 @@
   const { form: formData, enhance, submitting } = form;
 </script>
 
-<AlertDialog.Root preventScroll={true} open={isOpen}>
+<Button onclick={() => (open = true)}>Create Reservation</Button>
+
+<AlertDialog.Root preventScroll={true} bind:open>
   <AlertDialog.Content class="p-0">
     <ScrollArea class="max-h-screen md:max-h-[80dvh]">
       <button
         onclick={() => {
-          goto('/admin/reservations', { invalidateAll: false });
+          open = false;
           form.reset();
         }}
         class="absolute right-4 top-4 z-30 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"

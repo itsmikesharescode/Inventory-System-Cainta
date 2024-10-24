@@ -16,8 +16,10 @@
     />
   </div>
 
-  <div class="flex items-center gap-2.5">
+  <div class="flex items-center justify-between gap-2.5">
     <FilterSelect />
+
+    <CreateReservation createReservationForm={data.createReservationForm} />
   </div>
 
   <Table.Root>
@@ -48,5 +50,3 @@
     </Table.Body>
   </Table.Root>
 </div>
-
-<CreateReservation createReservationForm={data.createReservationForm} />
