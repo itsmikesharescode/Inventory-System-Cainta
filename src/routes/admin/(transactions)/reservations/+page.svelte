@@ -41,10 +41,10 @@
           <Table.Cell>
             <ReservationMenu />
           </Table.Cell>
-          <Table.Cell>Eviota, Mike John B</Table.Cell>
-          <Table.Cell>asdasd</Table.Cell>
-          <Table.Cell>123123sd</Table.Cell>
-          <Table.Cell>asdasd</Table.Cell>
+          <Table.Cell>{reservation.teacher_name}</Table.Cell>
+          <Table.Cell>{reservation.max_items}</Table.Cell>
+          <Table.Cell>{reservation.time_limit}</Table.Cell>
+          <Table.Cell>{reservation.room}</Table.Cell>
         </Table.Row>
       {/each}
     </Table.Body>
