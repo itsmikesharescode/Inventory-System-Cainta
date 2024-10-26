@@ -10,13 +10,16 @@
   import { ScrollArea } from '$lib/components/ui/scroll-area/index';
   import { updateReservationSchema, type UpdateReservationSchema } from './schema';
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
+  import DatePicker from '$lib/components/gen/DatePicker.svelte';
+  import SelectPicker from '$lib/components/gen/SelectPicker.svelte';
 
   interface Props {
     updateReservationForm: SuperValidated<Infer<UpdateReservationSchema>>;
-    showUpdateReservation: boolean;
+    showUpReservation: boolean;
+    reservation: AdminLayout['reservations'][number];
   }
 
-  let { updateReservationForm, showUpdateReservation = $bindable() }: Props = $props();
+  let { updateReservationForm, showUpReservation = $bindable(), reservation }: Props = $props();
 
   const form = superForm(updateReservationForm, {
     validators: zodClient(updateReservationSchema),
@@ -26,7 +29,7 @@
       switch (status) {
         case 200:
           toast.success('', { description: data.msg });
-          showUpdateReservation = false;
+          showUpReservation = false;
           break;
 
         case 401:
@@ -39,24 +42,25 @@
   const { form: formData, enhance, submitting } = form;
 
   $effect(() => {
-    /* if (showUpdateReservation) {
-      $formData.fName = teacher.user_meta_data.firstname;
-      $formData.mName = teacher.user_meta_data.middlename;
-      $formData.lName = teacher.user_meta_data.lastname;
-      $formData.email = teacher.user_meta_data.email;
-      $formData.teacherId = teacher.user_meta_data.teacherId;
-      $formData.phone = teacher.user_meta_data.phonenumber;
-      $formData.department = teacher.user_meta_data.department;
-    } */
+    if (showUpReservation) {
+      const [date, time, ampm] = reservation.time_limit.split(' ');
+      $formData.teacherId = reservation.teacher_id;
+      $formData.teacherName = reservation.teacher_name;
+      $formData.maxItems = reservation.max_items;
+      $formData.room = reservation.room;
+      $formData.date = date;
+      $formData.time = `${time} ${ampm}`;
+      $formData.status = reservation.status;
+    }
   });
 </script>
 
-<AlertDialog.Root preventScroll={true} bind:open={showUpdateReservation}>
+<AlertDialog.Root preventScroll={true} bind:open={showUpReservation}>
   <AlertDialog.Content class="p-0">
     <ScrollArea class="max-h-screen md:max-h-[80dvh]">
       <button
         onclick={() => {
-          showUpdateReservation = false;
+          showUpReservation = false;
           form.reset();
         }}
         class="absolute right-4 top-4 z-30 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
@@ -66,47 +70,60 @@
       </button>
 
       <AlertDialog.Header class="sticky top-0 z-20 rounded-t-lg p-5 backdrop-blur-lg">
-        <AlertDialog.Title>Update Teacher</AlertDialog.Title>
+        <AlertDialog.Title>Update Reservation</AlertDialog.Title>
         <AlertDialog.Description>
-          Kindly fill all the following fields to update a teacher.
+          Kindly fill all the following fields to update this reservation.
         </AlertDialog.Description>
       </AlertDialog.Header>
 
       <form
         method="POST"
-        action="?/updateTeacherEvent"
+        action="?/updateResEvent"
         use:enhance
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
         <Form.Field {form} name="id" class="hidden">
           <Form.Control let:attrs>
-            <Input {...attrs} bind:value={$formData.id} />
+            <Input {...attrs} bind:value={reservation.id} />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
-        <Form.Field {form} name="name">
+        <Form.Field {form} name="status">
           <Form.Control let:attrs>
-            <Form.Label>Name</Form.Label>
-            <Input {...attrs} bind:value={$formData.name} placeholder="Enter name" />
+            <Form.Label>Status</Form.Label>
+            <SelectPicker
+              selections={['Accepted', 'Pending']}
+              bind:chosenValue={$formData.status}
+              placeholder="Select status"
+            />
+            <input {...attrs} type="hidden" bind:value={$formData.status} />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
-        <Form.Field {form} name="item">
+        <Form.Field {form} name="teacherId">
           <Form.Control let:attrs>
-            <Form.Label>Item</Form.Label>
-            <Input {...attrs} bind:value={$formData.item} placeholder="Enter item" />
+            <Form.Label>Teacher ID</Form.Label>
+            <Input {...attrs} bind:value={$formData.teacherId} placeholder="Enter teacher id" />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
-        <Form.Field {form} name="reservationDate">
+        <Form.Field {form} name="teacherName">
           <Form.Control let:attrs>
-            <Form.Label>Reservation Date</Form.Label>
+            <Form.Label>Teacher Name</Form.Label>
+            <Input {...attrs} bind:value={$formData.teacherName} placeholder="Enter teacher name" />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field {form} name="maxItems">
+          <Form.Control let:attrs>
+            <Form.Label>Max Items</Form.Label>
             <Input
               {...attrs}
-              bind:value={$formData.reservationDate}
+              bind:value={$formData.maxItems}
               placeholder="Enter reservation date"
             />
           </Form.Control>
@@ -121,18 +138,34 @@
           <Form.FieldErrors />
         </Form.Field>
 
+        <Form.Field {form} name="date">
+          <Form.Control let:attrs>
+            <Form.Label>Date</Form.Label>
+            <DatePicker bind:dateValue={$formData.date} name="Select date" />
+            <input {...attrs} type="hidden" bind:value={$formData.date} />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field {form} name="time">
+          <Form.Control let:attrs>
+            <Form.Label>Time</Form.Label>
+            <Input {...attrs} bind:value={$formData.time} placeholder="Enter time" />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
         <div class="sticky bottom-[1rem] left-0 right-0 flex justify-end">
           <Form.Button disabled={$submitting} class="relative  max-w-fit">
             {#if $submitting}
               <div
                 class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-1.5 rounded-lg bg-primary"
               >
-                <span>Updating</span>
                 <LoaderCircle class="h-[20px] w-[20px] animate-spin" />
               </div>
             {/if}
 
-            Update Teacher
+            Update
           </Form.Button>
         </div>
       </form>

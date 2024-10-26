@@ -5,8 +5,11 @@
   import { pushState } from '$app/navigation';
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
   import ViewReservation from './ViewReservation/ViewReservation.svelte';
+  import type { UpdateReservationSchema } from './UpdateReservation/schema';
+  import UpdateReservation from './UpdateReservation/UpdateReservation.svelte';
 
   interface Props {
+    updateReservationForm: SuperValidated<Infer<UpdateReservationSchema>>;
     reservation: AdminLayout['reservations'][number];
   }
 
@@ -49,3 +52,8 @@
 </Menubar.Root>
 
 <ViewReservation reservation={props.reservation} bind:showViewReservation />
+<UpdateReservation
+  reservation={props.reservation}
+  updateReservationForm={props.updateReservationForm}
+  bind:showUpReservation
+/>
