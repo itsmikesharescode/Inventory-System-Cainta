@@ -62,6 +62,7 @@
         <Table.Head>Items</Table.Head>
         <Table.Head>Reservation Date</Table.Head>
         <Table.Head>Rooms</Table.Head>
+        <Table.Head>Status</Table.Head>
       </Table.Row>
     </Table.Header>
     <Table.Body>
@@ -78,6 +79,7 @@
               <Table.Cell>{reservation.max_items}</Table.Cell>
               <Table.Cell>{reservation.time_limit}</Table.Cell>
               <Table.Cell>{reservation.room}</Table.Cell>
+              <Table.Cell>{reservation.status}</Table.Cell>
             </Table.Row>
           {/each}
         {/await}
@@ -91,6 +93,7 @@
             <Table.Cell>{reservation.max_items}</Table.Cell>
             <Table.Cell>{reservation.time_limit}</Table.Cell>
             <Table.Cell>{reservation.room}</Table.Cell>
+            <Table.Cell>{reservation.status}</Table.Cell>
           </Table.Row>
         {/each}
       {/if}
