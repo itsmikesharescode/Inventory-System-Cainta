@@ -56,5 +56,14 @@ export const actions: Actions = {
 
     if (error) return fail(401, { form, msg: error.message });
     return { form, msg: 'Reservation updated.' };
+  },
+  deleteResEvent: async ({ locals: { supabase }, request }) => {
+    const formData = await request.formData();
+    const id = formData.get('id') as string;
+
+    const { error } = await supabase.from('reservations_tb').delete().eq('id', Number(id));
+
+    if (error) return fail(401, { msg: error.message });
+    return { msg: 'Reservation deleted.' };
   }
 };

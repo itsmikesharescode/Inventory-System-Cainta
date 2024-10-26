@@ -9,13 +9,14 @@
   import { toast } from 'svelte-sonner';
 
   interface Props {
-    showDeleteReservation: boolean;
+    showDelReservation: boolean;
+    reservation: AdminLayout['reservations'][number];
   }
 
-  let { showDeleteReservation = $bindable() }: Props = $props();
+  let { showDelReservation = $bindable(), reservation }: Props = $props();
 
   let deleteLoader = $state(false);
-  const deleteReservationEvent: SubmitFunction = () => {
+  const deleteResEvent: SubmitFunction = () => {
     deleteLoader = true;
     return async ({ result, update }) => {
       const { status, data } = result as Result<{ msg: string }>;
@@ -23,7 +24,7 @@
       switch (status) {
         case 200:
           toast.success('', { description: data.msg });
-          showDeleteReservation = false;
+          showDelReservation = false;
           break;
 
         case 401:
@@ -36,7 +37,7 @@
   };
 </script>
 
-<AlertDialog.Root bind:open={showDeleteReservation}>
+<AlertDialog.Root bind:open={showDelReservation}>
   <AlertDialog.Content>
     <AlertDialog.Header>
       <AlertDialog.Title>Delete this reservation?</AlertDialog.Title>
@@ -47,8 +48,8 @@
 
     <AlertDialog.Footer>
       <AlertDialog.Cancel disabled={deleteLoader}>Cancel</AlertDialog.Cancel>
-      <form method="post" action="?/deleteReservationEvent" use:enhance={deleteReservationEvent}>
-        <input name="teacherId" type="hidden" value="" />
+      <form method="post" action="?/deleteResEvent" use:enhance={deleteResEvent}>
+        <input name="id" type="hidden" value={reservation.id} />
         <Button type="submit" disabled={deleteLoader} class="relative w-full" variant="destructive">
           {#if deleteLoader}
             <div

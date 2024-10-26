@@ -7,6 +7,7 @@
   import ViewReservation from './ViewReservation/ViewReservation.svelte';
   import type { UpdateReservationSchema } from './UpdateReservation/schema';
   import UpdateReservation from './UpdateReservation/UpdateReservation.svelte';
+  import DeleteReservation from './DeleteReservation/DeleteReservation.svelte';
 
   interface Props {
     updateReservationForm: SuperValidated<Infer<UpdateReservationSchema>>;
@@ -57,3 +58,4 @@
   updateReservationForm={props.updateReservationForm}
   bind:showUpReservation
 />
+<DeleteReservation reservation={props.reservation} bind:showDelReservation />
