@@ -1,8 +1,26 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
+  import type { PostgrestSingleResponse } from '@supabase/supabase-js';
   import BarChart from './_components/BarChart.svelte';
   import CountCard from './_components/CountCard.svelte';
   import LineChart from './_components/LineChart.svelte';
+
+  const { data } = $props();
+
+  const streamCounts = async () => {
+    const { data: counts, error } = (await data.supabase.rpc(
+      'admin_dashboard_counts'
+    )) as PostgrestSingleResponse<{
+      pending_count: number;
+      accepted_count: number;
+      canceled_count: number;
+      teachers_count: number;
+    }>;
+    console.log(error?.message);
+
+    if (error) return null;
+    return counts;
+  };
 </script>
 
 <div class="flex flex-col gap-5">
@@ -24,9 +42,17 @@
   </div>
 
   <div class="grid grid-cols-4 gap-2.5">
-    <CountCard title="Pending" count={8} />
-    <CountCard title="Accepted" count={18} />
-    <CountCard title="Canceled" count={5} />
-    <CountCard title="Teachers" count={305} />
+    {#await streamCounts()}
+      <p>Fetching</p>
+    {:then counts}
+      {#if counts}
+        <CountCard title="Pending" count={counts.pending_count} />
+        <CountCard title="Accepted" count={counts.accepted_count} />
+        <CountCard title="Canceled" count={counts.canceled_count} />
+        <CountCard title="Teachers" count={counts.teachers_count} />
+      {:else}
+        <p>Error fetching counts</p>
+      {/if}
+    {/await}
   </div>
 </div>

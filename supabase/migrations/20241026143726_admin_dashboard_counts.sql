@@ -1,4 +1,4 @@
-create or replace function admin_dashboards() returns jsonb as $$
+create or replace function admin_dashboard_counts() returns jsonb as $$
 declare
     pending_count integer;
     accepted_count integer;
@@ -7,15 +7,15 @@ declare
 begin
     select count(*) into pending_count
     from public.reservations_tb
-    where status = 'pending';
+    where status = 'Pending';
 
     select count(*) into accepted_count
     from public.reservations_tb
-    where status = 'accepted';
+    where status = 'Accepted';
 
     select count(*) into canceled_count
     from public.reservations_tb
-    where status = 'canceled';
+    where status = 'Canceled';
 
     select count(*) into teacher_count
     from teachers_tb;
