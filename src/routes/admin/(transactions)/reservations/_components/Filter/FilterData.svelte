@@ -9,6 +9,7 @@
   <div class="flex w-full max-w-sm flex-col gap-1.5">
     <Label for="email">Filter</Label>
     <SelectPicker
+      class=""
       placeholder="Select Filter"
       bind:chosenValue
       selections={['All', 'Accepted', 'Pending']}

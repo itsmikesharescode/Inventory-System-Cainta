@@ -93,6 +93,7 @@
           <Form.Control let:attrs>
             <Form.Label>Status</Form.Label>
             <SelectPicker
+              class=""
               selections={['Accepted', 'Pending']}
               bind:chosenValue={$formData.status}
               placeholder="Select status"

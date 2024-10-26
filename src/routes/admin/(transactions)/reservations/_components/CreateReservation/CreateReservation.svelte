@@ -8,8 +8,6 @@
   import { Input } from '$lib/components/ui/input';
   import { ScrollArea } from '$lib/components/ui/scroll-area/index';
   import { createReservationSchema, type CreateReservationSchema } from './schema';
-  import { page } from '$app/stores';
-  import { goto } from '$app/navigation';
   import Button from '$lib/components/ui/button/button.svelte';
   import DatePicker from '$lib/components/gen/DatePicker.svelte';
 

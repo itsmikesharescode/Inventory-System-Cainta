@@ -1,10 +1,13 @@
 <script lang="ts">
   import * as Select from '$lib/components/ui/select';
+  import { cn } from '$lib/utils';
+  import type { ClassValue } from 'tailwind-variants';
 
   interface Props {
     selections: string[];
     chosenValue: string;
     placeholder: string;
+    class: ClassValue;
   }
 
   let { chosenValue = $bindable(), ...props }: Props = $props();
@@ -25,7 +28,7 @@
     v && (chosenValue = v.value);
   }}
 >
-  <Select.Trigger class="">
+  <Select.Trigger class={cn('w-[180px]', !chosenValue && 'text-muted-foreground', props.class)}>
     <Select.Value placeholder={props.placeholder} />
   </Select.Trigger>
   <Select.Content>
