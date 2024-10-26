@@ -10,6 +10,7 @@
   import { addBorrowerSchema, type AddBorrowerSchema } from './schema';
   import Button from '$lib/components/ui/button/button.svelte';
   import DatePicker from '$lib/components/gen/DatePicker.svelte';
+  import BorrowedItem from './BorrowedItem.svelte';
 
   interface Props {
     addBorrowerForm: SuperValidated<Infer<AddBorrowerSchema>>;
@@ -107,6 +108,8 @@
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
+
+        <BorrowedItem />
 
         <div class="sticky bottom-[1rem] left-0 right-0 flex justify-end">
           <Form.Button disabled={$submitting} class="relative  max-w-fit">
