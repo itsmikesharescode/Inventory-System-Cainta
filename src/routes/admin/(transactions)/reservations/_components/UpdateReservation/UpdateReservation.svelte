@@ -93,8 +93,8 @@
           <Form.Control let:attrs>
             <Form.Label>Status</Form.Label>
             <SelectPicker
-              class=""
-              selections={['Accepted', 'Pending']}
+              class="w-full"
+              selections={['Accepted', 'Pending', 'Canceled']}
               bind:chosenValue={$formData.status}
               placeholder="Select status"
             />
