@@ -2,7 +2,7 @@
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import * as Table from '$lib/components/ui/table';
   import CreateReservation from './_components/CreateReservation/CreateReservation.svelte';
-  import FilterSelect from './_components/FilterSelect/FilterSelect.svelte';
+  import FilterData from './_components/Filter/FilterData.svelte';
   import ReservationMenu from './_components/ReservationMenu.svelte';
 
   const { data } = $props();
@@ -17,7 +17,7 @@
   </div>
 
   <div class="flex items-center justify-between gap-2.5">
-    <FilterSelect />
+    <FilterData />
 
     <CreateReservation createReservationForm={data.createReservationForm} />
   </div>
