@@ -4,13 +4,13 @@
   import type { Infer, SuperValidated } from 'sveltekit-superforms';
   import { pushState } from '$app/navigation';
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
+  import ViewReservation from './ViewReservation/ViewReservation.svelte';
 
-  /* interface Props {
-    teacher: AdminLayout['teachers'][number];
-    updateTeacherForm: SuperValidated<Infer<UpdateTeacherSchema>>;
+  interface Props {
+    reservation: AdminLayout['reservations'][number];
   }
 
-  const { updateTeacherForm, teacher }: Props = $props(); */
+  const { ...props }: Props = $props();
 
   let showUpReservation = $state(false);
   let showDelReservation = $state(false);
@@ -27,7 +27,7 @@
       <Menubar.Item
         onclick={() => {
           showViewReservation = true;
-          /*  pushState(`/admin/borrowers/${teacher.teacher_id}`, {}); */
+          pushState(`/admin/reservations/${props.reservation.id}`, {});
         }}
       >
         View
@@ -47,3 +47,5 @@
     </Menubar.Content>
   </Menubar.Menu>
 </Menubar.Root>
+
+<ViewReservation reservation={props.reservation} bind:showViewReservation />

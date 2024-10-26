@@ -39,7 +39,7 @@
       {#each data.adminLayout.data?.reservations ?? [] as reservation}
         <Table.Row>
           <Table.Cell>
-            <ReservationMenu />
+            <ReservationMenu {reservation} />
           </Table.Cell>
           <Table.Cell>{reservation.teacher_name}</Table.Cell>
           <Table.Cell>{reservation.max_items}</Table.Cell>

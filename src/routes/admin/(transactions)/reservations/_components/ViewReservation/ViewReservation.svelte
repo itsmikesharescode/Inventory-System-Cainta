@@ -5,9 +5,10 @@
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
   interface Props {
     showViewReservation: boolean;
+    reservation: AdminLayout['reservations'][number];
   }
 
-  let { showViewReservation = $bindable() }: Props = $props();
+  let { showViewReservation = $bindable(), ...props }: Props = $props();
 </script>
 
 <AlertDialog.Root bind:open={showViewReservation}>
@@ -30,22 +31,22 @@
       <div class="flex flex-col gap-2.5 p-5 pt-0">
         <div class="">
           <p class="">Name</p>
-          <p class="text-muted-foreground">asdasdasd</p>
+          <p class="text-muted-foreground">{props.reservation.teacher_name}</p>
         </div>
 
         <div class="">
-          <p class="">Item</p>
-          <p class="text-muted-foreground">asdasasd</p>
+          <p class="">Max Item</p>
+          <p class="text-muted-foreground">{props.reservation.max_items}</p>
         </div>
 
         <div class="">
           <p class="">Reservation Date</p>
-          <p class="text-muted-foreground">asdasdasd</p>
+          <p class="text-muted-foreground">{props.reservation.time_limit}</p>
         </div>
 
         <div class="">
           <p class="">Room</p>
-          <p class="text-muted-foreground">asdasdasdasd</p>
+          <p class="text-muted-foreground">{props.reservation.room}</p>
         </div>
       </div>
     </ScrollArea>
