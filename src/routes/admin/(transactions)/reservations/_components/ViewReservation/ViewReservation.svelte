@@ -30,7 +30,17 @@
 
       <div class="flex flex-col gap-2.5 p-5 pt-0">
         <div class="">
-          <p class="">Name</p>
+          <p class="">Status</p>
+          <p class="text-muted-foreground">{props.reservation.status}</p>
+        </div>
+
+        <div class="">
+          <p class="">Teacher ID</p>
+          <p class="text-muted-foreground">{props.reservation.teacher_id}</p>
+        </div>
+
+        <div class="">
+          <p class="">Teacher Name</p>
           <p class="text-muted-foreground">{props.reservation.teacher_name}</p>
         </div>
 
