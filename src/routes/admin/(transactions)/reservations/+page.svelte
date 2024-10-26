@@ -11,7 +11,7 @@
   const { data } = $props();
 
   const filterStream = async () => {
-    if ($page.url.searchParams.get('filter') === 'Accepted') {
+    if ($page.url.searchParams.get('filter') === 'accepted') {
       const { data: acceptedData, error } = (await data.supabase
         .from('reservations_tb')
         .select('*')
@@ -23,7 +23,7 @@
       return acceptedData;
     }
 
-    if ($page.url.searchParams.get('filter') === 'Pending') {
+    if ($page.url.searchParams.get('filter') === 'pending') {
       const { data: pendingData, error } = (await data.supabase
         .from('reservations_tb')
         .select('*')
@@ -65,17 +65,35 @@
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      {#each data.adminLayout.data?.reservations ?? [] as reservation}
-        <Table.Row>
-          <Table.Cell>
-            <ReservationMenu updateReservationForm={data.updateReservationForm} {reservation} />
-          </Table.Cell>
-          <Table.Cell>{reservation.teacher_name}</Table.Cell>
-          <Table.Cell>{reservation.max_items}</Table.Cell>
-          <Table.Cell>{reservation.time_limit}</Table.Cell>
-          <Table.Cell>{reservation.room}</Table.Cell>
-        </Table.Row>
-      {/each}
+      {#if $page.url.searchParams.get('filter')}
+        {#await filterStream()}
+          <p>Fetching {$page.url.searchParams.get('filter')}</p>
+        {:then reservations}
+          {#each reservations as reservation}
+            <Table.Row>
+              <Table.Cell>
+                <ReservationMenu updateReservationForm={data.updateReservationForm} {reservation} />
+              </Table.Cell>
+              <Table.Cell>{reservation.teacher_name}</Table.Cell>
+              <Table.Cell>{reservation.max_items}</Table.Cell>
+              <Table.Cell>{reservation.time_limit}</Table.Cell>
+              <Table.Cell>{reservation.room}</Table.Cell>
+            </Table.Row>
+          {/each}
+        {/await}
+      {:else}
+        {#each data.adminLayout.data?.reservations ?? [] as reservation}
+          <Table.Row>
+            <Table.Cell>
+              <ReservationMenu updateReservationForm={data.updateReservationForm} {reservation} />
+            </Table.Cell>
+            <Table.Cell>{reservation.teacher_name}</Table.Cell>
+            <Table.Cell>{reservation.max_items}</Table.Cell>
+            <Table.Cell>{reservation.time_limit}</Table.Cell>
+            <Table.Cell>{reservation.room}</Table.Cell>
+          </Table.Row>
+        {/each}
+      {/if}
     </Table.Body>
   </Table.Root>
 </div>
