@@ -16,7 +16,6 @@
       canceled_count: number;
       teachers_count: number;
     }>;
-    console.log(error?.message);
 
     if (error) return null;
     return counts;
