@@ -10,7 +10,6 @@
   import { addBorrowerSchema, type AddBorrowerSchema } from './schema';
   import Button from '$lib/components/ui/button/button.svelte';
   import DatePicker from '$lib/components/gen/DatePicker.svelte';
-  import SearchTeacher from './SearchTeacher.svelte';
 
   interface Props {
     addBorrowerForm: SuperValidated<Infer<AddBorrowerSchema>>;
@@ -47,7 +46,7 @@
 
 <AlertDialog.Root preventScroll={true} bind:open>
   <AlertDialog.Content class="p-0">
-    <ScrollArea class="h-[80dvh] max-h-screen">
+    <ScrollArea class="max-h-screen lg:max-h-[80dvh]">
       <button
         onclick={() => {
           open = false;
@@ -72,19 +71,39 @@
         use:enhance
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
-        <!-- <Form.Field {form} name="teacherId">
+        <Form.Field {form} name="teacherId">
           <Form.Control let:attrs>
             <Form.Label>Teacher ID</Form.Label>
-            <Input {...attrs} bind:value={$formData.teacherId} placeholder="Enter first name" />
+            <Input {...attrs} bind:value={$formData.teacherId} placeholder="Enter teacher id" />
           </Form.Control>
           <Form.FieldErrors />
-        </Form.Field> -->
+        </Form.Field>
 
         <Form.Field {form} name="borrowerName">
           <Form.Control let:attrs>
             <Form.Label>Borrower Name</Form.Label>
-            <SearchTeacher name="Select borrower" bind:chosenTeacher={$formData.borrowerName} />
-            <input type="hidden" value={$formData.borrowerName} />
+            <Input
+              {...attrs}
+              bind:value={$formData.borrowerName}
+              placeholder="Enter borrower name"
+            />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field {form} name="room">
+          <Form.Control let:attrs>
+            <Form.Label>Room</Form.Label>
+            <Input {...attrs} bind:value={$formData.room} placeholder="Enter room" />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field {form} name="borrowedDate">
+          <Form.Control let:attrs>
+            <Form.Label>Borrowed Date</Form.Label>
+            <DatePicker name="Select date" bind:dateValue={$formData.borrowedDate} />
+            <input {...attrs} type="hidden" value={$formData.borrowedDate} />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
