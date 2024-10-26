@@ -1,11 +1,40 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import * as Table from '$lib/components/ui/table';
+  import type { PostgrestSingleResponse } from '@supabase/supabase-js';
   import CreateReservation from './_components/CreateReservation/CreateReservation.svelte';
   import FilterData from './_components/Filter/FilterData.svelte';
   import ReservationMenu from './_components/ReservationMenu.svelte';
+  import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
+  import { page } from '$app/stores';
 
   const { data } = $props();
+
+  const filterStream = async () => {
+    if ($page.url.searchParams.get('filter') === 'Accepted') {
+      const { data: acceptedData, error } = (await data.supabase
+        .from('reservations_tb')
+        .select('*')
+        .eq('status', 'Accepted')) as PostgrestSingleResponse<
+        AdminLayout['reservations'][number][]
+      >;
+
+      if (error) return [];
+      return acceptedData;
+    }
+
+    if ($page.url.searchParams.get('filter') === 'Pending') {
+      const { data: pendingData, error } = (await data.supabase
+        .from('reservations_tb')
+        .select('*')
+        .eq('status', 'Pending')) as PostgrestSingleResponse<AdminLayout['reservations'][number][]>;
+
+      if (error) return [];
+      return pendingData;
+    }
+
+    return [];
+  };
 </script>
 
 <div class="flex flex-col gap-5">

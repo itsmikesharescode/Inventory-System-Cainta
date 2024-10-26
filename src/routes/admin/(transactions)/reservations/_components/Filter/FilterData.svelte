@@ -2,7 +2,11 @@
   import SelectPicker from '$lib/components/gen/SelectPicker.svelte';
   import { Label } from '$lib/components/ui/label/index.js';
 
-  let chosenValue = $state('');
+  interface Props {
+    chosenValue: string;
+  }
+
+  let { chosenValue = $bindable() }: Props = $props();
 </script>
 
 <div class="">
