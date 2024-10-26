@@ -1,7 +1,10 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import * as Table from '$lib/components/ui/table';
+  import AddBorrower from './_components/AddBorrower/AddBorrower.svelte';
   import BorrowedMenu from './_components/BorrowedMenu.svelte';
+
+  const { data } = $props();
 </script>
 
 <div class="flex flex-col gap-5">
@@ -10,6 +13,10 @@
       class="font-display text-left text-4xl font-bold tracking-[-0.1em]  text-black   md:leading-[5rem]"
       words="Borrowed Items"
     />
+  </div>
+
+  <div class="flex justify-end">
+    <AddBorrower addBorrowerForm={data.addBorrowerForm} />
   </div>
 
   <Table.Root>
