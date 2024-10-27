@@ -3,6 +3,8 @@
   import * as Table from '$lib/components/ui/table';
   import AddBorrower from './_components/AddBorrower/AddBorrower.svelte';
   import BorrowedMenu from './_components/BorrowedMenu.svelte';
+  import * as Popover from '$lib/components/ui/popover';
+  import RenderBorrowedItems from './_components/RenderBorrowedItems.svelte';
 
   const { data } = $props();
 </script>
@@ -31,15 +33,17 @@
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      {#each data.adminLayout.data?.borrowed_items ?? [] as borrowedItem}
+      {#each data.adminLayout.data?.borrowed_items ?? [] as borrower}
         <Table.Row>
           <Table.Cell>
             <BorrowedMenu />
           </Table.Cell>
-          <Table.Cell>{borrowedItem.borrower_name}</Table.Cell>
-          <Table.Cell>{borrowedItem.borrowed_date}</Table.Cell>
-          <Table.Cell>{borrowedItem.items_borrowed}</Table.Cell>
-          <Table.Cell>{borrowedItem.room}</Table.Cell>
+          <Table.Cell>{borrower.borrower_name}</Table.Cell>
+          <Table.Cell>{borrower.borrowed_date}</Table.Cell>
+          <Table.Cell>
+            <RenderBorrowedItems {borrower} />
+          </Table.Cell>
+          <Table.Cell>{borrower.room}</Table.Cell>
         </Table.Row>
       {/each}
     </Table.Body>
