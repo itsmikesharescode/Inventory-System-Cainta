@@ -16,6 +16,11 @@
     </div>
 
     <div class="flex flex-col gap-1.5">
+      <span class="">Reference ID</span>
+      <span class="text-muted-foreground">{borrowedItemRef.reference_id}</span>
+    </div>
+
+    <div class="flex flex-col gap-1.5">
       <span class="">Borrowed Date</span>
       <span class="text-muted-foreground">{borrowedItemRef.borrowed_date}</span>
     </div>

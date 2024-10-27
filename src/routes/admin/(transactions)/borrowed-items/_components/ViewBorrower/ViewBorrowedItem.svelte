@@ -32,12 +32,17 @@
       <div class="flex flex-col gap-2.5 p-5 pt-0">
         <div class="flex flex-col gap-1.5">
           <span class="">Teacher ID</span>
-          <span class="text-muted-foreground">asdasdas</span>
+          <span class="text-muted-foreground">{borrower.teacher_real_id}</span>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <span class="">Reference ID</span>
+          <span class="text-muted-foreground">{borrower.reference_id}</span>
         </div>
 
         <div class="flex flex-col gap-1.5">
           <span class="">Borrowed Date</span>
-          <span class="text-muted-foreground">asdasdas</span>
+          <span class="text-muted-foreground">{borrower.borrowed_date}</span>
         </div>
 
         <div class="flex flex-col gap-1.5">
