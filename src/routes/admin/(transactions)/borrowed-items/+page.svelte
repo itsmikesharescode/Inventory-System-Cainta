@@ -31,15 +31,15 @@
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      {#each Array(20) as _}
+      {#each data.adminLayout.data?.borrowed_items ?? [] as borrowedItem}
         <Table.Row>
           <Table.Cell>
             <BorrowedMenu />
           </Table.Cell>
-          <Table.Cell>asdasd</Table.Cell>
-          <Table.Cell>asdasd</Table.Cell>
-          <Table.Cell>asdasd</Table.Cell>
-          <Table.Cell>asdasd</Table.Cell>
+          <Table.Cell>{borrowedItem.borrower_name}</Table.Cell>
+          <Table.Cell>{borrowedItem.borrowed_date}</Table.Cell>
+          <Table.Cell>{borrowedItem.items_borrowed}</Table.Cell>
+          <Table.Cell>{borrowedItem.room}</Table.Cell>
         </Table.Row>
       {/each}
     </Table.Body>
