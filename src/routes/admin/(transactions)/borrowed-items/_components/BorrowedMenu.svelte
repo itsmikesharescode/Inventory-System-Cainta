@@ -4,17 +4,18 @@
   import type { Infer, SuperValidated } from 'sveltekit-superforms';
   import { pushState } from '$app/navigation';
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
+  import ViewBorrowedItem from './ViewBorrower/ViewBorrowedItem.svelte';
 
-  /* interface Props {
-    updateReservationForm: SuperValidated<Infer<UpdateReservationSchema>>;
-    reservation: AdminLayout['reservations'][number];
+  interface Props {
+    /* updateReservationForm: SuperValidated<Infer<UpdateReservationSchema>>; */
+    borrower: AdminLayout['borrowed_items'][number];
   }
 
-  const { ...props }: Props = $props(); */
+  const { ...props }: Props = $props();
 
   let showUpReservation = $state(false);
   let showDelReservation = $state(false);
-  let showViewReservation = $state(false);
+  let showViewBorrowedItem = $state(false);
 </script>
 
 <Menubar.Root preventScroll={true} class="max-w-fit border-0">
@@ -26,8 +27,8 @@
     <Menubar.Content>
       <Menubar.Item
         onclick={() => {
-          showViewReservation = true;
-          /* pushState(`/admin/reservations/${props.reservation.id}`, {}); */
+          showViewBorrowedItem = true;
+          pushState(`/admin/borrowed-items/${props.borrower.id}`, {});
         }}
       >
         View
@@ -47,3 +48,5 @@
     </Menubar.Content>
   </Menubar.Menu>
 </Menubar.Root>
+
+<ViewBorrowedItem borrower={props.borrower} bind:showViewBorrowedItem />
