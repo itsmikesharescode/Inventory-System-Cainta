@@ -8,12 +8,13 @@
   import { toast } from 'svelte-sonner';
 
   type Items = AdminLayout['items'][number];
+  type BorrowedItem = AdminLayout['borrowed_items'][number];
   interface Props {
     selectedItems: Items[];
-    teacher_real_id: string;
+    referenceId: string;
   }
 
-  let { selectedItems = $bindable(), teacher_real_id }: Props = $props();
+  let { selectedItems = $bindable(), referenceId }: Props = $props();
 
   const supabase = fromSupabaseState();
   const sb = supabase.get();
@@ -24,8 +25,9 @@
     const { data, error } = (await sb
       .from('borrowed_items_tb')
       .select('*')
-      .eq('teacher_real_id', teacher_real_id)) as PostgrestSingleResponse<Items[]>;
-    console.log(data, error?.message);
+      .eq('reference_id', referenceId)
+      .limit(1)
+      .single()) as PostgrestSingleResponse<BorrowedItem>;
     if (error) return null;
     return data;
   };
@@ -62,30 +64,31 @@
       >Borrowed Items</Popover.Trigger
     >
     <Popover.Content>
-      <p class="text-sm text-muted-foreground">Available Items</p>
+      <p class="text-sm text-muted-foreground">Borrowed Items</p>
       <ScrollArea class="h-[35dvh]">
         {#await streamBorrowedItems()}
           <p>Fetching items from database</p>
-        {:then items}
+        {:then item}
           <div class="flex flex-col gap-1.5">
-            {#each items ?? [] as item}
+            {#each item?.items_borrowed ?? [] as itemBorrowed}
               <button
                 onclick={() => {
                   const idRef = selectedItems.map((item) => item.id);
 
-                  if (idRef.includes(item.id)) {
+                  if (idRef.includes(itemBorrowed.id)) {
                     return toast.warning('', {
                       description: 'Item already selected click the item outside to unselect.'
                     });
                   }
-                  selectedItems.push(item);
+                  selectedItems.push(itemBorrowed);
                   selectedItems = selectedItems;
+                  return;
                 }}
                 type="button"
-                class="{checkIfExist(item.id)}
+                class="{checkIfExist(itemBorrowed.id)}
                    p-2 text-left transition-all"
               >
-                <span class="text-xs">{item.category}({item.brand})</span>
+                <span class="text-xs">{itemBorrowed.category}({itemBorrowed.brand})</span>
               </button>
             {/each}
           </div>

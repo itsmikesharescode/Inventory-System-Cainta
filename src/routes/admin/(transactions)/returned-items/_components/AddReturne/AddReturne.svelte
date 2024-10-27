@@ -80,6 +80,14 @@
           <Form.FieldErrors />
         </Form.Field>
 
+        <Form.Field {form} name="referenceId">
+          <Form.Control let:attrs>
+            <Form.Label>Reference ID</Form.Label>
+            <Input {...attrs} bind:value={$formData.referenceId} placeholder="Enter teacher id" />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
         <Form.Field {form} name="borrowerName">
           <Form.Control let:attrs>
             <Form.Label>Borrower Name</Form.Label>
@@ -105,7 +113,7 @@
           <Form.Control let:attrs>
             <Form.Label>Items Returned</Form.Label>
             <ReturnedItem
-              teacher_real_id={$formData.teacherRealId}
+              referenceId={$formData.referenceId}
               bind:selectedItems={$formData.itemsReturned}
             />
             <input {...attrs} type="hidden" value={$formData.itemsReturned} />
