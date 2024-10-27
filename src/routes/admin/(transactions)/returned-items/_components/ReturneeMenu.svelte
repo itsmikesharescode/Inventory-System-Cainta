@@ -5,6 +5,7 @@
   import { pushState } from '$app/navigation';
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
   import ViewReturneeItem from './ViewReturnee/ViewReturneeItem.svelte';
+  import DeleteReturnee from './DeleteReturnee/DeleteReturnee.svelte';
 
   interface Props {
     /* updateBorrowerForm: SuperValidated<Infer<UpdateBorrowerSchema>>; */
@@ -14,7 +15,7 @@
   const { ...props }: Props = $props();
 
   let showUpdateBorrower = $state(false);
-  let showDeleteBorrower = $state(false);
+  let showDeleteReturnee = $state(false);
   let showViewReturneeItem = $state(false);
 </script>
 
@@ -36,12 +37,12 @@
       </Menubar.Item>
 
       <Menubar.Separator />
-      <Menubar.Item onclick={() => (showUpdateBorrower = true)}>
+      <!--  <Menubar.Item onclick={() => (showUpdateBorrower = true)}>
         Update
         <Menubar.Shortcut>⌘U</Menubar.Shortcut>
-      </Menubar.Item>
+      </Menubar.Item> -->
       <Menubar.Separator />
-      <Menubar.Item onclick={() => (showDeleteBorrower = true)}
+      <Menubar.Item onclick={() => (showDeleteReturnee = true)}
         >Delete
         <Menubar.Shortcut>⌘D</Menubar.Shortcut>
       </Menubar.Item>
@@ -50,3 +51,4 @@
 </Menubar.Root>
 
 <ViewReturneeItem returnee={props.returnee} bind:showViewReturneeItem />
+<DeleteReturnee returnee={props.returnee} bind:showDeleteReturnee />
