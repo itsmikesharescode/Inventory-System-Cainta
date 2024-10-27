@@ -83,7 +83,7 @@
         <Form.Field {form} name="referenceId">
           <Form.Control let:attrs>
             <Form.Label>Reference ID</Form.Label>
-            <Input {...attrs} bind:value={$formData.referenceId} placeholder="Enter teacher id" />
+            <Input {...attrs} bind:value={$formData.referenceId} placeholder="Enter reference id" />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>

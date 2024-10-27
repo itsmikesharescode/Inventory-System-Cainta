@@ -15,6 +15,17 @@ export const actions: Actions = {
     const form = await superValidate(request, zod(addReturneSchema));
 
     if (!form.valid) return fail(400, { form });
-    console.log(form.data);
+    const { error } = await supabase.rpc('add_returnee', {
+      teacher_real_id_input: form.data.teacherRealId,
+      reference_id_input: form.data.referenceId,
+      borrower_name_input: form.data.borrowerName,
+      borrowed_date_input: form.data.borrowedDate,
+      returned_date_input: form.data.returnedDate,
+      items_returned_input: form.data.itemsReturned
+    });
+
+    if (error) return fail(401, { form, msg: error.message });
+
+    return { form, msg: 'Success added returnee.' };
   }
 };
