@@ -26,6 +26,7 @@
     <Table.Header>
       <Table.Row>
         <Table.Head class="w-[100px]"></Table.Head>
+        <Table.Head>Teacher ID</Table.Head>
         <Table.Head>Borrower Name</Table.Head>
         <Table.Head>Borrowed Date</Table.Head>
         <Table.Head>Items Borrowed</Table.Head>
@@ -38,6 +39,7 @@
           <Table.Cell>
             <BorrowedMenu updateBorrowerForm={data.updateBorrowerForm} {borrower} />
           </Table.Cell>
+          <Table.Cell>{borrower.teacher_real_id}</Table.Cell>
           <Table.Cell>{borrower.borrower_name}</Table.Cell>
           <Table.Cell>{borrower.borrowed_date}</Table.Cell>
           <Table.Cell>
