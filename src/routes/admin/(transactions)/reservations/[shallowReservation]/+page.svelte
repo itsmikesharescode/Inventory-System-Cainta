@@ -14,8 +14,13 @@
       </div>
 
       <div class="">
+        <p class="">Reference ID</p>
+        <p class="text-muted-foreground">{reservationRef.reference_id}</p>
+      </div>
+
+      <div class="">
         <p class="">Teacher ID</p>
-        <p class="text-muted-foreground">{reservationRef.teacher_id}</p>
+        <p class="text-muted-foreground">{reservationRef.teacher_real_id}</p>
       </div>
 
       <div class="">

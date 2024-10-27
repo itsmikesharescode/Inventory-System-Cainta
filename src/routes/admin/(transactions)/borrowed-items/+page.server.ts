@@ -4,6 +4,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { addBorrowerSchema } from './_components/AddBorrower/schema';
 import { fail } from '@sveltejs/kit';
 import { updateBorrowerSchema } from './_components/UpdateBorrower/schema';
+import { generateRefId } from '$lib';
 
 export const load: PageServerLoad = async () => {
   return {

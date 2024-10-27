@@ -25,7 +25,7 @@ export const actions: Actions = {
       options: {
         data: {
           role: 'teacher',
-          teacher_id_real: form.data.teacherId,
+          teacher_real_id: form.data.teacherId,
           email: form.data.email,
           firstname: form.data.fName,
           middlename: form.data.mName,

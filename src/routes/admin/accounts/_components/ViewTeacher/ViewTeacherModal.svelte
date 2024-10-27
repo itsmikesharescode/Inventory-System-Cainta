@@ -31,7 +31,7 @@
       <div class="flex flex-col gap-2.5 p-5 pt-0">
         <div class="">
           <p class="">Teacher ID</p>
-          <p class="text-muted-foreground">{teacher.user_meta_data.teacher_id_real}</p>
+          <p class="text-muted-foreground">{teacher.user_meta_data.teacher_real_id}</p>
         </div>
 
         <div class="">

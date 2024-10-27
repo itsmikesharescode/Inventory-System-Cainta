@@ -1,7 +1,8 @@
 export type ReservationType = {
   id: number;
   created_at: string;
-  teacher_id: string;
+  reference_id: string;
+  teacher_real_id: string;
   teacher_name: string;
   max_items: number;
   room: string;

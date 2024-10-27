@@ -3,22 +3,20 @@
   import * as Menubar from '$lib/components/ui/menubar';
   import type { Infer, SuperValidated } from 'sveltekit-superforms';
   import { pushState } from '$app/navigation';
-  import ViewTeacherModal from './ViewTeacher/ViewTeacherModal.svelte';
-  import UpdateTeacherModal from './UpdateTeacher/UpdateTeacherModal.svelte';
-  import type { UpdateTeacherSchema } from './UpdateTeacher/schema';
-  import DeleteTeacherModal from './DeleteTeacher/DeleteTeacherModal.svelte';
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
+  import ViewReturneeItem from './ViewReturnee/ViewReturneeItem.svelte';
+  import DeleteReturnee from './DeleteReturnee/DeleteReturnee.svelte';
 
   interface Props {
-    teacher: AdminLayout['teachers'][number];
-    updateTeacherForm: SuperValidated<Infer<UpdateTeacherSchema>>;
+    /* updateBorrowerForm: SuperValidated<Infer<UpdateBorrowerSchema>>; */
+    returnee: AdminLayout['returned_items'][number];
   }
 
-  const { updateTeacherForm, teacher }: Props = $props();
+  const { ...props }: Props = $props();
 
-  let showUpdateTeacher = $state(false);
-  let showDeleteTeacher = $state(false);
-  let showViewTeacher = $state(false);
+  let showUpdateBorrower = $state(false);
+  let showDeleteReturnee = $state(false);
+  let showViewReturneeItem = $state(false);
 </script>
 
 <Menubar.Root preventScroll={true} class="max-w-fit border-0">
@@ -30,8 +28,8 @@
     <Menubar.Content>
       <Menubar.Item
         onclick={() => {
-          showViewTeacher = true;
-          pushState(`/admin/borrowers/${teacher.teacher_id}`, {});
+          showViewReturneeItem = true;
+          pushState(`/admin/returned-items/${props.returnee.id}`, {});
         }}
       >
         View
@@ -39,12 +37,12 @@
       </Menubar.Item>
 
       <Menubar.Separator />
-      <Menubar.Item onclick={() => (showUpdateTeacher = true)}>
+      <!--  <Menubar.Item onclick={() => (showUpdateBorrower = true)}>
         Update
         <Menubar.Shortcut>⌘U</Menubar.Shortcut>
-      </Menubar.Item>
+      </Menubar.Item> -->
       <Menubar.Separator />
-      <Menubar.Item onclick={() => (showDeleteTeacher = true)}
+      <Menubar.Item onclick={() => (showDeleteReturnee = true)}
         >Delete
         <Menubar.Shortcut>⌘D</Menubar.Shortcut>
       </Menubar.Item>
@@ -52,6 +50,5 @@
   </Menubar.Menu>
 </Menubar.Root>
 
-<ViewTeacherModal {teacher} bind:showViewTeacher />
-<UpdateTeacherModal {teacher} {updateTeacherForm} bind:showUpdateTeacher />
-<DeleteTeacherModal {teacher} bind:showDeleteTeacher />
+<ViewReturneeItem returnee={props.returnee} bind:showViewReturneeItem />
+<DeleteReturnee returnee={props.returnee} bind:showDeleteReturnee />

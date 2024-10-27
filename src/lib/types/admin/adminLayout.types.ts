@@ -1,6 +1,7 @@
 import type { BorrowedItemType } from '../general/borrowed_items.types';
 import type { ItemType } from '../general/items.types';
 import type { ReservationType } from '../general/reservations.types';
+import type { ReturnedItemType } from '../general/returned_items.types';
 import type { TeacherType } from '../general/teachers.types';
 
 export interface AdminLayout {
@@ -8,4 +9,5 @@ export interface AdminLayout {
   items: ItemType[] | [];
   reservations: ReservationType[] | [];
   borrowed_items: BorrowedItemType[] | [];
+  returned_items: ReturnedItemType[] | [];
 }
