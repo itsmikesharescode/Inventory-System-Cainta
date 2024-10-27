@@ -7,6 +7,7 @@ declare
     borrowed_date date;
     room text;
     items_borrowed jsonb;
+    gen_reference_id text;
 begin
     -- Extract values from the JSON input
     input_teacher_id := client_input->>'teacherId';
@@ -15,12 +16,14 @@ begin
     room := client_input->>'room';
     items_borrowed := client_input->'itemsBorrowed';
 
+    gen_reference_id := substring(gen_random_uuid()::text from 1 for 8);
+
     -- Check if the teacherId exists in the teachers_tb
     if exists (select 1 from teachers_tb t where t.teacher_id_real = input_teacher_id) then
 
         -- Insert items borrowed into the borrowed_items_tb
-        insert into borrowed_items_tb (teacher_real_id, borrower_name, borrowed_date, room, items_borrowed)
-        values (input_teacher_id, borrower_name, borrowed_date, room, items_borrowed);
+        insert into borrowed_items_tb (teacher_real_id, reference_id, borrower_name, borrowed_date, room, items_borrowed)
+        values (input_teacher_id, gen_reference_id, borrower_name, borrowed_date, room, items_borrowed);
 
     else
         raise exception 'Teacher ID % not found in database.', input_teacher_id;

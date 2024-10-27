@@ -18,6 +18,7 @@ export type BorrowedItemType = {
   id: number;
   created_at: string;
   teacher_real_id: string;
+  reference_id: string;
   borrower_name: string;
   borrowed_date: string;
   room: string;

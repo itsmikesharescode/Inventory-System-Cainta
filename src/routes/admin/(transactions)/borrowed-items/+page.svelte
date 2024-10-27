@@ -22,11 +22,14 @@
   </div>
 
   <Table.Root>
-    <Table.Caption>A list of your recent invoices.</Table.Caption>
+    {#if !data.adminLayout.data?.borrowed_items.length}
+      <Table.Caption>No data available in the table.</Table.Caption>
+    {/if}
     <Table.Header>
       <Table.Row>
         <Table.Head class="w-[100px]"></Table.Head>
         <Table.Head>Teacher ID</Table.Head>
+        <Table.Head>Reference ID</Table.Head>
         <Table.Head>Borrower Name</Table.Head>
         <Table.Head>Borrowed Date</Table.Head>
         <Table.Head>Items Borrowed</Table.Head>
@@ -40,6 +43,7 @@
             <BorrowedMenu updateBorrowerForm={data.updateBorrowerForm} {borrower} />
           </Table.Cell>
           <Table.Cell>{borrower.teacher_real_id}</Table.Cell>
+          <Table.Cell>{borrower.reference_id}</Table.Cell>
           <Table.Cell>{borrower.borrower_name}</Table.Cell>
           <Table.Cell>{borrower.borrowed_date}</Table.Cell>
           <Table.Cell>
