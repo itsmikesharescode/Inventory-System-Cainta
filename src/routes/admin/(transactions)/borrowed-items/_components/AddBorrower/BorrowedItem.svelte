@@ -4,11 +4,13 @@
   import { fromSupabaseState } from '$lib/runes/supabaseState.svelte';
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
   import type { PostgrestSingleResponse } from '@supabase/supabase-js';
+  import { ScrollArea } from '$lib/components/ui/scroll-area/index.js';
+  import { toast } from 'svelte-sonner';
 
   const supabase = fromSupabaseState();
   const sb = supabase.get();
 
-  let selectedItems = $state([]);
+  let selectedItems = $state<AdminLayout['items'][number][]>([]);
 
   const streamItemsTable = async () => {
     if (!sb) return null;
@@ -20,19 +22,66 @@
     if (error) return null;
     return data;
   };
+
+  const checkIfExist = (id: number) => {
+    const idRef = selectedItems.map((item) => item.id);
+
+    if (idRef.includes(id)) return 'bg-primary text-white';
+    return 'bg-secondary';
+  };
 </script>
 
 <div
   class="relative flex min-h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 aria-[invalid]:border-destructive [&>span]:line-clamp-1 data-[placeholder]:[&>span]:text-muted-foreground"
 >
+  <!--Render selected items here-->
+  <div class="flex items-center gap-1.5">
+    {#each selectedItems as item}
+      <button
+        title="Click to remove {item.category} ({item.brand})"
+        onclick={() => {
+          selectedItems = selectedItems.filter((itemRef) => itemRef.id !== item.id);
+        }}
+        type="button"
+        class="bg-secondary p-2"
+      >
+        <span>{item.category} ({item.brand})</span>
+      </button>
+    {/each}
+  </div>
+
   <Popover.Root>
     <Popover.Trigger class=" absolute right-0 top-0">Add Item</Popover.Trigger>
     <Popover.Content>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde temporibus dolore sapiente
-      excepturi provident eaque mollitia repellat eius reiciendis nihil. Praesentium repudiandae
-      natus dolorum enim. Sit neque aliquam odit iusto unde corrupti assumenda, nam porro eaque
-      provident aspernatur minima itaque autem? Quasi dicta accusamus officia quia facilis, optio
-      accusantium architecto.
+      <p class="text-sm text-muted-foreground">Available Items</p>
+      <ScrollArea class="h-[35dvh]">
+        {#await streamItemsTable()}
+          <p>Fetching items from database</p>
+        {:then items}
+          <div class="flex flex-col gap-1.5">
+            {#each items ?? [] as item}
+              <button
+                onclick={() => {
+                  const idRef = selectedItems.map((item) => item.id);
+
+                  if (idRef.includes(item.id)) {
+                    return toast.warning('', {
+                      description: 'Item already selected click the item outside to unselect.'
+                    });
+                  }
+
+                  selectedItems.push(item);
+                }}
+                type="button"
+                class="{checkIfExist(item.id)}
+                   p-2 text-left transition-all"
+              >
+                <span class="text-xs">{item.category}({item.brand})</span>
+              </button>
+            {/each}
+          </div>
+        {/await}
+      </ScrollArea>
     </Popover.Content>
   </Popover.Root>
 </div>
