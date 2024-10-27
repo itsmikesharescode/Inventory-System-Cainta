@@ -45,7 +45,11 @@
 
   $effect(() => {
     if (showUpdateBorrower) {
+      $formData.id = borrower.id;
       $formData.itemsBorrowed = borrower.items_borrowed;
+      $formData.borrowerName = borrower.borrower_name;
+      $formData.room = borrower.room;
+      $formData.borrowedDate = borrower.borrowed_date;
     }
   });
 </script>
@@ -73,10 +77,16 @@
 
       <form
         method="POST"
-        action="?/addBorrowerEvent"
+        action="?/updateBorrowerEvent"
         use:enhance
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
+        <Form.Field {form} name="id" class="hidden">
+          <Form.Control let:attrs>
+            <Input type="number" {...attrs} bind:value={$formData.id} />
+          </Form.Control>
+        </Form.Field>
+
         <Form.Field {form} name="borrowerName">
           <Form.Control let:attrs>
             <Form.Label>Borrower Name</Form.Label>
@@ -125,7 +135,7 @@
               </div>
             {/if}
 
-            Add
+            Update
           </Form.Button>
         </div>
       </form>

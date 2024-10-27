@@ -28,8 +28,21 @@ export const actions: Actions = {
 
   updateBorrowerEvent: async ({ locals: { supabase }, request }) => {
     const form = await superValidate(request, zod(updateBorrowerSchema));
-
     if (!form.valid) return fail(400, { form });
-    console.log(form.data);
+    const { error } = await supabase
+      .from('borrowed_items_tb')
+      .update([
+        {
+          borrower_name: form.data.borrowerName,
+          borrowed_date: form.data.borrowedDate,
+          room: form.data.room,
+          items_borrowed: form.data.itemsBorrowed
+        }
+      ])
+      .eq('id', form.data.id);
+
+    if (error) return fail(401, { form, msg: error.message });
+
+    return { form, msg: 'Borrowed item updated.' };
   }
 };

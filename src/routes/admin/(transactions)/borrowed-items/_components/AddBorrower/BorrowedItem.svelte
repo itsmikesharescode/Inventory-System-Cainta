@@ -6,9 +6,6 @@
   import type { PostgrestSingleResponse } from '@supabase/supabase-js';
   import { ScrollArea } from '$lib/components/ui/scroll-area/index.js';
   import { toast } from 'svelte-sonner';
-  import { flip } from 'svelte/animate';
-  import { fly, scale } from 'svelte/transition';
-  import { cubicInOut } from 'svelte/easing';
 
   type Items = AdminLayout['items'][number];
   interface Props {
@@ -46,8 +43,6 @@
   <div class="flex flex-wrap items-center gap-1.5 overflow-hidden">
     {#each selectedItems as item (item)}
       <button
-        transition:fly={{ x: 100, duration: 500, easing: cubicInOut }}
-        animate:flip={{ duration: 300 }}
         title="Click to remove {item.category} ({item.brand})"
         onclick={() => {
           selectedItems = selectedItems.filter((itemRef) => itemRef.id !== item.id);
