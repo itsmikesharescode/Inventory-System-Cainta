@@ -15,6 +15,10 @@ export const actions: Actions = {
     const form = await superValidate(request, zod(addBorrowerSchema));
 
     if (!form.valid) return fail(400, { form });
-    console.log(form.data);
+
+    const { error } = await supabase.rpc('add_borrower', {
+      client_input: form.data
+    });
+    console.log(error?.message);
   }
 };
