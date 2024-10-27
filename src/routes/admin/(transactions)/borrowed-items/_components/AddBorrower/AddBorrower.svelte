@@ -112,7 +112,7 @@
         <Form.Field {form} name="itemsBorrowed">
           <Form.Control let:attrs>
             <Form.Label>Items Borrowed</Form.Label>
-            <BorrowedItem bind:emittedItems={$formData.itemsBorrowed} />
+            <BorrowedItem bind:selectedItems={$formData.itemsBorrowed} />
             <input {...attrs} type="hidden" value={$formData.itemsBorrowed} />
           </Form.Control>
           <Form.FieldErrors />

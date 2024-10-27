@@ -12,15 +12,13 @@
 
   type Items = AdminLayout['items'][number];
   interface Props {
-    emittedItems: Items[];
+    selectedItems: Items[];
   }
 
-  let { emittedItems = $bindable() }: Props = $props();
+  let { selectedItems = $bindable() }: Props = $props();
 
   const supabase = fromSupabaseState();
   const sb = supabase.get();
-
-  let selectedItems = $state<Items[]>([]);
 
   const streamItemsTable = async () => {
     if (!sb) return null;
@@ -53,7 +51,6 @@
         title="Click to remove {item.category} ({item.brand})"
         onclick={() => {
           selectedItems = selectedItems.filter((itemRef) => itemRef.id !== item.id);
-          emittedItems = selectedItems;
         }}
         type="button"
         class="truncate bg-secondary p-2"
@@ -84,9 +81,8 @@
                       description: 'Item already selected click the item outside to unselect.'
                     });
                   }
-
                   selectedItems.push(item);
-                  emittedItems = selectedItems;
+                  selectedItems = selectedItems;
                 }}
                 type="button"
                 class="{checkIfExist(item.id)}
