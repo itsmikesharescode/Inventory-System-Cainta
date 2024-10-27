@@ -1,7 +1,25 @@
 <script lang="ts">
   import Button from '$lib/components/ui/button/button.svelte';
   import * as Popover from '$lib/components/ui/popover';
+  import { fromSupabaseState } from '$lib/runes/supabaseState.svelte';
+  import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
+  import type { PostgrestSingleResponse } from '@supabase/supabase-js';
+
+  const supabase = fromSupabaseState();
+  const sb = supabase.get();
+
   let selectedItems = $state([]);
+
+  const streamItemsTable = async () => {
+    if (!sb) return null;
+
+    const { data, error } = (await sb.from('items_tb').select('*')) as PostgrestSingleResponse<
+      AdminLayout['items'][number][]
+    >;
+
+    if (error) return null;
+    return data;
+  };
 </script>
 
 <div
