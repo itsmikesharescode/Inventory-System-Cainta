@@ -9,7 +9,7 @@
     <p class="text-lg font-semibold">View Teacher</p>
     <div class="">
       <p class="">Teacher ID</p>
-      <p class="text-muted-foreground">{teacherRef.teacherId}</p>
+      <p class="text-muted-foreground">{teacherRef.teacher_id_real}</p>
     </div>
 
     <div class="">
