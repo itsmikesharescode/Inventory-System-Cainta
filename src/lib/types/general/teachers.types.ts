@@ -1,9 +1,10 @@
 export type TeacherType = {
   teacher_id: string;
   created_at: string;
+  teacher_id_real: string;
   user_meta_data: {
     role: string;
-    teacherId: string;
+    teacher_id_real: string;
     email: string;
     firstname: string;
     middlename: string;

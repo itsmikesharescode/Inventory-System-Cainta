@@ -27,7 +27,7 @@ export const actions: Actions = {
       email_confirm: true,
       user_metadata: {
         role: 'teacher',
-        teacherId: form.data.teacherId,
+        teacher_id_real: form.data.teacherId,
         email: form.data.email,
         firstname: form.data.fName,
         middlename: form.data.mName,
