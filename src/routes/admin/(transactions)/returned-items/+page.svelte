@@ -1,6 +1,9 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import * as Table from '$lib/components/ui/table';
+  import AddReturne from './_components/AddReturne/AddReturne.svelte';
+
+  const { data } = $props();
 </script>
 
 <div class="flex flex-col gap-5">
@@ -9,6 +12,10 @@
       class="font-display text-left text-4xl font-bold tracking-[-0.1em]  text-black   md:leading-[5rem]"
       words="Returned Items"
     />
+  </div>
+
+  <div class="">
+    <AddReturne addReturneForm={data.addReturneForm} />
   </div>
 
   <Table.Root>
