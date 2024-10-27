@@ -19,6 +19,8 @@ export const actions: Actions = {
     const { error } = await supabase.rpc('add_borrower', {
       client_input: form.data
     });
-    console.log(error?.message);
+
+    if (error) return fail(401, { form, msg: error.message });
+    else return { form, msg: 'Successfully added.' };
   }
 };
