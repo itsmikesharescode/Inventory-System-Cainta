@@ -2,6 +2,7 @@
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import * as Table from '$lib/components/ui/table';
   import AddReturne from './_components/AddReturne/AddReturne.svelte';
+  import RenderReturnedItems from './_components/RenderReturnedItems.svelte';
   import ReturneeMenu from './_components/ReturneeMenu.svelte';
 
   const { data } = $props();
@@ -33,20 +34,19 @@
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      {#each Array(20) as _}
+      {#each data.adminLayout.data?.returned_items ?? [] as returnee}
         <Table.Row>
           <Table.Cell>
             <ReturneeMenu />
           </Table.Cell>
-          <Table.Cell>asasd</Table.Cell>
-          <Table.Cell>asasd</Table.Cell>
-          <Table.Cell>asdasd</Table.Cell>
-          <Table.Cell>aasdasd</Table.Cell>
+          <Table.Cell>{returnee.teacher_real_id}</Table.Cell>
+          <Table.Cell>{returnee.reference_id}</Table.Cell>
+          <Table.Cell>{returnee.borrower_name}</Table.Cell>
           <Table.Cell>
-            <!-- <RenderBorrowedItems {borrower} /> -->
-            render returned items
+            <RenderReturnedItems {returnee} />
           </Table.Cell>
-          <Table.Cell>asdasd</Table.Cell>
+          <Table.Cell>{returnee.borrowed_date}</Table.Cell>
+          <Table.Cell>{returnee.returned_date}</Table.Cell>
         </Table.Row>
       {/each}
     </Table.Body>
