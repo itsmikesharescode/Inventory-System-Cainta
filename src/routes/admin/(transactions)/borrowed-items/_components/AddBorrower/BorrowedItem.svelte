@@ -6,17 +6,27 @@
   import type { PostgrestSingleResponse } from '@supabase/supabase-js';
   import { ScrollArea } from '$lib/components/ui/scroll-area/index.js';
   import { toast } from 'svelte-sonner';
+  import { flip } from 'svelte/animate';
+  import { fly, scale } from 'svelte/transition';
+  import { cubicInOut } from 'svelte/easing';
+
+  type Items = AdminLayout['items'][number];
+  interface Props {
+    emittedItems: Items[];
+  }
+
+  let { emittedItems = $bindable() }: Props = $props();
 
   const supabase = fromSupabaseState();
   const sb = supabase.get();
 
-  let selectedItems = $state<AdminLayout['items'][number][]>([]);
+  let selectedItems = $state<Items[]>([]);
 
   const streamItemsTable = async () => {
     if (!sb) return null;
 
     const { data, error } = (await sb.from('items_tb').select('*')) as PostgrestSingleResponse<
-      AdminLayout['items'][number][]
+      Items[]
     >;
 
     if (error) return null;
@@ -35,15 +45,18 @@
   class="relative flex min-h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 aria-[invalid]:border-destructive [&>span]:line-clamp-1 data-[placeholder]:[&>span]:text-muted-foreground"
 >
   <!--Render selected items here-->
-  <div class="flex items-center gap-1.5">
-    {#each selectedItems as item}
+  <div class="flex flex-wrap items-center gap-1.5 overflow-hidden">
+    {#each selectedItems as item (item)}
       <button
+        transition:fly={{ x: 100, duration: 500, easing: cubicInOut }}
+        animate:flip={{ duration: 300 }}
         title="Click to remove {item.category} ({item.brand})"
         onclick={() => {
           selectedItems = selectedItems.filter((itemRef) => itemRef.id !== item.id);
+          emittedItems = selectedItems;
         }}
         type="button"
-        class="bg-secondary p-2"
+        class="truncate bg-secondary p-2"
       >
         <span>{item.category} ({item.brand})</span>
       </button>
@@ -51,7 +64,9 @@
   </div>
 
   <Popover.Root>
-    <Popover.Trigger class=" absolute right-0 top-0">Add Item</Popover.Trigger>
+    <Popover.Trigger class=" absolute right-2 top-0 bg-primary px-2 text-xs text-white"
+      >Add Item</Popover.Trigger
+    >
     <Popover.Content>
       <p class="text-sm text-muted-foreground">Available Items</p>
       <ScrollArea class="h-[35dvh]">
@@ -71,6 +86,7 @@
                   }
 
                   selectedItems.push(item);
+                  emittedItems = selectedItems;
                 }}
                 type="button"
                 class="{checkIfExist(item.id)}

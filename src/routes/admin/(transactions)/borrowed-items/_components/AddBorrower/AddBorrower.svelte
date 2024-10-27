@@ -68,7 +68,7 @@
 
       <form
         method="POST"
-        action="?/createResEvent"
+        action="?/addBorrowerEvent"
         use:enhance
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
@@ -109,7 +109,14 @@
           <Form.FieldErrors />
         </Form.Field>
 
-        <BorrowedItem />
+        <Form.Field {form} name="itemsBorrowed">
+          <Form.Control let:attrs>
+            <Form.Label>Items Borrowed</Form.Label>
+            <BorrowedItem bind:emittedItems={$formData.itemsBorrowed} />
+            <input {...attrs} type="hidden" value={$formData.itemsBorrowed} />
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
 
         <div class="sticky bottom-[1rem] left-0 right-0 flex justify-end">
           <Form.Button disabled={$submitting} class="relative  max-w-fit">
