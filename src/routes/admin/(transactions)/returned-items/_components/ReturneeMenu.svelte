@@ -4,17 +4,18 @@
   import type { Infer, SuperValidated } from 'sveltekit-superforms';
   import { pushState } from '$app/navigation';
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
+  import ViewReturneeItem from './ViewReturnee/ViewReturneeItem.svelte';
 
-  /* interface Props {
-    updateBorrowerForm: SuperValidated<Infer<UpdateBorrowerSchema>>;
-    borrower: AdminLayout['borrowed_items'][number];
+  interface Props {
+    /* updateBorrowerForm: SuperValidated<Infer<UpdateBorrowerSchema>>; */
+    returnee: AdminLayout['returned_items'][number];
   }
 
-  const { ...props }: Props = $props(); */
+  const { ...props }: Props = $props();
 
   let showUpdateBorrower = $state(false);
   let showDeleteBorrower = $state(false);
-  let showViewBorrowedItem = $state(false);
+  let showViewReturneeItem = $state(false);
 </script>
 
 <Menubar.Root preventScroll={true} class="max-w-fit border-0">
@@ -26,8 +27,8 @@
     <Menubar.Content>
       <Menubar.Item
         onclick={() => {
-          showViewBorrowedItem = true;
-          /* pushState(`/admin/borrowed-items/${props.borrower.id}`, {}); */
+          showViewReturneeItem = true;
+          pushState(`/admin/returned-items/${props.returnee.id}`, {});
         }}
       >
         View
@@ -47,3 +48,5 @@
     </Menubar.Content>
   </Menubar.Menu>
 </Menubar.Root>
+
+<ViewReturneeItem returnee={props.returnee} bind:showViewReturneeItem />

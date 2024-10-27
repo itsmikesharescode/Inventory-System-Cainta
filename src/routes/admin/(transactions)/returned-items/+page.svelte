@@ -1,7 +1,7 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import * as Table from '$lib/components/ui/table';
-  import AddReturne from './_components/AddReturne/AddReturne.svelte';
+  import AddReturne from './_components/AddReturnee/AddReturne.svelte';
   import RenderReturnedItems from './_components/RenderReturnedItems.svelte';
   import ReturneeMenu from './_components/ReturneeMenu.svelte';
 
@@ -37,7 +37,7 @@
       {#each data.adminLayout.data?.returned_items ?? [] as returnee}
         <Table.Row>
           <Table.Cell>
-            <ReturneeMenu />
+            <ReturneeMenu {returnee} />
           </Table.Cell>
           <Table.Cell>{returnee.teacher_real_id}</Table.Cell>
           <Table.Cell>{returnee.reference_id}</Table.Cell>
