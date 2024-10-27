@@ -23,7 +23,7 @@ export const actions: Actions = {
 
     const { error } = await supabase.from('reservations_tb').insert([
       {
-        teacher_id: form.data.teacherId,
+        teacher_real_id: form.data.teacherId,
         teacher_name: form.data.teacherName,
         max_items: form.data.maxItems,
         room: form.data.room,
@@ -44,7 +44,6 @@ export const actions: Actions = {
       .from('reservations_tb')
       .update([
         {
-          teacher_id: form.data.teacherId,
           teacher_name: form.data.teacherName,
           max_items: form.data.maxItems,
           room: form.data.room,

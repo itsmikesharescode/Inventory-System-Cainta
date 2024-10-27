@@ -37,7 +37,7 @@
           <Table.Cell>
             <TeacherMenu {teacher} updateTeacherForm={data.updateTeacherForm} />
           </Table.Cell>
-          <Table.Cell>{teacher.user_meta_data.teacher_id_real}</Table.Cell>
+          <Table.Cell>{teacher.user_meta_data.teacher_real_id}</Table.Cell>
           <Table.Cell
             >{teacher.user_meta_data.lastname}, {teacher.user_meta_data.firstname}
             {teacher.user_meta_data.middlename}</Table.Cell

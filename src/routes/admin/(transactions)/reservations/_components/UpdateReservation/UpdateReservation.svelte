@@ -44,7 +44,6 @@
   $effect(() => {
     if (showUpReservation) {
       const [date, time, ampm] = reservation.time_limit.split(' ');
-      $formData.teacherId = reservation.teacher_id;
       $formData.teacherName = reservation.teacher_name;
       $formData.maxItems = reservation.max_items;
       $formData.room = reservation.room;
@@ -99,14 +98,6 @@
               placeholder="Select status"
             />
             <input {...attrs} type="hidden" bind:value={$formData.status} />
-          </Form.Control>
-          <Form.FieldErrors />
-        </Form.Field>
-
-        <Form.Field {form} name="teacherId">
-          <Form.Control let:attrs>
-            <Form.Label>Teacher ID</Form.Label>
-            <Input {...attrs} bind:value={$formData.teacherId} placeholder="Enter teacher id" />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>

@@ -45,7 +45,7 @@
       $formData.mName = teacher.user_meta_data.middlename;
       $formData.lName = teacher.user_meta_data.lastname;
       $formData.email = teacher.user_meta_data.email;
-      $formData.teacherId = teacher.user_meta_data.teacher_id_real;
+      $formData.teacherId = teacher.user_meta_data.teacher_real_id;
       $formData.phone = teacher.user_meta_data.phonenumber;
       $formData.department = teacher.user_meta_data.department;
     }
