@@ -44,5 +44,14 @@ export const actions: Actions = {
     if (error) return fail(401, { form, msg: error.message });
 
     return { form, msg: 'Borrowed item updated.' };
+  },
+
+  deleteBorrowerEvent: async ({ locals: { supabase }, request }) => {
+    const formData = await request.formData();
+    const id = formData.get('id') as string;
+
+    const { error } = await supabase.from('borrowed_items_tb').delete().eq('id', id);
+    if (error) return fail(401, { msg: error.message });
+    return { msg: 'Success deleted.' };
   }
 };

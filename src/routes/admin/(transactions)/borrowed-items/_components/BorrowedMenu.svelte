@@ -7,6 +7,7 @@
   import ViewBorrowedItem from './ViewBorrower/ViewBorrowedItem.svelte';
   import type { UpdateBorrowerSchema } from './UpdateBorrower/schema';
   import UpdateBorrowedItem from './UpdateBorrower/UpdateBorrowedItem.svelte';
+  import DeleteBorrower from './DeleteBorrower/DeleteBorrower.svelte';
 
   interface Props {
     updateBorrowerForm: SuperValidated<Infer<UpdateBorrowerSchema>>;
@@ -16,7 +17,7 @@
   const { ...props }: Props = $props();
 
   let showUpdateBorrower = $state(false);
-  let showDelReservation = $state(false);
+  let showDeleteBorrower = $state(false);
   let showViewBorrowedItem = $state(false);
 </script>
 
@@ -43,7 +44,7 @@
         <Menubar.Shortcut>⌘U</Menubar.Shortcut>
       </Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item onclick={() => (showDelReservation = true)}
+      <Menubar.Item onclick={() => (showDeleteBorrower = true)}
         >Delete
         <Menubar.Shortcut>⌘D</Menubar.Shortcut>
       </Menubar.Item>
@@ -57,3 +58,4 @@
   updateBorrowerForm={props.updateBorrowerForm}
   bind:showUpdateBorrower
 />
+<DeleteBorrower borrower={props.borrower} bind:showDeleteBorrower />
