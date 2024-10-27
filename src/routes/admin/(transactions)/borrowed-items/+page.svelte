@@ -36,7 +36,7 @@
       {#each data.adminLayout.data?.borrowed_items ?? [] as borrower}
         <Table.Row>
           <Table.Cell>
-            <BorrowedMenu {borrower} />
+            <BorrowedMenu updateBorrowerForm={data.updateBorrowerForm} {borrower} />
           </Table.Cell>
           <Table.Cell>{borrower.borrower_name}</Table.Cell>
           <Table.Cell>{borrower.borrowed_date}</Table.Cell>

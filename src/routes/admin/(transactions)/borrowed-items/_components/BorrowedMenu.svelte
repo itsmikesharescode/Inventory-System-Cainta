@@ -5,15 +5,17 @@
   import { pushState } from '$app/navigation';
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
   import ViewBorrowedItem from './ViewBorrower/ViewBorrowedItem.svelte';
+  import type { UpdateBorrowerSchema } from './UpdateBorrower/schema';
+  import UpdateBorrowedItem from './UpdateBorrower/UpdateBorrowedItem.svelte';
 
   interface Props {
-    /* updateReservationForm: SuperValidated<Infer<UpdateReservationSchema>>; */
+    updateBorrowerForm: SuperValidated<Infer<UpdateBorrowerSchema>>;
     borrower: AdminLayout['borrowed_items'][number];
   }
 
   const { ...props }: Props = $props();
 
-  let showUpReservation = $state(false);
+  let showUpdateBorrower = $state(false);
   let showDelReservation = $state(false);
   let showViewBorrowedItem = $state(false);
 </script>
@@ -36,7 +38,7 @@
       </Menubar.Item>
 
       <Menubar.Separator />
-      <Menubar.Item onclick={() => (showUpReservation = true)}>
+      <Menubar.Item onclick={() => (showUpdateBorrower = true)}>
         Update
         <Menubar.Shortcut>⌘U</Menubar.Shortcut>
       </Menubar.Item>
@@ -50,3 +52,8 @@
 </Menubar.Root>
 
 <ViewBorrowedItem borrower={props.borrower} bind:showViewBorrowedItem />
+<UpdateBorrowedItem
+  borrower={props.borrower}
+  updateBorrowerForm={props.updateBorrowerForm}
+  bind:showUpdateBorrower
+/>

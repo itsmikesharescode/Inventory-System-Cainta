@@ -3,10 +3,12 @@ import type { Actions, PageServerLoad } from './$types';
 import { zod } from 'sveltekit-superforms/adapters';
 import { addBorrowerSchema } from './_components/AddBorrower/schema';
 import { fail } from '@sveltejs/kit';
+import { updateBorrowerSchema } from './_components/UpdateBorrower/schema';
 
 export const load: PageServerLoad = async () => {
   return {
-    addBorrowerForm: await superValidate(zod(addBorrowerSchema))
+    addBorrowerForm: await superValidate(zod(addBorrowerSchema)),
+    updateBorrowerForm: await superValidate(zod(updateBorrowerSchema))
   };
 };
 
@@ -22,5 +24,12 @@ export const actions: Actions = {
 
     if (error) return fail(401, { form, msg: error.message });
     else return { form, msg: 'Successfully added.' };
+  },
+
+  updateBorrowerEvent: async ({ locals: { supabase }, request }) => {
+    const form = await superValidate(request, zod(updateBorrowerSchema));
+
+    if (!form.valid) return fail(400, { form });
+    console.log(form.data);
   }
 };
