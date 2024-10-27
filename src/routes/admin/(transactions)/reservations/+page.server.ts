@@ -21,16 +21,13 @@ export const actions: Actions = {
 
     if (!form.valid) return fail(400, { form });
 
-    const { error } = await supabase.from('reservations_tb').insert([
-      {
-        teacher_real_id: form.data.teacherId,
-        teacher_name: form.data.teacherName,
-        max_items: form.data.maxItems,
-        room: form.data.room,
-        time_limit: `${form.data.date} ${form.data.time}`,
-        status: 'Pending'
-      }
-    ]);
+    const { error } = await supabase.rpc('add_reservation', {
+      teacher_real_id_input: form.data.teacherId,
+      teacher_name_input: form.data.teacherName,
+      max_items_input: form.data.maxItems,
+      room_input: form.data.room,
+      time_limit_input: `${form.data.date} ${form.data.time}`
+    });
 
     if (error) return fail(401, { form, msg: error.message });
     return { form, msg: 'Reservation created.' };

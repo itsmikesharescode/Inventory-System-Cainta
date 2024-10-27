@@ -58,6 +58,7 @@
     <Table.Header>
       <Table.Row>
         <Table.Head class="w-[100px]"></Table.Head>
+        <Table.Head>Teacher ID</Table.Head>
         <Table.Head>Name</Table.Head>
         <Table.Head>Items</Table.Head>
         <Table.Head>Reservation Date</Table.Head>
@@ -75,6 +76,7 @@
               <Table.Cell>
                 <ReservationMenu updateReservationForm={data.updateReservationForm} {reservation} />
               </Table.Cell>
+              <Table.Cell>{reservation.teacher_real_id}</Table.Cell>
               <Table.Cell>{reservation.teacher_name}</Table.Cell>
               <Table.Cell>{reservation.max_items}</Table.Cell>
               <Table.Cell>{reservation.time_limit}</Table.Cell>
@@ -89,6 +91,7 @@
             <Table.Cell>
               <ReservationMenu updateReservationForm={data.updateReservationForm} {reservation} />
             </Table.Cell>
+            <Table.Cell>{reservation.teacher_real_id}</Table.Cell>
             <Table.Cell>{reservation.teacher_name}</Table.Cell>
             <Table.Cell>{reservation.max_items}</Table.Cell>
             <Table.Cell>{reservation.time_limit}</Table.Cell>

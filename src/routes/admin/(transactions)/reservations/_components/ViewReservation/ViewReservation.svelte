@@ -35,6 +35,11 @@
         </div>
 
         <div class="">
+          <p class="">Reference ID</p>
+          <p class="text-muted-foreground">{props.reservation.reference_id}</p>
+        </div>
+
+        <div class="">
           <p class="">Teacher ID</p>
           <p class="text-muted-foreground">{props.reservation.teacher_real_id}</p>
         </div>
