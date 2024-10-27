@@ -10,20 +10,22 @@
   type Items = AdminLayout['items'][number];
   interface Props {
     selectedItems: Items[];
+    teacher_real_id: string;
   }
 
-  let { selectedItems = $bindable() }: Props = $props();
+  let { selectedItems = $bindable(), teacher_real_id }: Props = $props();
 
   const supabase = fromSupabaseState();
   const sb = supabase.get();
 
-  const streamItemsTable = async () => {
+  const streamBorrowedItems = async () => {
     if (!sb) return null;
 
-    const { data, error } = (await sb.from('items_tb').select('*')) as PostgrestSingleResponse<
-      Items[]
-    >;
-
+    const { data, error } = (await sb
+      .from('borrowed_items_tb')
+      .select('*')
+      .eq('teacher_real_id', teacher_real_id)) as PostgrestSingleResponse<Items[]>;
+    console.log(data, error?.message);
     if (error) return null;
     return data;
   };
@@ -57,12 +59,12 @@
 
   <Popover.Root>
     <Popover.Trigger class=" absolute right-2 top-0 bg-primary px-2 text-xs text-white"
-      >Add Item</Popover.Trigger
+      >Borrowed Items</Popover.Trigger
     >
     <Popover.Content>
       <p class="text-sm text-muted-foreground">Available Items</p>
       <ScrollArea class="h-[35dvh]">
-        {#await streamItemsTable()}
+        {#await streamBorrowedItems()}
           <p>Fetching items from database</p>
         {:then items}
           <div class="flex flex-col gap-1.5">

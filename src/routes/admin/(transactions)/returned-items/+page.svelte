@@ -14,7 +14,7 @@
     />
   </div>
 
-  <div class="">
+  <div class="flex justify-end">
     <AddReturne addReturneForm={data.addReturneForm} />
   </div>
 

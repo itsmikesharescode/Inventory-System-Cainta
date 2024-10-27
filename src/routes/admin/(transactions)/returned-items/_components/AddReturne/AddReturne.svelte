@@ -72,10 +72,10 @@
         use:enhance
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
-        <Form.Field {form} name="teacherId">
+        <Form.Field {form} name="teacherRealId">
           <Form.Control let:attrs>
             <Form.Label>Teacher ID</Form.Label>
-            <Input {...attrs} bind:value={$formData.teacherId} placeholder="Enter teacher id" />
+            <Input {...attrs} bind:value={$formData.teacherRealId} placeholder="Enter teacher id" />
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
@@ -104,7 +104,10 @@
         <Form.Field {form} name="itemsReturned">
           <Form.Control let:attrs>
             <Form.Label>Items Returned</Form.Label>
-            <ReturnedItem bind:selectedItems={$formData.itemsReturned} />
+            <ReturnedItem
+              teacher_real_id={$formData.teacherRealId}
+              bind:selectedItems={$formData.itemsReturned}
+            />
             <input {...attrs} type="hidden" value={$formData.itemsReturned} />
           </Form.Control>
           <Form.FieldErrors />
