@@ -2,8 +2,6 @@
   import Button from '$lib/components/ui/button/button.svelte';
   import * as Popover from '$lib/components/ui/popover';
   let selectedItems = $state([]);
-
-  //goal is to fetch items and push to selected items
 </script>
 
 <div
