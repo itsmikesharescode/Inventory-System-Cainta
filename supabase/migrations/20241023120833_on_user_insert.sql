@@ -5,9 +5,10 @@ declare
 begin
   role = new.raw_user_meta_data ->> 'role'; 
 
-  insert into public.teachers_tb (teacher_id, user_meta_data)
+  insert into public.teachers_tb (teacher_id, teacher_id_real, user_meta_data)
   values (
-    new.id, 
+    new.id,
+    new.raw_user_meta_data ->> 'teacher_id_real',
     new.raw_user_meta_data
   );
   insert into public.role_tb (user_id, role) values(new.id, role);
