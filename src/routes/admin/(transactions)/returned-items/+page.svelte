@@ -2,6 +2,7 @@
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import * as Table from '$lib/components/ui/table';
   import AddReturne from './_components/AddReturne/AddReturne.svelte';
+  import ReturneeMenu from './_components/ReturneeMenu.svelte';
 
   const { data } = $props();
 </script>
@@ -35,7 +36,7 @@
       {#each Array(20) as _}
         <Table.Row>
           <Table.Cell>
-            <!-- <BorrowedMenu updateBorrowerForm={data.updateBorrowerForm} {borrower} /> -->
+            <ReturneeMenu />
           </Table.Cell>
           <Table.Cell>asasd</Table.Cell>
           <Table.Cell>asasd</Table.Cell>
