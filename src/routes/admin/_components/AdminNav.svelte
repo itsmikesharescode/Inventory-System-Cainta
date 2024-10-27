@@ -40,8 +40,8 @@
       subRoutes: []
     },
     {
-      name: 'Borrowers',
-      url: '/admin/borrowers',
+      name: 'Accounts',
+      url: '/admin/accounts',
       subRoutes: []
     }
   ];

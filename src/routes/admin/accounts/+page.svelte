@@ -11,7 +11,7 @@
   <div class="flex items-center justify-between">
     <GradualSpacing
       class="font-display text-left text-4xl font-bold tracking-[-0.1em]  text-black   md:leading-[5rem]"
-      words="Borrowers"
+      words="Accounts"
     />
 
     <AddTeacherModal addTeacherForm={data.addTeacherForm} />

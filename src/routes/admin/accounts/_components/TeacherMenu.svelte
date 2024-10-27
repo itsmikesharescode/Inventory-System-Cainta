@@ -31,7 +31,7 @@
       <Menubar.Item
         onclick={() => {
           showViewTeacher = true;
-          pushState(`/admin/borrowers/${teacher.teacher_id}`, {});
+          pushState(`/admin/accounts/${teacher.teacher_id}`, {});
         }}
       >
         View

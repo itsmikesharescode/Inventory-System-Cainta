@@ -48,7 +48,7 @@
         <CountCard title="Pending" count={counts.pending_count} />
         <CountCard title="Accepted" count={counts.accepted_count} />
         <CountCard title="Canceled" count={counts.canceled_count} />
-        <CountCard title="Teachers" count={counts.teachers_count} />
+        <CountCard title="Accounts" count={counts.teachers_count} />
       {:else}
         <p>Error fetching counts</p>
       {/if}
