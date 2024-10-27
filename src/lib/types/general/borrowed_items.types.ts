@@ -1,4 +1,4 @@
-export type ItemBorrowed = {
+export type Item = {
   id: number;
   created_at: string;
   admin_id: string;
@@ -22,5 +22,5 @@ export type BorrowedItemType = {
   borrower_name: string;
   borrowed_date: string;
   room: string;
-  items_borrowed: ItemBorrowed[];
+  items_borrowed: Item[];
 };
