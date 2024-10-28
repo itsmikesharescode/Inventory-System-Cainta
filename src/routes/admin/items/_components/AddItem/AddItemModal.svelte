@@ -9,9 +9,9 @@
   import * as Form from '$lib/components/ui/form';
   import { Input } from '$lib/components/ui/input';
   import { Textarea } from '$lib/components/ui/textarea/index';
-  import AddItemSelect from './AddItemSelect.svelte';
   import { categoriesMeta, statusMeta, typeMeta } from '../../metadata';
   import { ScrollArea } from '$lib/components/ui/scroll-area/index';
+  import SelectPicker from '$lib/components/gen/SelectPicker.svelte';
 
   interface Props {
     addItemForm: SuperValidated<Infer<AddItemSchema>>;
@@ -46,7 +46,7 @@
   <Plus class="h-[20px] w-[20px]" />
   Add Item
 </Button>
-<AlertDialog.Root preventScroll={true} bind:open>
+<AlertDialog.Root bind:open>
   <AlertDialog.Content class="p-0">
     <ScrollArea class="max-h-screen md:max-h-[80dvh]">
       <button
@@ -74,116 +74,136 @@
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
         <Form.Field {form} name="deviceId">
-          <Form.Control let:attrs>
-            <Form.Label>Device ID</Form.Label>
-            <Input {...attrs} bind:value={$formData.deviceId} placeholder="Enter device id" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Device ID</Form.Label>
+              <Input {...props} bind:value={$formData.deviceId} placeholder="Enter device id" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="model">
-          <Form.Control let:attrs>
-            <Form.Label>Model</Form.Label>
-            <Input {...attrs} bind:value={$formData.model} placeholder="Enter model" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Model</Form.Label>
+              <Input {...props} bind:value={$formData.model} placeholder="Enter model" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="category">
-          <Form.Control let:attrs>
-            <Form.Label>Category</Form.Label>
-            <AddItemSelect
-              style="h-[30dvh] pr-4"
-              placeholder="Select Category"
-              {attrs}
-              selections={categoriesMeta}
-              bind:selected={$formData.category}
-            />
-            <input hidden bind:value={$formData.category} name={attrs.name} />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Category</Form.Label>
+              <SelectPicker
+                name="Select Category"
+                class=""
+                formProps={props}
+                selections={categoriesMeta}
+                bind:value={$formData.category}
+              />
+              <input type="hidden" name={props.name} value={$formData.category} />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="type">
-          <Form.Control let:attrs>
-            <Form.Label>Type</Form.Label>
-            <AddItemSelect
-              style=""
-              placeholder="Select Type"
-              {attrs}
-              selections={typeMeta}
-              bind:selected={$formData.type}
-            />
-            <input hidden bind:value={$formData.type} name={attrs.name} />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Type</Form.Label>
+              <SelectPicker
+                name="Select Type"
+                class=""
+                formProps={props}
+                selections={typeMeta}
+                bind:value={$formData.type}
+              />
+              <input type="hidden" name={props.name} value={$formData.type} />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="status">
-          <Form.Control let:attrs>
-            <Form.Label>Status</Form.Label>
-            <AddItemSelect
-              style=""
-              placeholder="Select Status"
-              {attrs}
-              selections={statusMeta}
-              bind:selected={$formData.status}
-            />
-            <input hidden bind:value={$formData.status} name={attrs.name} />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Status</Form.Label>
+              <SelectPicker
+                name="Select Status"
+                class=""
+                formProps={props}
+                selections={statusMeta}
+                bind:value={$formData.status}
+              />
+              <input type="hidden" name={props.name} value={$formData.status} />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="mr">
-          <Form.Control let:attrs>
-            <Form.Label>MR</Form.Label>
-            <Input {...attrs} bind:value={$formData.mr} placeholder="Enter mr" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>MR</Form.Label>
+              <Input {...props} bind:value={$formData.mr} placeholder="Enter mr" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="brand">
-          <Form.Control let:attrs>
-            <Form.Label>Brand</Form.Label>
-            <Input {...attrs} bind:value={$formData.brand} placeholder="Enter brand" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Brand</Form.Label>
+              <Input {...props} bind:value={$formData.brand} placeholder="Enter brand" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="quantity">
-          <Form.Control let:attrs>
-            <Form.Label>Quantity</Form.Label>
-            <Input
-              type="number"
-              {...attrs}
-              bind:value={$formData.quantity}
-              placeholder="Enter quantity"
-            />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Quantity</Form.Label>
+              <Input
+                type="number"
+                {...props}
+                bind:value={$formData.quantity}
+                placeholder="Enter quantity"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="price">
-          <Form.Control let:attrs>
-            <Form.Label>Price</Form.Label>
-            <Input
-              type="number"
-              {...attrs}
-              bind:value={$formData.price}
-              placeholder="Enter price"
-            />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Price</Form.Label>
+              <Input
+                type="number"
+                {...props}
+                bind:value={$formData.price}
+                placeholder="Enter price"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="description">
-          <Form.Control let:attrs>
-            <Form.Label>Description</Form.Label>
-            <Textarea
-              {...attrs}
-              bind:value={$formData.description}
-              placeholder="Enter description"
-            />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Description</Form.Label>
+              <Textarea
+                {...props}
+                bind:value={$formData.description}
+                placeholder="Enter description"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
