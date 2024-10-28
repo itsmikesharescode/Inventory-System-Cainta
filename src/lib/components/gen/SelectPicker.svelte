@@ -12,7 +12,7 @@
       'aria-invalid': 'true' | undefined;
       'aria-required': 'true' | undefined;
       'data-fs-control': string;
-    };
+    } | null;
     value: string;
     selections: {
       value: string;

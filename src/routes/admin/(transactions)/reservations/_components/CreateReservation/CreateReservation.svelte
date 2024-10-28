@@ -43,7 +43,7 @@
 
 <Button onclick={() => (open = true)}>Create Reservation</Button>
 
-<AlertDialog.Root preventScroll={true} bind:open>
+<AlertDialog.Root bind:open>
   <AlertDialog.Content class="p-0">
     <ScrollArea class="max-h-screen md:max-h-[80dvh]">
       <button
@@ -71,55 +71,71 @@
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
         <Form.Field {form} name="teacherId">
-          <Form.Control let:attrs>
-            <Form.Label>Teacher ID</Form.Label>
-            <Input {...attrs} bind:value={$formData.teacherId} placeholder="Enter first name" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Teacher ID</Form.Label>
+              <Input {...props} bind:value={$formData.teacherId} placeholder="Enter teacher id" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="teacherName">
-          <Form.Control let:attrs>
-            <Form.Label>Teacher Name</Form.Label>
-            <Input {...attrs} bind:value={$formData.teacherName} placeholder="Enter name" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Teacher Name</Form.Label>
+              <Input
+                {...props}
+                bind:value={$formData.teacherName}
+                placeholder="Enter teacher name"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="maxItems">
-          <Form.Control let:attrs>
-            <Form.Label>Max Items</Form.Label>
-            <Input
-              type="number"
-              {...attrs}
-              bind:value={$formData.maxItems}
-              placeholder="Enter max items"
-            />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Max Items</Form.Label>
+              <Input
+                type="number"
+                {...props}
+                bind:value={$formData.maxItems}
+                placeholder="Enter max items"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="room">
-          <Form.Control let:attrs>
-            <Form.Label>Room</Form.Label>
-            <Input {...attrs} bind:value={$formData.room} placeholder="Enter room" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Room</Form.Label>
+              <Input {...props} bind:value={$formData.room} placeholder="Enter room" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="date">
-          <Form.Control let:attrs>
-            <Form.Label>Select Date</Form.Label>
-            <DatePicker name="Select date" bind:dateValue={$formData.date} />
-            <input type="hidden" {...attrs} bind:value={$formData.date} />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Select Date</Form.Label>
+              <DatePicker formProps={props} class="w-full" bind:dateString={$formData.date} />
+              <input type="hidden" name={props.name} value={$formData.date} />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="time">
-          <Form.Control let:attrs>
-            <Form.Label>Time</Form.Label>
-            <Input type="text" {...attrs} bind:value={$formData.time} placeholder="Enter time" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Time</Form.Label>
+              <Input {...props} bind:value={$formData.time} placeholder="Enter time" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>

@@ -5,21 +5,43 @@
 
   let chosenValue = $state('All');
 
+  const selections = [
+    {
+      value: 'All',
+      label: 'Will show all reservations'
+    },
+    {
+      value: 'Accepted',
+      label: 'Will show only accepted reservations'
+    },
+    {
+      value: 'Pending',
+      label: 'Will show only pending reservations'
+    },
+
+    {
+      value: 'Canceled',
+      label: 'Will show only calceled reservations'
+    }
+  ];
+
   $effect(() => {
     if (chosenValue === 'Accepted') goto('?filter=accepted', { invalidateAll: false });
     else if (chosenValue === 'Pending') goto('?filter=pending', { invalidateAll: false });
+    else if (chosenValue === 'Canceled') goto('?filter=canceled', { invalidateAll: false });
     else goto('/admin/reservations', { invalidateAll: false });
   });
 </script>
 
 <div class="">
-  <div class="flex w-full max-w-sm flex-col gap-1.5">
+  <div class="flex w-[200px] items-center gap-2.5">
     <Label for="email">Filter</Label>
     <SelectPicker
+      formProps={null}
+      name="Select filter"
       class=""
-      placeholder="Select Filter"
-      bind:chosenValue
-      selections={['All', 'Accepted', 'Pending']}
+      bind:value={chosenValue}
+      {selections}
     />
   </div>
 </div>
