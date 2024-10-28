@@ -52,7 +52,7 @@
   });
 </script>
 
-<AlertDialog.Root preventScroll={true} bind:open={showUpdateTeacher}>
+<AlertDialog.Root bind:open={showUpdateTeacher}>
   <AlertDialog.Content class="p-0">
     <ScrollArea class="max-h-screen md:max-h-[80dvh]">
       <button
@@ -80,90 +80,110 @@
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
         <Form.Field {form} name="userId" class="hidden">
-          <Form.Control let:attrs>
-            <Input {...attrs} bind:value={teacher.teacher_id} />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Input {...props} bind:value={teacher.teacher_id} />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="teacherId">
-          <Form.Control let:attrs>
-            <Form.Label>Teacher ID</Form.Label>
-            <Input {...attrs} bind:value={$formData.teacherId} placeholder="Enter teacher id" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Teacher ID</Form.Label>
+              <Input {...props} bind:value={$formData.teacherId} placeholder="Enter teacher id" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="fName">
-          <Form.Control let:attrs>
-            <Form.Label>First Name</Form.Label>
-            <Input {...attrs} bind:value={$formData.fName} placeholder="Enter first name" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>First Name</Form.Label>
+              <Input {...props} bind:value={$formData.fName} placeholder="Enter first name" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="mName">
-          <Form.Control let:attrs>
-            <Form.Label>Middle Name</Form.Label>
-            <Input {...attrs} bind:value={$formData.mName} placeholder="Enter middle name" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Middle Name</Form.Label>
+              <Input {...props} bind:value={$formData.mName} placeholder="Enter middle name" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="lName">
-          <Form.Control let:attrs>
-            <Form.Label>Last Name</Form.Label>
-            <Input {...attrs} bind:value={$formData.lName} placeholder="Enter last name" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Last Name</Form.Label>
+              <Input {...props} bind:value={$formData.lName} placeholder="Enter last name" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="phone">
-          <Form.Control let:attrs>
-            <Form.Label>Phone Number</Form.Label>
-            <Input {...attrs} bind:value={$formData.phone} placeholder="Enter phone number" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Phone Number</Form.Label>
+              <Input {...props} bind:value={$formData.phone} placeholder="Enter phone number" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="department">
-          <Form.Control let:attrs>
-            <Form.Label>Deparment</Form.Label>
-            <Input {...attrs} bind:value={$formData.department} placeholder="Enter department" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Department</Form.Label>
+              <Input {...props} bind:value={$formData.department} placeholder="Enter department" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="email">
-          <Form.Control let:attrs>
-            <Form.Label>Email</Form.Label>
-            <Input {...attrs} bind:value={$formData.email} placeholder="Enter email" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Email</Form.Label>
+              <Input {...props} bind:value={$formData.email} placeholder="Enter email" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="pwd">
-          <Form.Control let:attrs>
-            <Form.Label>Password</Form.Label>
-            <Input
-              type="password"
-              {...attrs}
-              bind:value={$formData.pwd}
-              placeholder="Enter password"
-            />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Password</Form.Label>
+              <Input
+                type="password"
+                {...props}
+                bind:value={$formData.pwd}
+                placeholder="Enter new password"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="confirmPwd">
-          <Form.Control let:attrs>
-            <Form.Label>Confirm Password</Form.Label>
-            <Input
-              type="password"
-              {...attrs}
-              bind:value={$formData.confirmPwd}
-              placeholder="Confirm password"
-            />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Confirm Password</Form.Label>
+              <Input
+                type="password"
+                {...props}
+                bind:value={$formData.confirmPwd}
+                placeholder="Confirm new password"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
@@ -174,7 +194,6 @@
               <div
                 class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-1.5 rounded-lg bg-primary"
               >
-                <span>Updating</span>
                 <LoaderCircle class="h-[20px] w-[20px] animate-spin" />
               </div>
             {/if}
