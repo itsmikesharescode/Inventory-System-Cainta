@@ -8,7 +8,6 @@
   import { Input } from '$lib/components/ui/input';
   import { ScrollArea } from '$lib/components/ui/scroll-area/index';
   import { updateBorrowerSchema, type UpdateBorrowerSchema } from './schema';
-  import Button from '$lib/components/ui/button/button.svelte';
   import DatePicker from '$lib/components/gen/DatePicker.svelte';
   import BorrowedItem from '../AddBorrower/BorrowedItem.svelte';
   import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
@@ -54,7 +53,7 @@
   });
 </script>
 
-<AlertDialog.Root preventScroll={true} bind:open={showUpdateBorrower}>
+<AlertDialog.Root bind:open={showUpdateBorrower}>
   <AlertDialog.Content class="p-0">
     <ScrollArea class="max-h-screen lg:max-h-[80dvh]">
       <button
