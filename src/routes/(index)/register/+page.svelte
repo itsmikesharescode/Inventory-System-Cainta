@@ -49,93 +49,118 @@
     <div class="flex flex-col items-center gap-2.5 md:border-l-2 md:py-20">
       <h1 class="scroll-m-20 text-2xl font-semibold tracking-tight">Register</h1>
 
-      <form method="POST" action="?/registerEvent" use:enhance class="flex flex-col gap-2.5">
+      <form
+        method="POST"
+        action="?/registerEvent"
+        use:enhance
+        class="flex w-[290px] flex-col gap-2.5"
+      >
         <Form.Field {form} name="teacherId">
-          <Form.Control let:attrs>
-            <Form.Label>Teacher ID</Form.Label>
-            <Input
-              {...attrs}
-              bind:value={$formData.teacherId}
-              placeholder="Enter your teacher id"
-            />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Teacher ID</Form.Label>
+              <Input {...props} bind:value={$formData.teacherId} placeholder="Enter teacher id" />
+            {/snippet}
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field {form} name="teacherId">
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Teacher ID</Form.Label>
+              <Input {...props} bind:value={$formData.teacherId} placeholder="Enter teacher id" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="fName">
-          <Form.Control let:attrs>
-            <Form.Label>First Name</Form.Label>
-            <Input {...attrs} bind:value={$formData.fName} placeholder="Enter your first name" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>First Name</Form.Label>
+              <Input {...props} bind:value={$formData.fName} placeholder="Enter first name" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="mName">
-          <Form.Control let:attrs>
-            <Form.Label>Middle Name</Form.Label>
-            <Input {...attrs} bind:value={$formData.mName} placeholder="Enter your middle name" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Middle Name</Form.Label>
+              <Input {...props} bind:value={$formData.mName} placeholder="Enter middle name" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="lName">
-          <Form.Control let:attrs>
-            <Form.Label>Last Name</Form.Label>
-            <Input {...attrs} bind:value={$formData.lName} placeholder="Enter your last name" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Last Name</Form.Label>
+              <Input {...props} bind:value={$formData.lName} placeholder="Enter last name" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="phone">
-          <Form.Control let:attrs>
-            <Form.Label>Phone Number</Form.Label>
-            <Input {...attrs} bind:value={$formData.phone} placeholder="Enter your phone number" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Phone Number</Form.Label>
+              <Input {...props} bind:value={$formData.phone} placeholder="Enter phone number" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="department">
-          <Form.Control let:attrs>
-            <Form.Label>Department</Form.Label>
-            <Input
-              {...attrs}
-              bind:value={$formData.department}
-              placeholder="Enter your department"
-            />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Phone Number</Form.Label>
+              <Input {...props} bind:value={$formData.department} placeholder="Enter department" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="email">
-          <Form.Control let:attrs>
-            <Form.Label>Email</Form.Label>
-            <Input {...attrs} bind:value={$formData.email} placeholder="Enter your email" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Email</Form.Label>
+              <Input {...props} bind:value={$formData.email} placeholder="Enter email" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="pwd">
-          <Form.Control let:attrs>
-            <Form.Label>Password</Form.Label>
-            <Input
-              type="password"
-              {...attrs}
-              bind:value={$formData.pwd}
-              placeholder="Enter your password"
-            />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Password</Form.Label>
+              <Input
+                type="password"
+                {...props}
+                bind:value={$formData.pwd}
+                placeholder="Enter password"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="confirmPwd">
-          <Form.Control let:attrs>
-            <Form.Label>Confirm Password</Form.Label>
-            <Input
-              type="password"
-              {...attrs}
-              bind:value={$formData.confirmPwd}
-              placeholder="Confirm your password"
-            />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Confirm Password</Form.Label>
+              <Input
+                type="password"
+                {...props}
+                bind:value={$formData.confirmPwd}
+                placeholder="Confirm password"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
@@ -154,8 +179,8 @@
         </Form.Button>
       </form>
 
-      <p class="leading-7 [&:not(:first-child)]:mt-6">Already have an account?</p>
-      <a href="/" class="underline transition-all hover:text-primary">Log in here</a>
+      <p class=" leading-7 [&:not(:first-child)]:mt-6">Already have an account?</p>
+      <a href="/" class=" underline transition-all hover:text-primary">Log in here</a>
     </div>
   </ScrollArea>
 </div>

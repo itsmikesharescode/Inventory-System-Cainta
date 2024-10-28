@@ -46,11 +46,18 @@
   <div class="flex flex-col items-center justify-center gap-2.5 md:border-l-2">
     <h1 class="scroll-m-20 text-2xl font-semibold tracking-tight">Forgot Password</h1>
 
-    <form method="POST" action="?/forgotPwdEvent" use:enhance class="flex flex-col gap-2.5">
+    <form
+      method="POST"
+      action="?/forgotPwdEvent"
+      use:enhance
+      class="flex w-[290px] flex-col gap-2.5"
+    >
       <Form.Field {form} name="email">
-        <Form.Control let:attrs>
-          <Form.Label>Email</Form.Label>
-          <Input {...attrs} bind:value={$formData.email} placeholder="Enter your email" />
+        <Form.Control>
+          {#snippet children({ props })}
+            <Form.Label>Email</Form.Label>
+            <Input {...props} bind:value={$formData.email} placeholder="Enter email" />
+          {/snippet}
         </Form.Control>
         <Form.FieldErrors />
       </Form.Field>
@@ -69,7 +76,7 @@
       </Form.Button>
     </form>
 
-    <p class="leading-7 [&:not(:first-child)]:mt-6">Already recovered your account?</p>
-    <a href="/" class="underline transition-all hover:text-primary">Log in here</a>
+    <p class=" leading-7 [&:not(:first-child)]:mt-6">Already recovered your account?</p>
+    <a href="/" class=" underline transition-all hover:text-primary">Log in here</a>
   </div>
 </div>
