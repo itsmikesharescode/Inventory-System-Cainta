@@ -4,6 +4,7 @@
   import BarChart from './_components/BarChart.svelte';
   import CountCard from './_components/CountCard.svelte';
   import LineChart from './_components/LineChart.svelte';
+  import { Skeleton } from '$lib/components/ui/skeleton/index.js';
 
   const { data } = $props();
 
@@ -42,7 +43,10 @@
 
   <div class="grid grid-cols-4 gap-2.5">
     {#await streamCounts()}
-      <p>Fetching</p>
+      <Skeleton class="h-[183px] w-full bg-slate-400" />
+      <Skeleton class="h-[183px] w-full bg-slate-400" />
+      <Skeleton class="h-[183px] w-full bg-slate-400" />
+      <Skeleton class="h-[183px] w-full bg-slate-400" />
     {:then counts}
       {#if counts}
         <CountCard title="Pending" count={counts.pending_count} />
