@@ -1,39 +1,45 @@
 <script lang="ts">
-  import * as Select from '$lib/components/ui/select';
+  import * as Select from '$lib/components/ui/select/index.js';
   import { cn } from '$lib/utils';
-  import type { ClassValue } from 'tailwind-variants';
+  import type { ClassNameValue } from 'tailwind-merge';
 
   interface Props {
-    selections: string[];
-    chosenValue: string;
-    placeholder: string;
-    class: ClassValue;
+    formProps: {
+      name: string;
+      id: string;
+      'data-fs-error': string | undefined;
+      'aria-describedby': string | undefined;
+      'aria-invalid': 'true' | undefined;
+      'aria-required': 'true' | undefined;
+      'data-fs-control': string;
+    } | null;
+    value: string;
+    selections: {
+      value: string;
+      label: string;
+    }[];
+    class: ClassNameValue;
+    name: string;
   }
 
-  let { chosenValue = $bindable(), ...props }: Props = $props();
+  let { value = $bindable(), ...props }: Props = $props();
 
-  const selectedValue = $derived(
-    chosenValue
-      ? {
-          label: chosenValue,
-          value: chosenValue
-        }
-      : undefined
+  const triggerContent = $derived(
+    props.selections.find((f) => f.value === value)?.value ?? props.name
   );
 </script>
 
-<Select.Root
-  selected={selectedValue}
-  onSelectedChange={(v) => {
-    v && (chosenValue = v.value);
-  }}
->
-  <Select.Trigger class={cn('w-[180px]', !chosenValue && 'text-muted-foreground', props.class)}>
-    <Select.Value placeholder={props.placeholder} />
+<Select.Root {...props.formProps} type="single" name={props.name} bind:value>
+  <Select.Trigger class={cn('', props.class)}>
+    {triggerContent}
   </Select.Trigger>
   <Select.Content>
-    {#each props.selections as selection}
-      <Select.Item value={selection}>{selection}</Select.Item>
-    {/each}
+    <Select.Group>
+      {#each props.selections as selection}
+        <Select.Item title={selection.label} value={selection.value} label={selection.label}
+          >{selection.value}</Select.Item
+        >
+      {/each}
+    </Select.Group>
   </Select.Content>
 </Select.Root>

@@ -45,7 +45,7 @@
 
 <Button onclick={() => (open = true)}>Add Borrower</Button>
 
-<AlertDialog.Root preventScroll={true} bind:open>
+<AlertDialog.Root bind:open>
   <AlertDialog.Content class="p-0">
     <ScrollArea class="max-h-screen lg:max-h-[80dvh]">
       <button
@@ -73,47 +73,61 @@
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
         <Form.Field {form} name="teacherId">
-          <Form.Control let:attrs>
-            <Form.Label>Teacher ID</Form.Label>
-            <Input {...attrs} bind:value={$formData.teacherId} placeholder="Enter teacher id" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Teacher ID</Form.Label>
+              <Input {...props} bind:value={$formData.teacherId} placeholder="Enter teacher id" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="borrowerName">
-          <Form.Control let:attrs>
-            <Form.Label>Borrower Name</Form.Label>
-            <Input
-              {...attrs}
-              bind:value={$formData.borrowerName}
-              placeholder="Enter borrower name"
-            />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Borrower Name</Form.Label>
+              <Input
+                {...props}
+                bind:value={$formData.borrowerName}
+                placeholder="Enter borrower name"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="room">
-          <Form.Control let:attrs>
-            <Form.Label>Room</Form.Label>
-            <Input {...attrs} bind:value={$formData.room} placeholder="Enter room" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Room</Form.Label>
+              <Input {...props} bind:value={$formData.room} placeholder="Enter room" />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="borrowedDate">
-          <Form.Control let:attrs>
-            <Form.Label>Borrowed Date</Form.Label>
-            <DatePicker name="Select date" bind:dateValue={$formData.borrowedDate} />
-            <input {...attrs} type="hidden" value={$formData.borrowedDate} />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Borrowed Date</Form.Label>
+              <DatePicker
+                class="w-full"
+                formProps={props}
+                bind:dateString={$formData.borrowedDate}
+              />
+              <input type="hidden" bind:value={$formData.borrowedDate} name={props.name} />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="itemsBorrowed">
-          <Form.Control let:attrs>
-            <Form.Label>Items Borrowed</Form.Label>
-            <BorrowedItem bind:selectedItems={$formData.itemsBorrowed} />
-            <input {...attrs} type="hidden" value={$formData.itemsBorrowed} />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Items Borrowed</Form.Label>
+              <BorrowedItem bind:selectedItems={$formData.itemsBorrowed} />
+              <input type="hidden" bind:value={$formData.itemsBorrowed} name={props.name} />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>

@@ -45,7 +45,7 @@
 
 <Button onclick={() => (open = true)}>Add Returnee</Button>
 
-<AlertDialog.Root preventScroll={true} bind:open>
+<AlertDialog.Root bind:open>
   <AlertDialog.Content class="p-0">
     <ScrollArea class="max-h-screen lg:max-h-[80dvh]">
       <button
@@ -73,59 +73,87 @@
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
         <Form.Field {form} name="teacherRealId">
-          <Form.Control let:attrs>
-            <Form.Label>Teacher ID</Form.Label>
-            <Input {...attrs} bind:value={$formData.teacherRealId} placeholder="Enter teacher id" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Teacher ID</Form.Label>
+              <Input
+                {...props}
+                bind:value={$formData.teacherRealId}
+                placeholder="Enter teacher id"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="referenceId">
-          <Form.Control let:attrs>
-            <Form.Label>Reference ID</Form.Label>
-            <Input {...attrs} bind:value={$formData.referenceId} placeholder="Enter reference id" />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Reference ID</Form.Label>
+              <Input
+                {...props}
+                bind:value={$formData.referenceId}
+                placeholder="Enter reference id"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="borrowerName">
-          <Form.Control let:attrs>
-            <Form.Label>Borrower Name</Form.Label>
-            <Input
-              {...attrs}
-              bind:value={$formData.borrowerName}
-              placeholder="Enter borrower name"
-            />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Borrower Name</Form.Label>
+              <Input
+                {...props}
+                bind:value={$formData.borrowerName}
+                placeholder="Enter reference id"
+              />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="borrowedDate">
-          <Form.Control let:attrs>
-            <Form.Label>Borrowed Date</Form.Label>
-            <DatePicker name="Select date" bind:dateValue={$formData.borrowedDate} />
-            <input {...attrs} type="hidden" value={$formData.borrowedDate} />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Borrowed Date</Form.Label>
+              <DatePicker
+                class="w-full"
+                formProps={props}
+                bind:dateString={$formData.borrowedDate}
+              />
+              <input type="hidden" bind:value={$formData.borrowedDate} name={props.name} />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="itemsReturned">
-          <Form.Control let:attrs>
-            <Form.Label>Items Returned</Form.Label>
-            <ReturnedItem
-              referenceId={$formData.referenceId}
-              bind:selectedItems={$formData.itemsReturned}
-            />
-            <input {...attrs} type="hidden" value={$formData.itemsReturned} />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Items Returned</Form.Label>
+              <ReturnedItem
+                referenceId={$formData.referenceId}
+                bind:selectedItems={$formData.itemsReturned}
+              />
+              <input {...props} type="hidden" value={$formData.itemsReturned} />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
 
         <Form.Field {form} name="returnedDate">
-          <Form.Control let:attrs>
-            <Form.Label>Returned Date</Form.Label>
-            <DatePicker name="Select date" bind:dateValue={$formData.returnedDate} />
-            <input {...attrs} type="hidden" value={$formData.returnedDate} />
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Returned Date</Form.Label>
+              <DatePicker
+                class="w-full"
+                formProps={props}
+                bind:dateString={$formData.returnedDate}
+              />
+              <input type="hidden" bind:value={$formData.returnedDate} name={props.name} />
+            {/snippet}
           </Form.Control>
           <Form.FieldErrors />
         </Form.Field>
