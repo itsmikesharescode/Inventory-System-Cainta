@@ -12,12 +12,8 @@
 
   const adminSiteMaps = [
     {
-      name: 'Dashboard',
-      url: '/teacher'
-    },
-    {
       name: 'Reservations',
-      url: '/teacher/reservations'
+      url: '/teacher'
     },
     {
       name: 'Account',
