@@ -1,0 +1,60 @@
+<script lang="ts">
+  import AdminProfile from './TeacherProfile/TeacherProfile.svelte';
+  import * as Menubar from '$lib/components/ui/menubar';
+  import { ChevronDown } from 'lucide-svelte';
+  import type { SupabaseClient } from '@supabase/supabase-js';
+
+  interface Props {
+    supabase: SupabaseClient;
+  }
+
+  const { supabase }: Props = $props();
+
+  const adminSiteMaps = [
+    {
+      name: 'Dashboard',
+      url: '/teacher',
+      subRoutes: []
+    },
+    {
+      name: 'Reservations',
+      url: '/teacher/reservations',
+      subRoutes: []
+    },
+    {
+      name: 'Account',
+      url: '/teacher/account',
+      subRoutes: []
+    }
+  ];
+</script>
+
+<nav
+  class="sticky top-0 z-40 flex items-center justify-between border-b-[1px] p-1.5 px-2.5 backdrop-blur-lg"
+>
+  <div class="flex items-center gap-5">
+    {#each adminSiteMaps as site}
+      {#if site.subRoutes.length}
+        <Menubar.Root>
+          <Menubar.Menu>
+            <Menubar.Trigger>{site.name} <ChevronDown class="h-[20px] w-[20px]" /></Menubar.Trigger>
+            <Menubar.Content>
+              {#each site.subRoutes as subRoute}
+                <a href={subRoute.url}>
+                  <Menubar.Item>
+                    {subRoute.name}
+                  </Menubar.Item>
+                </a>
+
+                <Menubar.Separator />
+              {/each}
+            </Menubar.Content>
+          </Menubar.Menu>
+        </Menubar.Root>
+      {:else if site.url.length}
+        <a href={site.url} class="text-sm font-medium">{site.name}</a>
+      {/if}
+    {/each}
+  </div>
+  <AdminProfile {supabase} />
+</nav>
