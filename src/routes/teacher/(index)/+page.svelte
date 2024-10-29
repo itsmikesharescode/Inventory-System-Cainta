@@ -1,10 +1,9 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import type { PostgrestSingleResponse } from '@supabase/supabase-js';
-  import BarChart from './_components/BarChart.svelte';
-  import CountCard from './_components/CountCard.svelte';
-  import LineChart from './_components/LineChart.svelte';
   import { Skeleton } from '$lib/components/ui/skeleton/index.js';
+  import * as Table from '$lib/components/ui/table/index.js';
+  import SendReservation from './_components/SendReservation/SendReservation.svelte';
 
   const { data } = $props();
 
@@ -31,9 +30,33 @@
     />
   </div>
 
-  <div class="grid grid-cols-4 gap-2.5">
-    <CountCard class="" title="Pending" count={2} />
-    <CountCard class="" title="Accepted" count={2} />
-    <CountCard class="" title="Canceled" count={5} />
+  <div class="flex justify-end">
+    <SendReservation sendReservationForm={data.sendReservationForm} />
+  </div>
+
+  <div class="">
+    <Table.Root>
+      <Table.Caption>A list of your recent invoices.</Table.Caption>
+      <Table.Header>
+        <Table.Row>
+          <Table.Head class="w-[100px]"></Table.Head>
+          <Table.Head>Reservation Date</Table.Head>
+          <Table.Head>Items</Table.Head>
+          <Table.Head class="text-right">Room</Table.Head>
+          <Table.Head class="text-right">Status</Table.Head>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {#each Array(20) as _}
+          <Table.Row>
+            <Table.Cell class="font-medium"></Table.Cell>
+            <Table.Cell>{new Date().toLocaleDateString()}</Table.Cell>
+            <Table.Cell>Credit Card</Table.Cell>
+            <Table.Cell class="text-right">$250.00</Table.Cell>
+            <Table.Cell class="text-right">$250.00</Table.Cell>
+          </Table.Row>
+        {/each}
+      </Table.Body>
+    </Table.Root>
   </div>
 </div>
