@@ -65,16 +65,6 @@
           <Form.FieldErrors />
         </Form.Field>
 
-        <Form.Field {form} name="teacherId">
-          <Form.Control>
-            {#snippet children({ props })}
-              <Form.Label>Teacher ID</Form.Label>
-              <Input {...props} bind:value={$formData.teacherId} placeholder="Enter teacher id" />
-            {/snippet}
-          </Form.Control>
-          <Form.FieldErrors />
-        </Form.Field>
-
         <Form.Field {form} name="fName">
           <Form.Control>
             {#snippet children({ props })}
