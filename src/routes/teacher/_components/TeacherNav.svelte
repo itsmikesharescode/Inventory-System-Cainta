@@ -13,18 +13,15 @@
   const adminSiteMaps = [
     {
       name: 'Dashboard',
-      url: '/teacher',
-      subRoutes: []
+      url: '/teacher'
     },
     {
       name: 'Reservations',
-      url: '/teacher/reservations',
-      subRoutes: []
+      url: '/teacher/reservations'
     },
     {
       name: 'Account',
-      url: '/teacher/account',
-      subRoutes: []
+      url: '/teacher/account'
     }
   ];
 </script>
@@ -34,26 +31,7 @@
 >
   <div class="flex items-center gap-5">
     {#each adminSiteMaps as site}
-      {#if site.subRoutes.length}
-        <Menubar.Root>
-          <Menubar.Menu>
-            <Menubar.Trigger>{site.name} <ChevronDown class="h-[20px] w-[20px]" /></Menubar.Trigger>
-            <Menubar.Content>
-              {#each site.subRoutes as subRoute}
-                <a href={subRoute.url}>
-                  <Menubar.Item>
-                    {subRoute.name}
-                  </Menubar.Item>
-                </a>
-
-                <Menubar.Separator />
-              {/each}
-            </Menubar.Content>
-          </Menubar.Menu>
-        </Menubar.Root>
-      {:else if site.url.length}
-        <a href={site.url} class="text-sm font-medium">{site.name}</a>
-      {/if}
+      <a href={site.url} class="text-sm font-medium">{site.name}</a>
     {/each}
   </div>
   <AdminProfile {supabase} />
