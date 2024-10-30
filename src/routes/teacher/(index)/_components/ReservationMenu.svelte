@@ -4,6 +4,7 @@
   import type { Infer, SuperValidated } from 'sveltekit-superforms';
   import type { TeacherLayout } from '$lib/types/teacher/teacherLayout.types';
   import ViewReservationModal from './ViewReservation/ViewReservationModal.svelte';
+  import DeleteReservationModal from './DeleteReservation/DeleteReservationModal.svelte';
 
   interface Props {
     reservation: TeacherLayout['reservations'][number];
@@ -12,7 +13,7 @@
   const { reservation }: Props = $props();
 
   let showUpdateTeacher = $state(false);
-  let showDeleteTeacher = $state(false);
+  let showDeleteReservation = $state(false);
   let showViewReservation = $state(false);
 </script>
 
@@ -31,7 +32,7 @@
       <Menubar.Separator />
 
       <Menubar.Separator />
-      <Menubar.Item onclick={() => (showDeleteTeacher = true)}
+      <Menubar.Item onclick={() => (showDeleteReservation = true)}
         >Delete
         <Menubar.Shortcut>⌘D</Menubar.Shortcut>
       </Menubar.Item>
@@ -40,3 +41,4 @@
 </Menubar.Root>
 
 <ViewReservationModal bind:showViewReservation {reservation} />
+<DeleteReservationModal bind:showDeleteReservation {reservation} />

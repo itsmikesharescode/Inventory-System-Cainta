@@ -27,5 +27,18 @@ export const actions: Actions = {
     console.log(error?.message);
     if (error) return fail(400, { form });
     return { form, msg: 'Reservation sent.' };
+  },
+  deleteResEvent: async ({ locals: { supabase, user }, request }) => {
+    const formData = await request.formData();
+    const id = formData.get('id') as string;
+    if (!user) return fail(401, { msg: 'Unauthorized.' });
+
+    const { error } = await supabase
+      .from('reservations_tb')
+      .delete()
+      .match({ id: Number(id), teacher_real_id: user.user_metadata.teacher_real_id });
+
+    if (error) return fail(401, { msg: error.message });
+    return { msg: 'Reservation deleted.' };
   }
 };
