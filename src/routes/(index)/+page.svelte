@@ -46,27 +46,32 @@
   <div class="flex flex-col items-center justify-center gap-2.5 md:border-l-2">
     <h1 class="scroll-m-20 text-2xl font-semibold tracking-tight">Log in</h1>
 
-    <form method="POST" action="?/loginEvent" use:enhance class="flex flex-col gap-2.5">
+    <form method="POST" action="?/loginEvent" use:enhance class="flex w-[290px] flex-col gap-2.5">
       <Form.Field {form} name="email">
-        <Form.Control let:attrs>
-          <Form.Label>Email</Form.Label>
-          <Input {...attrs} bind:value={$formData.email} placeholder="Enter your email" />
+        <Form.Control>
+          {#snippet children({ props })}
+            <Form.Label>Email</Form.Label>
+            <Input {...props} bind:value={$formData.email} placeholder="Enter email" />
+          {/snippet}
         </Form.Control>
         <Form.FieldErrors />
       </Form.Field>
 
       <Form.Field {form} name="pwd">
-        <Form.Control let:attrs>
-          <Form.Label>Password</Form.Label>
-          <Input
-            type="password"
-            {...attrs}
-            bind:value={$formData.pwd}
-            placeholder="Enter your password"
-          />
+        <Form.Control>
+          {#snippet children({ props })}
+            <Form.Label>Password</Form.Label>
+            <Input
+              type="password"
+              {...props}
+              bind:value={$formData.pwd}
+              placeholder="Enter password"
+            />
+          {/snippet}
         </Form.Control>
         <Form.FieldErrors />
       </Form.Field>
+
       <Form.Button disabled={$submitting} class="relative">
         {#if $submitting}
           <div
@@ -82,10 +87,10 @@
     </form>
     <a
       href="/forgot-password"
-      class="leading-7 underline transition-all hover:text-primary [&:not(:first-child)]:mt-6"
+      class=" leading-7 underline transition-all hover:text-primary [&:not(:first-child)]:mt-6"
       >Forgot Password</a
     >
-    <p class="leading-7 [&:not(:first-child)]:mt-6">Don't have an account yet?</p>
-    <a href="/register" class="underline transition-all hover:text-primary">Create here</a>
+    <p class=" leading-7 [&:not(:first-child)]:mt-6">Don't have an account yet?</p>
+    <a href="/register" class=" underline transition-all hover:text-primary">Create here</a>
   </div>
 </div>

@@ -25,10 +25,6 @@
           url: '/admin/reservations'
         },
         {
-          name: 'New',
-          url: '/admin/new'
-        },
-        {
           name: 'Borrowed Items',
           url: '/admin/borrowed-items'
         },
@@ -44,8 +40,8 @@
       subRoutes: []
     },
     {
-      name: 'Borrowers',
-      url: '/admin/borrowers',
+      name: 'Accounts',
+      url: '/admin/accounts',
       subRoutes: []
     }
   ];
@@ -62,9 +58,12 @@
             <Menubar.Trigger>{site.name} <ChevronDown class="h-[20px] w-[20px]" /></Menubar.Trigger>
             <Menubar.Content>
               {#each site.subRoutes as subRoute}
-                <Menubar.Item href={subRoute.url}>
-                  {subRoute.name}
-                </Menubar.Item>
+                <a href={subRoute.url}>
+                  <Menubar.Item>
+                    {subRoute.name}
+                  </Menubar.Item>
+                </a>
+
                 <Menubar.Separator />
               {/each}
             </Menubar.Content>

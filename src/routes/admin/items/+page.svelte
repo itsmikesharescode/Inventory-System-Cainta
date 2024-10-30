@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from '$app/forms';
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
   import * as Table from '$lib/components/ui/table';
   import AddItemModal from './_components/AddItem/AddItemModal.svelte';

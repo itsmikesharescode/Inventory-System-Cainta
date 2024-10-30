@@ -4,12 +4,15 @@
   import { Toaster } from '$lib/components/ui/sonner';
   import { onMount } from 'svelte';
   import { fromUserState, initUserState } from '$lib/runes/userState.svelte';
+  import { fromSupabaseState, initSupabaseState } from '$lib/runes/supabaseState.svelte';
 
   const { data: clientSb, children } = $props();
 
+  initSupabaseState();
   initUserState();
 
   const user = fromUserState();
+  const supabase = fromSupabaseState();
 
   onMount(() => {
     const { data } = clientSb.supabase.auth.onAuthStateChange((_, newSession) => {
@@ -34,6 +37,7 @@
 
   $effect(() => {
     user.set(clientSb.user);
+    supabase.set(clientSb.supabase);
   });
 </script>
 
