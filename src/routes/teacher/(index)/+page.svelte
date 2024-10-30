@@ -1,26 +1,10 @@
 <script lang="ts">
   import GradualSpacing from '$lib/components/gen/GradualSpacing.svelte';
-  import type { PostgrestSingleResponse } from '@supabase/supabase-js';
-  import { Skeleton } from '$lib/components/ui/skeleton/index.js';
   import * as Table from '$lib/components/ui/table/index.js';
   import SendReservation from './_components/SendReservation/SendReservation.svelte';
   import ReservationMenu from './_components/ReservationMenu.svelte';
 
   const { data } = $props();
-
-  /* const streamCounts = async () => {
-    const { data: counts, error } = (await data.supabase.rpc(
-      'admin_dashboard_counts'
-    )) as PostgrestSingleResponse<{
-      pending_count: number;
-      accepted_count: number;
-      canceled_count: number;
-      teachers_count: number;
-    }>;
-
-    if (error) return null;
-    return counts;
-  }; */
 </script>
 
 <div class="flex flex-col gap-5">
@@ -48,15 +32,15 @@
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {#each Array(20) as _}
+        {#each data.teacherLayout.data?.reservations ?? [] as reservation}
           <Table.Row>
             <Table.Cell class="font-medium">
               <ReservationMenu />
             </Table.Cell>
-            <Table.Cell>{new Date().toLocaleDateString()}</Table.Cell>
-            <Table.Cell>Credit Card</Table.Cell>
-            <Table.Cell class="text-right">$250.00</Table.Cell>
-            <Table.Cell class="text-right">$250.00</Table.Cell>
+            <Table.Cell>{reservation.time_limit}</Table.Cell>
+            <Table.Cell>{reservation.max_items}</Table.Cell>
+            <Table.Cell class="text-right">{reservation.room}</Table.Cell>
+            <Table.Cell class="text-right">{reservation.status}</Table.Cell>
           </Table.Row>
         {/each}
       </Table.Body>
