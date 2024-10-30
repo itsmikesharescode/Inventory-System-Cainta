@@ -21,7 +21,7 @@
   let showViewReservation = $state(false);
 </script>
 
-<Menubar.Root preventScroll={true} class="max-w-fit border-0">
+<Menubar.Root class="max-w-fit border-0">
   <Menubar.Menu>
     <Menubar.Trigger class="max-w-fit cursor-pointer data-[state=open]:bg-inherit">
       <AlignJustify class="h-[20px] w-[20px]" />
