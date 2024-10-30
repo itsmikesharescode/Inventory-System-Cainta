@@ -27,7 +27,7 @@
         labels: chartLabels,
         datasets: [
           {
-            label: 'Approved this week',
+            label: 'Accepted this week',
             backgroundColor: '#000000',
             borderColor: '#000000',
             data: chartValues,

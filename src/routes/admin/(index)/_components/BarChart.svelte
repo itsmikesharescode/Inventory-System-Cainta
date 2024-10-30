@@ -28,7 +28,7 @@
         labels: chartLabels,
         datasets: [
           {
-            label: 'Income this week',
+            label: 'Canceled this week',
             backgroundColor: '#000000',
             data: chartValues
           }
