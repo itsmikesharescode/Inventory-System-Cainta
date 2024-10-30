@@ -4,6 +4,7 @@
   import { Skeleton } from '$lib/components/ui/skeleton/index.js';
   import * as Table from '$lib/components/ui/table/index.js';
   import SendReservation from './_components/SendReservation/SendReservation.svelte';
+  import ReservationMenu from './_components/ReservationMenu.svelte';
 
   const { data } = $props();
 
@@ -41,7 +42,7 @@
         <Table.Row>
           <Table.Head class="w-[100px]"></Table.Head>
           <Table.Head>Reservation Date</Table.Head>
-          <Table.Head>Items</Table.Head>
+          <Table.Head>Max Items</Table.Head>
           <Table.Head class="text-right">Room</Table.Head>
           <Table.Head class="text-right">Status</Table.Head>
         </Table.Row>
@@ -49,7 +50,9 @@
       <Table.Body>
         {#each Array(20) as _}
           <Table.Row>
-            <Table.Cell class="font-medium"></Table.Cell>
+            <Table.Cell class="font-medium">
+              <ReservationMenu />
+            </Table.Cell>
             <Table.Cell>{new Date().toLocaleDateString()}</Table.Cell>
             <Table.Cell>Credit Card</Table.Cell>
             <Table.Cell class="text-right">$250.00</Table.Cell>
