@@ -66,7 +66,7 @@
 
       <form
         method="POST"
-        action="?/createResEvent"
+        action="?/sendResEvent"
         use:enhance
         class="flex flex-col gap-2.5 p-5 pt-0"
       >
@@ -101,6 +101,16 @@
               <Form.Label>Select Date</Form.Label>
               <DatePicker formProps={props} class="w-full" bind:dateString={$formData.date} />
               <input type="hidden" name={props.name} value={$formData.date} />
+            {/snippet}
+          </Form.Control>
+          <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field {form} name="time">
+          <Form.Control>
+            {#snippet children({ props })}
+              <Form.Label>Time</Form.Label>
+              <Input {...props} bind:value={$formData.time} placeholder="Enter time" />
             {/snippet}
           </Form.Control>
           <Form.FieldErrors />
