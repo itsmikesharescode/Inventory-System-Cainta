@@ -2,19 +2,18 @@
   import { AlignJustify } from 'lucide-svelte';
   import * as Menubar from '$lib/components/ui/menubar';
   import type { Infer, SuperValidated } from 'sveltekit-superforms';
-  import { pushState } from '$app/navigation';
-  import type { AdminLayout } from '$lib/types/admin/adminLayout.types';
+  import type { TeacherLayout } from '$lib/types/teacher/teacherLayout.types';
+  import ViewReservationModal from './ViewReservation/ViewReservationModal.svelte';
 
-  /*  interface Props {
-    teacher: AdminLayout['teachers'][number];
-    updateTeacherForm: SuperValidated<Infer<UpdateTeacherSchema>>;
+  interface Props {
+    reservation: TeacherLayout['reservations'][number];
   }
 
-  const { updateTeacherForm, teacher }: Props = $props(); */
+  const { reservation }: Props = $props();
 
   let showUpdateTeacher = $state(false);
   let showDeleteTeacher = $state(false);
-  let showViewTeacher = $state(false);
+  let showViewReservation = $state(false);
 </script>
 
 <Menubar.Root class="max-w-fit border-0">
@@ -24,7 +23,7 @@
     </Menubar.Trigger>
 
     <Menubar.Content>
-      <Menubar.Item onclick={() => (showViewTeacher = true)}>
+      <Menubar.Item onclick={() => (showViewReservation = true)}>
         View
         <Menubar.Shortcut>⌘V</Menubar.Shortcut>
       </Menubar.Item>
@@ -39,3 +38,5 @@
     </Menubar.Content>
   </Menubar.Menu>
 </Menubar.Root>
+
+<ViewReservationModal bind:showViewReservation {reservation} />

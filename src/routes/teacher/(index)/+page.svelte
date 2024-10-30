@@ -25,6 +25,7 @@
       <Table.Header>
         <Table.Row>
           <Table.Head class="w-[100px]"></Table.Head>
+          <Table.Head>Reference ID</Table.Head>
           <Table.Head>Reservation Date</Table.Head>
           <Table.Head>Max Items</Table.Head>
           <Table.Head class="text-right">Room</Table.Head>
@@ -35,8 +36,9 @@
         {#each data.teacherLayout.data?.reservations ?? [] as reservation}
           <Table.Row>
             <Table.Cell class="font-medium">
-              <ReservationMenu />
+              <ReservationMenu {reservation} />
             </Table.Cell>
+            <Table.Cell>{reservation.reference_id}</Table.Cell>
             <Table.Cell>{reservation.time_limit}</Table.Cell>
             <Table.Cell>{reservation.max_items}</Table.Cell>
             <Table.Cell class="text-right">{reservation.room}</Table.Cell>
