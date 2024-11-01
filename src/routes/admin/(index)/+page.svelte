@@ -5,6 +5,7 @@
   import CountCard from './_components/CountCard.svelte';
   import LineChart from './_components/LineChart.svelte';
   import { Skeleton } from '$lib/components/ui/skeleton/index.js';
+  import type { GraphCountsType } from '../../../types';
 
   const { data } = $props();
 
@@ -21,6 +22,17 @@
     if (error) return null;
     return counts;
   };
+
+  const streamGraphCounts = async () => {
+    const { data: counts, error } = (await data.supabase.rpc(
+      'admin_dashboard_graph_counts'
+    )) as PostgrestSingleResponse<GraphCountsType>;
+
+    if (error) return null;
+    return counts;
+  };
+
+  streamGraphCounts();
 </script>
 
 <div class="flex flex-col gap-5">
@@ -30,16 +42,35 @@
       words="Dashboard"
     />
   </div>
+  {#await streamGraphCounts()}
+    <div class="grid grid-cols-2 gap-2.5">
+      <div class="flex h-[30dvh] flex-col gap-[0.5dvh]">
+        <Skeleton class="h-[8dvh] w-[60%] bg-slate-400" />
+        <Skeleton class="h-[8dvh] w-[90%] bg-slate-400" />
+        <Skeleton class="h-[8dvh] w-[30%] bg-slate-400" />
+      </div>
 
-  <div class="grid grid-cols-2 gap-2.5">
-    <div class="h-[30dvh]">
-      <LineChart />
+      <div class="flex h-[30dvh] flex-col gap-[0.5dvh]">
+        <Skeleton class="h-[8dvh] w-full bg-slate-400" />
+        <Skeleton class="h-[8dvh] w-[70%] bg-slate-400" />
+        <Skeleton class="h-[8dvh] w-full bg-slate-400" />
+      </div>
     </div>
+  {:then counts}
+    <div class="grid grid-cols-2 gap-2.5">
+      <div class="h-[30dvh]">
+        <LineChart
+          accepted={counts?.accepted ?? []}
+          canceled={counts?.canceled ?? []}
+          pending={counts?.pending ?? []}
+        />
+      </div>
 
-    <div class="h-[30dvh]">
-      <BarChart />
+      <div class="h-[30dvh]">
+        <BarChart reservations={counts?.reservations ?? []} />
+      </div>
     </div>
-  </div>
+  {/await}
 
   <div class="grid grid-cols-4 gap-2.5">
     {#await streamCounts()}
