@@ -30,11 +30,10 @@
 
 <div class="grid min-h-screen gap-10 py-20 md:grid-cols-[2fr,1fr] md:gap-0 md:p-0">
   <div class="flex flex-col items-center justify-center">
-    <img src="/favicon.png" alt="system logo" class="w-[200px]" />
     <h1
       class="scroll-m-20 border-b pb-2 text-center font-semibold tracking-tight transition-colors first:mt-0 md:text-3xl"
     >
-      ONE CAINTA COLLEGE
+      LOREM IPSUM
     </h1>
 
     <h1
