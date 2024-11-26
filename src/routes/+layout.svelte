@@ -8,12 +8,6 @@
 
   const { data: clientSb, children } = $props();
 
-  initSupabaseState();
-  initUserState();
-
-  const user = fromUserState();
-  const supabase = fromSupabaseState();
-
   onMount(() => {
     const { data } = clientSb.supabase.auth.onAuthStateChange((_, newSession) => {
       if (newSession?.expires_at !== clientSb.session?.expires_at) {
@@ -34,14 +28,9 @@
       });
     });
   });
-
-  $effect(() => {
-    user.set(clientSb.user);
-    supabase.set(clientSb.supabase);
-  });
 </script>
 
-<Toaster richColors={true} position="top-left" />
+<Toaster position="top-right" />
 
 {@render children()}
 
