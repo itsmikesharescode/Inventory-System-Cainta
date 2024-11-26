@@ -41,7 +41,7 @@
   });
 </script>
 
-<Toaster richColors={true} position="bottom-left" />
+<Toaster richColors={true} position="top-left" />
 
 {@render children()}
 
