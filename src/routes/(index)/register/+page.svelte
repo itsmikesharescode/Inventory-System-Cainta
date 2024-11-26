@@ -35,7 +35,7 @@
     <h1
       class="scroll-m-20 border-b pb-2 text-center font-semibold tracking-tight transition-colors first:mt-0 md:text-3xl"
     >
-      ONE CAINTA COLLEGE
+      LOREM IPSUM
     </h1>
 
     <h1
